@@ -1,0 +1,104 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:unified="sap.ui.unified"
+    xmlns:core="sap.ui.core">
+
+    <Table id="idRetencionesTable" items="{path : '/RetencionesSet' ,events: {
+        dataReceived: '.onCheckStep' } }" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders" visible="{= ${layout>/retencionesadd} === false }">
+        <headerToolbar>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button icon="sap-icon://sys-add" press="onAgregarRetencionesButtonPress" text="{i18n>btnagregar}" type="Emphasized"/>
+
+            </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+
+            <Column width="12rem">
+                <header>
+                    <Label text="{i18n>lbltipo}" />
+                </header>
+            </Column>
+            <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                <header>
+                    <Label text="{i18n>lblncertificado}"/>
+                </header>
+            </Column>
+            <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                <header>
+                    <Label text="{i18n>lblfecha}"/>
+                </header>
+            </Column>
+
+
+            <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                <header>
+                    <Label text="{i18n>lblimpor}"/>
+                </header>
+            </Column>
+            <Column width="3rem">
+                <header/>
+            </Column>
+
+
+        </columns>
+        <items>
+            <ColumnListItem type="Active" highlight="Information">
+                <cells>
+
+
+                    <Label text="{Descripcion}" design="Bold"/>
+                    <Label text="{Numero}"/>
+                    <Text text="{path : 'Fecha', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"/>
+                    <Label text="{Importe}"/>
+
+                    <HBox>
+                      
+                        <Button  text="{i18n>btnverificar}" press="onButtonEditaRetencionPress" />
+                    </HBox>
+
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+
+
+    <form:SimpleForm editable="true" layout="ColumnLayout" visible="{layout>/retencionesadd}">
+        <form:content>
+            <Label text="{i18n>lbltipo}" required="true" labelFor="idTipoRetencionInput"/>
+            <ComboBox enabled="{= ${mockdata>/Paso05PathUpdate} === '' }" id="idTipoRetencionInput" items="{/MotivoRetSet}" selectedKey="{mockdata>/ActiveRetencion/Tipokey}" value="{mockdata>/ActiveRetencion/Descripcion}">
+                <core:Item key="{Codigo}" text="{Descripcion}" />
+            </ComboBox>
+
+
+            <Label text="{i18n>lblncertificado}" required="true" labelFor="idCertificadoRetencionInput" />
+            <Input id="idCertificadoRetencionInput" type="Number" value="{mockdata>/ActiveRetencion/Numero}"/>
+
+
+            <Label text="{i18n>lblfecha}" required="true" labelFor="idFechaRetencionInput" />
+            <DatePicker id="idFechaDatePickerFRetencion" displayFormat="dd/MM/YYYY" dateValue="{mockdata>/ActiveRetencion/Fecha}" />
+
+            <Label text="{i18n>lblimpor}" required="true" labelFor="idImporteRetencionInput"/>
+            <Input id="idImporteRetencionInput" type="Number" value="{mockdata>/ActiveRetencion/Importe}"/>
+
+            <Label text="{i18n>lbldocumentacion}" required="true" labelFor="idRetencionesFileUploader"/>
+
+            <unified:FileUploader id="idRetencionesFileUploader" change="onAttachmentChange" name="FURetencion" uploadUrl="upload/" uploadComplete="onUploadComplete" useMultipart="false" sendXHR="true" buttonText="{i18n>btttnselect}" style="Emphasized"/>
+            <!-- <Button icon="sap-icon://attachment" text="{i18n>btnadjunto}" /> -->
+
+        </form:content>
+    </form:SimpleForm>
+
+    <!-- <HBox alignItems="Center" justifyContent="End" class="sapUiSmallMarginEnd sapUiLargeMarginTop" visible="{= ${layout>/retencionesadd} === false }">
+        <Button enabled="{= ${mockdata>/Paso05ImporteRetenciones} > 0}" text="{i18n>btnguardar}" type="Emphasized" icon="sap-icon://save" press="onGuardarButtonRETSavePress" />
+    </HBox> -->
+
+
+    <HBox alignItems="Center" justifyContent="End" class="sapUiSmallMarginEnd" visible="{layout>/retencionesadd}">
+        <!-- <Button text="{i18n>btnadjunto}" icon="sap-icon://attachment" class="sapUiTinyMarginEnd" /> -->
+        <Button enabled="{mockdata>/AddButtonActive}" text="{i18n>btnvolver}" type="Emphasized" icon="sap-icon://nav-back" press="cancelarRetencion" class="sapUiTinyMarginEnd"/>
+        <Button visible="{= ${mockdata>/Paso05PathUpdate} !== '' }" text="{i18n>lblactualizar}" type="Emphasized" icon="sap-icon://refresh" press="guardarRetencion" />
+        <Button visible="{= ${mockdata>/Paso05PathUpdate} === '' }" enabled="{mockdata>/AddButtonActive}" text="{i18n>btnagregar}" type="Emphasized" icon="sap-icon://add" press="guardarRetencion" />
+    </HBox>
+
+</core:FragmentDefinition>

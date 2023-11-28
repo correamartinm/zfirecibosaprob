@@ -1,0 +1,119 @@
+<mvc:View controllerName="morixe.zfirecibosaprob.controller.Detalle"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns="sap.m">
+    <Page >
+        <content>
+            <NavContainer id="wizardNavContainer">
+                <pages>
+                    <Page id="idRecibosPage" title="{i18n>lblnuevorecibo}" showNavButton="false" navButtonPress="onNavBack">
+                        <customHeader>
+                            <Bar design="Header">
+                                <contentLeft>
+                                    <Button icon="sap-icon://nav-back" press="onNavBack" type="Emphasized" />
+                                </contentLeft>
+                                <contentMiddle>
+
+
+                                </contentMiddle>
+                                <contentRight>
+                                    <Image src="./img/logo.png" height="36px" class="sapUiSmallMarginBegin" />
+                                    <!-- <Button icon="sap-icon://log" press="onEnd" text="{layout>/lastname}, {layout>/firstname}" type="Success" iconFirst="false" /> -->
+                                </contentRight>
+                            </Bar>
+                        </customHeader>
+
+                        <Wizard id="idWizard" complete="onWizardComplete" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" enableBranching="true">
+
+                            <WizardStep icon="sap-icon://person-placeholder" validated="true" id="idClienteWizardStep" nextStep="idRetencionesWizardStep" complete="onWizardStepClienteComplete" title="{i18n>clientetitle}">
+
+                                <Panel >
+                                    <content>
+
+                                        <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.01Cliente" type="XML"/>
+                                    </content>
+
+                                </Panel>
+
+                            </WizardStep>
+
+
+
+
+                            <WizardStep nextStep="idDetalleWizardStep" icon="sap-icon://sales-quote" id="idRetencionesWizardStep" title="{i18n>retencionestitle}" complete="onWizardStepRetencionComplete" validated="true">
+
+                                <Panel >
+
+                                    <content>
+                                        <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.02Retenciones" type="XML"/>
+                                    </content>
+
+                                </Panel>
+                            </WizardStep>
+
+                            <WizardStep complete="onWizardStepDetalleComplete" icon="sap-icon://menu" id="idDetalleWizardStep" validated="false" title="{i18n>detalletitle}" activate="onWizardStepDetalleActivate">
+                                <Panel >
+
+                                    <content>
+                                        <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.03Detalle" type="XML"/>
+                                        <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.03DetalleFile" type="XML"/>
+
+                                    </content>
+
+                                </Panel>
+                            </WizardStep>
+
+                        </Wizard>
+
+
+
+                    </Page>
+                    <Page id="idwizardReviewPage" showHeader="false" class="PanelLightCyan">
+
+
+                        <!-- <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.Review" type="XML"/> -->
+                        <List class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom" id="idResumenSetList" width="95%" items="{
+                                    path: '/ResumenSet',   events: {
+                                        dataRequested: '.onResumenData'
+                                       
+                                      }
+                                }">
+                            <CustomListItem >
+                                <VBox  >
+
+                                    <HBox class="sapUiTinyMarginBottom sapUiTinyMarginTop" alignItems="Center" justifyContent="SpaceBetween" alignContent="SpaceBetween" width="100%">
+                                        <Text text="{TipoLinea}" class="BoldOK sapUiTinyMarginBegin" />
+                                        <Text text="        " width="200px" />
+                                        <!-- <Text class="BoldOK sapUiTinyMarginEnd" text="{parts: ['TipoLinea', 'Importe'], formatter: '.formatItem'}"/> -->
+
+                                        <ObjectNumber unit="$" number="{parts: ['Importe'], formatter: '.formatNumber'}" state="{parts: ['Importe'], formatter: '.formatState'}" class="Bold sapUiTinyMarginEnd" />
+                                    </HBox>
+                                </VBox>
+                            </CustomListItem>
+
+                        </List>
+
+
+
+                        <MessageStrip text="{i18n>lblimporteacta} {mockdata>/SALDO}" showIcon="true" visible="{= ${mockdata>/SALDO} !== '' }" class=" BoldOK sapUiSmallMarginTopBottom"/>
+
+                        <OverflowToolbar >
+                            <ToolbarSpacer/>
+
+                            <Button icon="sap-icon://sys-cancel" text="{i18n>btnanular}" type="Critical" press="onNavBack" class="sapUiTinyMarginEnd"/>
+                            <Button icon="sap-icon://message-success" text="{i18n>btnconfirmar}" type="Success" press="onConfirmarReciboButtonPress" />
+                            <ToolbarSpacer/>
+                        </OverflowToolbar>
+
+
+                    </Page>
+                </pages>
+            </NavContainer>
+        </content>
+
+    </Page>
+
+
+
+</mvc:View>

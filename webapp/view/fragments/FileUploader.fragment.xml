@@ -1,0 +1,39 @@
+<c:FragmentDefinition xmlns="sap.m"  xmlns:c="sap.ui.core" 	xmlns:upload="sap.m.upload">>
+	<Dialog id="iduploader" title="Carga de Ficheros" class="sapUiSizeCompact">
+		<Panel width="400px" height="370px">
+			<content>
+				<upload:UploadSet
+				id="UploadSet"
+				instantUpload="true"
+				showIcons="true"
+				uploadEnabled="true"
+				terminationEnabled="true"
+				beforeUploadStarts="onBeforeUploadStarts"
+				uploadCompleted="onUploadComplete"
+				fileTypes="txt,doc,png"
+				maxFileNameLength="30"
+				maxFileSize="200"
+				mediaTypes="text/plain,application/msword,image/jpeg"
+				uploadUrl="/sap/opu/odata/sap/ZGWFI_COBRANZAS_SRV/AttachDocSet"
+				uploadButtonInvisible="false"
+				fileRenamed="onFileRenamed"
+				sameFilenameAllowed="false"
+				items="{path: '/items', templateShareable: false}">
+			<upload:items>
+				<upload:UploadSetItem
+						fileName="{Filename}"
+						mediaType="{MimeType}"
+						url="/sap/opu/odata/sap/ZGWFI_COBRANZAS_SRV/AttachDocSet/$value"
+					>
+					
+				</upload:UploadSetItem>
+			</upload:items>
+		</upload:UploadSet>
+		<List id="progressList"/>
+			</content>
+		</Panel>
+		<endButton>
+			<Button text="{i18n>btnvolver}" press="onCloseonFileDialog"/>
+		</endButton>
+	</Dialog>
+</c:FragmentDefinition>

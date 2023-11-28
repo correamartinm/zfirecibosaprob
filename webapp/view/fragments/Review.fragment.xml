@@ -1,0 +1,73 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+
+    <VBox visible="false" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginTopBottom" height="40%" justifyContent="SpaceBetween" width="70%" alignContent="Center">
+
+
+        <HBox justifyContent="SpaceBetween">
+
+            <Label text="{i18n>lbldocsafectados}" design="Bold" />
+            <ObjectNumber number="{mockdata>/Paso03ImporteComprobantes}" unit="$" inverted="true" state="Success"/>
+
+        </HBox>
+
+        <HBox justifyContent="SpaceBetween">
+            <Label text="{i18n>lbldescuentos}" design="Bold" />
+            <ObjectNumber number="{mockdata>/Paso04ImporteDescuentos}" unit="$" state="Error" />
+        </HBox >
+
+        <HBox justifyContent="SpaceBetween">
+            <Label text="{i18n>lblretenciones}" design="Bold"/>
+            <ObjectNumber number="{mockdata>/Paso05ImporteRetenciones}" unit="$" state="Error"/>
+        </HBox>
+
+        <HBox justifyContent="SpaceBetween">
+            <Label text="{i18n>lblpagoacta}" design="Bold" />
+            <ObjectNumber number="{mockdata>/Paso02ImportePagos}" unit="$" state="Error"/>
+        </HBox>
+
+        <HBox justifyContent="SpaceBetween">
+            <Label text="{i18n>lblmedios}" design="Bold"/>
+            <ObjectNumber number="{mockdata>/Paso06ImporteDetalle}" unit="$" state="Error"/>
+        </HBox>
+        <Label text="{i18n>lbltotal}" visible="{= ${mockdata>/Cliente/Anticipo} === false }" design="Bold"/>
+        <ObjectNumber number="{mockdata>/TOTAL}" unit="$" visible="{= ${mockdata>/Cliente/Anticipo} === false }" inverted="true" state="Success"/>
+        <HBox justifyContent="SpaceBetween">
+            <Label text="{i18n>lblimporteacta}" visible="{mockdata>/Cliente/Anticipo}" design="Bold"/>
+            <ObjectNumber number="{mockdata>/ANTICIPO}" unit="$" visible="{mockdata>/Cliente/Anticipo}" inverted="true" state="Success"/>
+        </HBox>
+
+
+    </VBox>
+
+        <List class="sapUiSmallMarginBeginEnd"  id="idResumenSetList" width="90%" items="{
+        path: '/ResumenSet',   events: {
+            dataRequested: '.onResumenData'
+           
+          }
+    }">
+            <CustomListItem >
+                <VBox  >
+
+                    <HBox class="sapUiTinyMarginBottom sapUiTinyMarginTop" alignItems="Center" justifyContent="SpaceBetween" alignContent="SpaceBetween" width="100%">
+                        <Text text="{TipoLinea}" class="BoldOK" textAlign="End"/>
+                        <Text class="BoldOK" text="{parts: ['TipoLinea', 'Importe'], formatter: '.formatItem'}"/>
+                    </HBox>
+                </VBox>
+            </CustomListItem>
+
+        </List>
+
+
+    <MessageStrip text="{i18n>lblimporteacta} {mockdata>/SALDO}" showIcon="true" visible="{= ${mockdata>/SALDO} !== '' }" class="sapUiSmallMarginTopBottom"/>
+
+    <OverflowToolbar >
+        <ToolbarSpacer/>
+
+        <Button icon="sap-icon://sys-cancel" text="{i18n>btnanular}" type="Reject" press="onNavBack" class="sapUiTinyMarginEnd"/>
+        <Button icon="sap-icon://message-success" text="{i18n>btnconfirmar}" type="Success" press="onConfirmarReciboButtonPress" />
+        <ToolbarSpacer/>
+    </OverflowToolbar>
+
+</core:FragmentDefinition>
