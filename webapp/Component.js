@@ -59,8 +59,6 @@ sap.ui.define([
                       BcoDes: false,
                       BcoDesReq: false,
                     },
-                    
-                   
                     Paso05CantidadRetenciones: 0,
                     Paso05ImporteRetenciones: 0,
                     Paso05PathUpdate: "",

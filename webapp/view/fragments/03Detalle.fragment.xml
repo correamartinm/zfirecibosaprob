@@ -7,7 +7,6 @@
         <headerToolbar>
             <OverflowToolbar>
                 <ToolbarSpacer/>
-                <Button icon="sap-icon://sys-add" press="onAgregarDetalleButtonPress" text="{i18n>btnagregar}" type="Emphasized" />
 
             </OverflowToolbar>
         </headerToolbar>

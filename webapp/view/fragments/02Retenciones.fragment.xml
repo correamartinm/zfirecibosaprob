@@ -8,7 +8,7 @@
         <headerToolbar>
             <OverflowToolbar>
                 <ToolbarSpacer/>
-                <Button icon="sap-icon://sys-add" press="onAgregarRetencionesButtonPress" text="{i18n>btnagregar}" type="Emphasized"/>
+        
 
             </OverflowToolbar>
         </headerToolbar>
@@ -98,7 +98,7 @@
         <!-- <Button text="{i18n>btnadjunto}" icon="sap-icon://attachment" class="sapUiTinyMarginEnd" /> -->
         <Button enabled="{mockdata>/AddButtonActive}" text="{i18n>btnvolver}" type="Emphasized" icon="sap-icon://nav-back" press="cancelarRetencion" class="sapUiTinyMarginEnd"/>
         <Button visible="{= ${mockdata>/Paso05PathUpdate} !== '' }" text="{i18n>lblactualizar}" type="Emphasized" icon="sap-icon://refresh" press="guardarRetencion" />
-        <Button visible="{= ${mockdata>/Paso05PathUpdate} === '' }" enabled="{mockdata>/AddButtonActive}" text="{i18n>btnagregar}" type="Emphasized" icon="sap-icon://add" press="guardarRetencion" />
+ 
     </HBox>
 
 </core:FragmentDefinition>
