@@ -24,50 +24,36 @@
                             </Bar>
                         </customHeader>
 
-                        <Wizard id="idWizard" complete="onWizardComplete" class="sapUiResponsivePadding--header sapUiResponsivePadding--content" enableBranching="true">
+                        <Panel >
+                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.01Cliente" type="XML"/>
+                        </Panel>
 
-                            <WizardStep icon="sap-icon://person-placeholder" validated="true" id="idClienteWizardStep" nextStep="idRetencionesWizardStep" complete="onWizardStepClienteComplete" title="{i18n>clientetitle}">
+                        <Panel >
+                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.02PagoCta" type="XML"/>
+                        </Panel>
 
-                                <Panel >
-                                    <content>
+                        <Panel >
+                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.03Comprobante" type="XML"/>
+                        </Panel>
 
-                                        <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.01Cliente" type="XML"/>
-                                    </content>
+                        <Panel >
+                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.04Descuentos" type="XML"/>
+                        </Panel>
 
-                                </Panel>
-
-                            </WizardStep>
-
-
+                        <Panel >
+                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.05Retenciones" type="XML"/>
+                        </Panel>
 
 
-                            <WizardStep nextStep="idDetalleWizardStep" icon="sap-icon://sales-quote" id="idRetencionesWizardStep" title="{i18n>retencionestitle}" complete="onWizardStepRetencionComplete" validated="true">
-
-                                <Panel >
-
-                                    <content>
-                                        <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.02Retenciones" type="XML"/>
-                                    </content>
-
-                                </Panel>
-                            </WizardStep>
-
-                            <WizardStep complete="onWizardStepDetalleComplete" icon="sap-icon://menu" id="idDetalleWizardStep" validated="false" title="{i18n>detalletitle}" activate="onWizardStepDetalleActivate">
-                                <Panel >
-
-                                    <content>
-                                        <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.03Detalle" type="XML"/>
-                                        <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.03DetalleFile" type="XML"/>
-
-                                    </content>
-
-                                </Panel>
-                            </WizardStep>
-
-                        </Wizard>
+                        <Panel >
+                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.06Detalle" type="XML"/>
+                        </Panel>
 
 
 
+
+
+ 
                     </Page>
                     <Page id="idwizardReviewPage" showHeader="false" class="PanelLightCyan">
 
@@ -85,7 +71,7 @@
                                     <HBox class="sapUiTinyMarginBottom sapUiTinyMarginTop" alignItems="Center" justifyContent="SpaceBetween" alignContent="SpaceBetween" width="100%">
                                         <Text text="{TipoLinea}" class="BoldOK sapUiTinyMarginBegin" />
                                         <Text text="        " width="200px" />
-                                        <!-- <Text class="BoldOK sapUiTinyMarginEnd" text="{parts: ['TipoLinea', 'Importe'], formatter: '.formatItem'}"/> -->
+                                        
 
                                         <ObjectNumber unit="$" number="{parts: ['Importe'], formatter: '.formatNumber'}" state="{parts: ['Importe'], formatter: '.formatState'}" class="Bold sapUiTinyMarginEnd" />
                                     </HBox>

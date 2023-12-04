@@ -7,6 +7,7 @@
         <headerToolbar>
             <OverflowToolbar>
                 <ToolbarSpacer/>
+                <Button icon="sap-icon://sys-add" press="onAgregarDetalleButtonPress" text="{i18n>btnagregar}" type="Emphasized" />
 
             </OverflowToolbar>
         </headerToolbar>
@@ -96,6 +97,7 @@
 
 
             </form:content>
+            <Button text="{i18n>btnadjunto}" icon="sap-icon://attachment" id="idAdjuntarComprobantePagosButton"  press="onCallFileDialog" class="sapUiTinyMarginEnd" />
 
         </form:SimpleForm>
 

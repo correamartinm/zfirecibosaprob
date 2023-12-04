@@ -1,0 +1,109 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+
+
+    <Table id="idPagoCtaTable" items="{mockdata>/Paso2Data}" mode="MultiSelect" selectionChange="onTablePagoCtaSelectionChange" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" growingThreshold="6" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
+        <headerToolbar>
+            <OverflowToolbar>
+                <SearchField width="75%" search="onSearchFieldSearchPagoCta" placeholder="{i18n>lblnumcomprobante}" />
+                <ToolbarSpacer/>
+
+
+            </OverflowToolbar>
+        </headerToolbar>
+        <columns>
+
+            <Column width="3rem" hAlign="Center">
+                <header>
+                    <Label text="{i18n>lbltc}" tooltip="{i18n>lbltipocomprobante}"/>
+                </header>
+            </Column>
+            <Column width="4rem" hAlign="Center">
+                <header>
+                    <Label text="{i18n>lblnumcomprobante}" />
+                </header>
+            </Column>
+            <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                <header>
+                    <Label text="{i18n>lblfecha}"/>
+                </header>
+            </Column>
+
+
+            <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                <header>
+                    <Label text="{i18n>lbltotal}"/>
+                </header>
+            </Column>
+            <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                <header>
+                    <Label text="{i18n>lblsaldo}"/>
+                </header>
+            </Column>
+            <Column width="100px" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                <header>
+                    <Label text="{i18n>lblaplicado}"/>
+                </header>
+            </Column>
+            <Column visible="false" width="100px" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                <header>
+                    <!-- <Label text="{i18n>lblaplicado}"/> -->
+                </header>
+            </Column>
+            <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                <header/>
+            </Column>
+
+
+        </columns>
+        <items>
+            <ColumnListItem type="Active" highlight="Information">
+                <cells>
+
+
+
+                    <Text text="{mockdata>Tipo}" wrapping="false"/>
+                   
+                    <Label text="{mockdata>Numero}"/>
+                    <Label text="{path : 'mockdata>Fecha' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}" design="Bold"/>
+                    
+
+                    <Label text="{mockdata>Total}"/>
+                    <Label text="{mockdata>Saldo}"/>
+                    
+                    <Input enabled="false" value="{mockdata>Aplicado}" textAlign="End" change="onInputImporteChangePagos"/>
+                    <HBox visible="false">
+                        <Button icon="sap-icon://delete" press="onButtonDeletePress" class="sapUiTinyMarginBeginEnd" />
+                        <Button icon="sap-icon://edit" press="onButtonEditPress" />
+                    </HBox>
+
+
+                </cells>
+            </ColumnListItem>
+        </items>
+    </Table>
+    <OverflowToolbar  visible="{= ${mockdata>/Paso02CantidadPagos} > 0 }">
+        <content>
+            <ToolbarSpacer />
+
+            <Label text="{i18n>lblseleccion}: " />
+            <Label text="{i18n>lblpagoacta}" />
+            <Label text="{mockdata>/Paso02CantidadPagos}" design="Bold" class="sapUiTinyMarginBeginEnd" />
+
+            <Label text="{i18n>lblimpor}" />
+            <Label text="{mockdata>/Paso02ImportePagos}" design="Bold" />
+            <!-- </HBox> -->
+        </content>
+
+    </OverflowToolbar>
+
+
+
+    <HBox alignItems="Center" justifyContent="End" class="sapUiSmallMarginEnd sapUiLargeMarginTop" >
+
+    
+            <!-- <Button  text="{i18n>btnvolver}" type="Emphasized" icon="sap-icon://nav-back" press="onVolverButtonCancelarDescPress" class="sapUiTinyMarginEnd" /> -->
+            <Button enabled="{= ${mockdata>/Paso02ImportePagos} > 0}" text="{i18n>btnguardar}" type="Emphasized" icon="sap-icon://save" press="onGuardarButtonPagoAdicionalPress" />
+    </HBox>
+</core:FragmentDefinition>

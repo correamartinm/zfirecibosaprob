@@ -40,10 +40,9 @@ sap.ui.define(
         this._onValidateStep();
 
         this._oNavContainer.to(this.byId("idRecibosPage"));
+       
 
-        this._wizard.invalidateStep(this.getView().byId("idClienteWizardStep"));
-
-        this.onClearData();
+        // this.onClearData();
       },
 
       _onClearTable: function (oTable, column) {
