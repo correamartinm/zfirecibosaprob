@@ -1,10 +1,10 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core">
-    <Table id="idComprobanteTable" mode="MultiSelect" selectionChange="onTableComprobantesSelectionChange" items="{mockdata>/Paso3Data}" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" alternateRowColors="true"  growingThreshold="6" sticky="HeaderToolbar,ColumnHeaders">
-        <!-- <Table id="idComprobanteTable" mode="MultiSelect" selectionChange="onTableComprobantesSelectionChange" items="{path : '/cbts' ,sorter: [ { path: 'Fecha', descending: true }  ]   }" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders"> -->
+
+    <Table id="idComprobanteTable" items="{/ComprobantesSet}" mode="MultiSelect" selectionChange="onTablePagoCtaSelectionChange" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" growingThreshold="6" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
         <headerToolbar>
             <OverflowToolbar>
-                <SearchField width="75%" search="onSearchFieldSearchComprobante" placeholder="{i18n>lblnumcomprobante}" />
+                <SearchField width="75%" search="onSearchFieldSearchPagoCta" placeholder="{i18n>lblnumcomprobante}" />
                 <ToolbarSpacer/>
 
 
@@ -28,28 +28,31 @@
                 </header>
             </Column>
 
-            <Column visible="false" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+
+            <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
                 <header>
-                    <Label text="{i18n>lblvencimiento}"/>
+                    <Label text="{i18n>lblimpor}"/>
+                    </header>
+                </Column>
+            <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                <header>
+                    <Label text="{i18n>lblaplicado}"/>
+                    </header>
+            </Column>
+            <Column width="100px" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                <header>
+                    <Label text="{i18n>lblsaldo}"/>
                 </header>
             </Column>
-            <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+            <Column visible="false" width="100px" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
                 <header>
                     <Label text="{i18n>lbltotal}"/>
                 </header>
             </Column>
             <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
-                <header>
-                    <Label text="{i18n>lblsaldo}"/>
-                </header>
-            </Column>
-            <Column width="100px" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
-                <header>
-                    <Label text="{i18n>lblaplicado}"/>
-                </header>
-            </Column>
-            <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
-                <header/>
+                <header> 
+                    <Label text="{i18n>lbltotal}"/>
+                     </header>
             </Column>
 
 
@@ -60,17 +63,19 @@
 
 
 
-                    <Text text="{mockdata>Tipo}" wrapping="false"/>
-                    <Label text="{mockdata>Numero}"/>
-                    <Label text="{path : 'mockdata>Fecha' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}" design="Bold"/>
-                    <Label text="{path : 'mockdata>Vencimiento' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}" design="Bold"/>
-
-                    <Label text="{mockdata>Total}"/>
-                    <Label text="{mockdata>Saldo}"/>
-                    <Input enabled="false" value="{mockdata>Aplicado}" textAlign="End" change="onInputImporteChange"/>
+                    <Text text="{Tipo}" wrapping="false"/>
+                   
+                    <Label text="{Numero}"/>
+                    <Label text="{path : 'mockdata>Fecha' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}" design="Bold"/>                    
+                        <Label text="{Importe}"/>
+                        <Label text="{Aplicado}"/>
+                        <Label text="{Saldo}"/>
+                        <Label text="{Total}"/>
+                    
+                    <Input enabled="false" value="{mockdata>Aplicado}" textAlign="End" change="onInputImporteChangePagos"/>
                     <HBox visible="false">
-                        <Button icon="sap-icon://delete" press="onButtonPrintPress" class="sapUiTinyMarginBeginEnd" />
-                        <Button icon="sap-icon://edit" press="onButtonPrintPress" />
+                        <Button icon="sap-icon://delete" press="onButtonDeletePress" class="sapUiTinyMarginBeginEnd" />
+                        <Button icon="sap-icon://edit" press="onButtonEditPress" />
                     </HBox>
 
 
@@ -78,6 +83,7 @@
             </ColumnListItem>
         </items>
     </Table>
+
     <OverflowToolbar visible="{= ${mockdata>/Paso03CantidadComprobantes} > 0 }">
         <content>
             <ToolbarSpacer />

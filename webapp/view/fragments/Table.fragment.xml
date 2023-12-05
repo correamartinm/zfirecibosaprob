@@ -7,24 +7,12 @@
         <Button icon="sap-icon://sys-add" press="onAgregarButtonPress" text="{i18n>btnagregar}" type="Emphasized" />
     </Toolbar>
 
-    <Table id="idTable" mode="MultiSelect" items="{
-        path : '/RECIBOSSet',
-        sorter: [{
-            path: 'Fecha',
-            descending: true
-        }, {
-            path: 'Procesado',
-            descending: true
-        }],
-        filters : [
-            { path : 'Procesado', operator : 'NE', value1 : '' }
-        ]					
-    }" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
+    <Table id="idTable" mode="MultiSelect" items="{path : '/RECIBOSSet'}" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
         <headerToolbar>
             <OverflowToolbar>
                 <SearchField width="95%" placeholder="{i18n>lblrazonsocial}" search="onSearchRS" visible="{= ${device>/system/desktop} === false }" />
                 <ToolbarSpacer/>
-                <Button icon="sap-icon://sys-help" press="onAgregarButtonPress"  type="Emphasized" visible="{= ${device>/system/phone} === false }" />
+                <!-- <Button icon="sap-icon://sys-help" press="onAgregarButtonPress"  type="Emphasized" visible="{= ${device>/system/phone} === false }" /> -->
 
 
             </OverflowToolbar>
@@ -133,8 +121,8 @@
                     <HBox >
 
                         <Button icon="sap-icon://print" enabled="{= ${Procesado} === 'X' }" press="onButtonPrintPress" />
-                        <Button icon="sap-icon://edit" enabled="false" press="onButtonEditPress" class="sapUiTinyMarginBegin" />
-                        <Button icon="sap-icon://my-view"  press="onFileDialog"  class="sapUiTinyMarginBegin"/>
+                        <Button icon="sap-icon://attachment"  press="onFileDialog"  class="sapUiTinyMarginBegin"/>
+                        <Button icon="sap-icon://detail-view" press="onDetailPress" class="sapUiTinyMarginBegin" />
                     </HBox>
 
                 </cells>

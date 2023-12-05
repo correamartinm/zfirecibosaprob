@@ -42,11 +42,7 @@
     </VBox>
 
         <List class="sapUiSmallMarginBeginEnd"  id="idResumenSetList" width="90%" items="{
-        path: '/ResumenSet',   events: {
-            dataRequested: '.onResumenData'
-           
-          }
-    }">
+        path: '/ResumenSet'  }">
             <CustomListItem >
                 <VBox  >
 

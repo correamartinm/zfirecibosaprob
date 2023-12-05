@@ -331,13 +331,7 @@ sap.ui.define(
           oFecha.setValueState(ValueState.None);
         }
 
-        // if (!oFile.getValue()) {
-        //   oFile.setValueState(ValueState.Error);
-        //   return;
-        // } else {
-        //   oFile.setValueState(ValueState.None);
-        // }
-
+  
         let oValue = false,
           oImportesSuma = 0,
           oDecuentos = "/Descuentos";

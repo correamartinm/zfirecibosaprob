@@ -15,24 +15,22 @@
         <columns>
 
             <Column width="12rem">
-                <header>
-                    <Label text="{i18n>lblmotivo}" />
-                </header>
+                <Label text="{i18n>lblmotivo}" />
             </Column>
             <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
-                <header>
-                    <Label text="{i18n>lblnumcomprobante}"/>
-                </header>
+
+                <Label text="{i18n>lblnumcomprobante}"/>
+
             </Column>
             <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
-                <header>
-                    <Label text="{i18n>lblfecha}"/>
-                </header>
+
+                <Label text="{i18n>lblfecha}"/>
+
             </Column>
             <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
-                <header>
-                    <Label text="{i18n>lblimpor}"/>
-                </header>
+
+                <Label text="{i18n>lblimpor}"/>
+
             </Column>
             <Column width="3rem">
                 <header/>
@@ -86,7 +84,7 @@
 
             <Label text="{i18n>lbldocumentacion}" required="true" labelFor="idDescuentoFileUploader"/>
 
-            <!-- <unified:FileUploader id="idDescuentoFileUploader" change="onAttachmentChange" name="FUDescuento" uploadUrl="/sap/opu/odata/sap/ZGWFI_COBRANZAS_SRV/AttachDocSet"  useMultipart="false" sendXHR="true" buttonText="{i18n>btttnselect}" style="Emphasized"/> -->
+            <!-- <unified:FileUploader id="idDescuentoFileUploader" change="onAttachmentChange" name="FUDescuento" uploadUrl="/sap/opu/odata/sap/ZGWFI_COBRANZAS_SRV/AttachDocSet" useMultipart="false" sendXHR="true" buttonText="{i18n>btttnselect}" style="Emphasized"/> -->
 
 
             <Button icon="sap-icon://attachment" id="idAdjuntarComprobanteDescuentoButton" text="{i18n>btnadjunto}" press="onCallFileDialog" />

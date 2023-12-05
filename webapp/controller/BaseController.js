@@ -304,21 +304,11 @@ sap.ui.define(
         },
 
         onCheckStep: function (oEvent) {
-          let Entidad = oEvent.oSource.sPath,
-            step,
-            registros = oEvent.mParameters.data.results.length;
+          let Entidad = oEvent.oSource.sPath;
+ 
+            // registros = oEvent.mParameters.data.results.length;
 
-          switch (Entidad) {
-            // case "/DescuentosSet":
-            //   step = "idDescuentosWizardStep";
-            //   break;
-            // case "/RetencionesSet":
-            //   step = "idRetencionesWizardStep";
-            //   break;
-            case "/PagosSet":
-              step = "idDetalleWizardStep";
-              break;
-          }
+ 
 
           if (registros === 0) {
             this._wizard.invalidateStep(this.getView().byId(step));

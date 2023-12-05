@@ -24,28 +24,28 @@
                             </Bar>
                         </customHeader>
 
-                        <Panel >
+                        <Panel expandable="true" expanded="false" headerText="{i18n>clientetitle}">
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.01Cliente" type="XML"/>
                         </Panel>
 
-                        <Panel >
+                        <Panel expandable="true" expanded="false" headerText="{i18n>pagoactatitle}">
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.02PagoCta" type="XML"/>
                         </Panel>
 
-                        <Panel >
+                        <Panel expandable="true" expanded="false" headerText="{i18n>comprobantetitle}">
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.03Comprobante" type="XML"/>
                         </Panel>
 
-                        <Panel >
+                        <Panel expandable="true" expanded="false" headerText="{i18n>descuentotitle}">
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.04Descuentos" type="XML"/>
                         </Panel>
 
-                        <Panel >
+                        <Panel expandable="true" expanded="false" headerText="{i18n>retencionestitle}">
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.05Retenciones" type="XML"/>
                         </Panel>
 
 
-                        <Panel >
+                        <Panel expandable="true" expanded="false" headerText="{i18n>detalletitle}">
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.06Detalle" type="XML"/>
                         </Panel>
 
@@ -60,11 +60,7 @@
 
                         <!-- <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.Review" type="XML"/> -->
                         <List class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom" id="idResumenSetList" width="95%" items="{
-                                    path: '/ResumenSet',   events: {
-                                        dataRequested: '.onResumenData'
-                                       
-                                      }
-                                }">
+                                    path: '/ResumenSet' }">
                             <CustomListItem >
                                 <VBox  >
 

@@ -139,12 +139,7 @@ sap.ui.define([
                 oTable.getBinding("items").filter([oFilters]);
               },
         
-              onButtonEditPress: function (oEvent) {
-                this._onEditMode();
-                let oPath = oEvent.getSource().getBindingContext().getPath(),
-                  oItem = oEvent.getSource().getBindingContext().getObject();
-              },
-        
+       
               _onEditMode: function () {
                 let oLayoutModel = this.getView().getModel("layout"),
                   oEntidad = "/EdicionRecibo",
@@ -156,7 +151,7 @@ sap.ui.define([
         
               // *** Nuevo Recibo
         
-              onAgregarButtonPress: function (oEvent) {
+              onDetailPress: function (oEvent) {
         
                 this.getOwnerComponent().getTargets().display("TargetDetalle");
 

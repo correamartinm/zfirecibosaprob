@@ -3,7 +3,7 @@
 
 
 
-    <Table id="idPagoCtaTable" items="{mockdata>/Paso2Data}" mode="MultiSelect" selectionChange="onTablePagoCtaSelectionChange" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" growingThreshold="6" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
+    <Table id="idPagoCtaTable" items="{/PagoCuentaSet}" mode="MultiSelect" selectionChange="onTablePagoCtaSelectionChange" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" growingThreshold="6" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
         <headerToolbar>
             <OverflowToolbar>
                 <SearchField width="75%" search="onSearchFieldSearchPagoCta" placeholder="{i18n>lblnumcomprobante}" />
@@ -33,26 +33,28 @@
 
             <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
                 <header>
-                    <Label text="{i18n>lbltotal}"/>
-                </header>
-            </Column>
+                    <Label text="{i18n>lblimpor}"/>
+                    </header>
+                </Column>
             <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+                <header>
+                    <Label text="{i18n>lblaplicado}"/>
+                    </header>
+            </Column>
+            <Column width="100px" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
                 <header>
                     <Label text="{i18n>lblsaldo}"/>
                 </header>
             </Column>
-            <Column width="100px" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
-                <header>
-                    <Label text="{i18n>lblaplicado}"/>
-                </header>
-            </Column>
             <Column visible="false" width="100px" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
                 <header>
-                    <!-- <Label text="{i18n>lblaplicado}"/> -->
+                    <Label text="{i18n>lbltotal}"/>
                 </header>
             </Column>
             <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
-                <header/>
+                <header> 
+                    <Label text="{i18n>lbltotal}"/>
+                     </header>
             </Column>
 
 
@@ -63,14 +65,14 @@
 
 
 
-                    <Text text="{mockdata>Tipo}" wrapping="false"/>
+                    <Text text="{Tipo}" wrapping="false"/>
                    
-                    <Label text="{mockdata>Numero}"/>
-                    <Label text="{path : 'mockdata>Fecha' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}" design="Bold"/>
-                    
-
-                    <Label text="{mockdata>Total}"/>
-                    <Label text="{mockdata>Saldo}"/>
+                    <Label text="{Numero}"/>
+                    <Label text="{path : 'mockdata>Fecha' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}" design="Bold"/>                    
+                        <Label text="{Importe}"/>
+                        <Label text="{Aplicado}"/>
+                        <Label text="{Saldo}"/>
+                        <Label text="{Total}"/>
                     
                     <Input enabled="false" value="{mockdata>Aplicado}" textAlign="End" change="onInputImporteChangePagos"/>
                     <HBox visible="false">
