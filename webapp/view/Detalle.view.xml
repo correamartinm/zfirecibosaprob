@@ -24,7 +24,7 @@
                             </Bar>
                         </customHeader>
 
-                        <Panel expandable="true" expanded="false" headerText="{i18n>clientetitle}">
+                        <Panel expandable="true" expanded="false" headerText="{i18n>clientetitle}" class="sapUiSmallMarginTop">
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.01Cliente" type="XML"/>
                         </Panel>
 

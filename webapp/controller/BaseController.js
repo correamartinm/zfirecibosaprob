@@ -310,11 +310,11 @@ sap.ui.define(
 
  
 
-          if (registros === 0) {
-            this._wizard.invalidateStep(this.getView().byId(step));
-          } else {
-            this._wizard.validateStep(this.getView().byId(step));
-          }
+          // if (registros === 0) {
+          //   this._wizard.invalidateStep(this.getView().byId(step));
+          // } else {
+          //   this._wizard.validateStep(this.getView().byId(step));
+          // }
         },
 
         _onSaveData: async function (oModel, oView, item) {

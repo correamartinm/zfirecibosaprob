@@ -1273,22 +1273,6 @@ sap.ui.define(
         this._oNavContainer.to(this.byId("idwizardReviewPage"));
       },
 
-      discardProgress: function () {
-        this._wizard.discardProgress(this.byId("idClienteWizardStep"));
-
-        var clearContent = function (content) {
-          for (var i = 0; i < content.length; i++) {
-            if (content[i].setValue) {
-              content[i].setValue("");
-            }
-
-            if (content[i].getContent) {
-              clearContent(content[i].getContent());
-            }
-          }
-        };
-        clearContent(this._wizard.getSteps());
-      },
 
       // ********************************************
       // Impresion *****************************
@@ -1313,15 +1297,7 @@ sap.ui.define(
         });
       },
 
-      onWizardComplete: function () {},
-
-      // onConfirmarReciboButtonPress: function () {
-      //   let oEntidad = "/Detalle",
-      //     Tipo = "DETA",
-      //     Step = "idDetalleWizardStep";
-
-      //   this._onGuardar(oEntidad, Tipo, Step);
-      // },
+   
 
       onConfirmarReciboButtonPress: async function () {
         let oMockModel = this.getView().getModel("mockdata"),
@@ -1348,9 +1324,9 @@ sap.ui.define(
             sMessageTitle = this._i18n().getText("msgok");
 
           this._onShowMsgBoxSucces(sMessage, sMessageTitle).then((rta) => {
-            if (rta === "OK") this.discardProgress();
+           
             oMockModel.setProperty("/NoComprobantes", false);
-            this.discardProgress();
+           
 
             this.getOwnerComponent().getTargets().display("TargetMainView");
             oModel.refresh();
@@ -1358,9 +1334,7 @@ sap.ui.define(
         }
       },
 
-      onAnularButtonPress: function () {
-        this.discardProgress();
-      },
+
 
       onNavBack: async function () {
         // this.getOwnerComponent().getTargets().display("TargetMainView");
@@ -1370,7 +1344,7 @@ sap.ui.define(
           sMessageTitle = this._i18n().getText("msgvolver");
 
         this._onShowMsgBoxConfirm(sMessage, sMessageTitle).then((rta) => {
-          if (rta === "OK") this.discardProgress();
+         
 
           this.getOwnerComponent().getTargets().display("TargetMainView");
         });
