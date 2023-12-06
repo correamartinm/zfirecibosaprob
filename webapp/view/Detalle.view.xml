@@ -49,7 +49,7 @@
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.06Detalle" type="XML"/>
                         </Panel>
 
-                        <Panel expandable="true" expanded="false" headerText="{i18n>detalletitle}">
+                        <Panel expandable="true" expanded="false" headerText="{i18n>resumentitle}">
                             <List class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom" id="idResumenSetList" width="95%" items="{
                                 path: '/ResumenSet' }">
                         <CustomListItem >

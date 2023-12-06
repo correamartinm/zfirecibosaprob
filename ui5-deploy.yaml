@@ -15,7 +15,7 @@ builder:
       configuration:
         ignoreCertError: true
         target:
-          url: https://mxecid.morixe.com.ar:44300
+          url: http://mxecid.morixe.com.ar:8000/
           client: "100"
         app:
           name: ZFIRECIBOAPB
