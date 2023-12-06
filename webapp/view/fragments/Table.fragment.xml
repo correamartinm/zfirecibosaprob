@@ -80,6 +80,9 @@
             <Column width="8rem">
                 <header/>
             </Column>
+            <Column width="8rem">
+                <header/>
+            </Column>
 
 
 
@@ -124,6 +127,7 @@
                         <Button icon="sap-icon://attachment"  press="onFileDialog"  class="sapUiTinyMarginBegin"/>
                         <Button icon="sap-icon://detail-view" press="onDetailPress" class="sapUiTinyMarginBegin" />
                     </HBox>
+                    <Button tooltip="POST" text="Contabilizar" icon="sap-icon://checklist-item" press="onPostPress" class="sapUiTinyMarginBegin" />
 
                 </cells>
             </ColumnListItem>

@@ -6,7 +6,7 @@
     <Table id="idPagoCtaTable" items="{/PagoCuentaSet}" mode="MultiSelect" selectionChange="onTablePagoCtaSelectionChange" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" growingThreshold="6" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
         <headerToolbar>
             <OverflowToolbar>
-                <SearchField width="75%" search="onSearchFieldSearchPagoCta" placeholder="{i18n>lblnumcomprobante}" />
+                
                 <ToolbarSpacer/>
 
 
@@ -85,27 +85,6 @@
             </ColumnListItem>
         </items>
     </Table>
-    <OverflowToolbar  visible="{= ${mockdata>/Paso02CantidadPagos} > 0 }">
-        <content>
-            <ToolbarSpacer />
+   
 
-            <Label text="{i18n>lblseleccion}: " />
-            <Label text="{i18n>lblpagoacta}" />
-            <Label text="{mockdata>/Paso02CantidadPagos}" design="Bold" class="sapUiTinyMarginBeginEnd" />
-
-            <Label text="{i18n>lblimpor}" />
-            <Label text="{mockdata>/Paso02ImportePagos}" design="Bold" />
-            <!-- </HBox> -->
-        </content>
-
-    </OverflowToolbar>
-
-
-
-    <HBox alignItems="Center" justifyContent="End" class="sapUiSmallMarginEnd sapUiLargeMarginTop" >
-
-    
-            <!-- <Button  text="{i18n>btnvolver}" type="Emphasized" icon="sap-icon://nav-back" press="onVolverButtonCancelarDescPress" class="sapUiTinyMarginEnd" /> -->
-            <Button enabled="{= ${mockdata>/Paso02ImportePagos} > 0}" text="{i18n>btnguardar}" type="Emphasized" icon="sap-icon://save" press="onGuardarButtonPagoAdicionalPress" />
-    </HBox>
 </core:FragmentDefinition>

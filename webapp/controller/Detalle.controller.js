@@ -37,12 +37,7 @@ sap.ui.define(
       },
 
       _onObjectMatched: function () {
-        this._onValidateStep();
-
-        this._oNavContainer.to(this.byId("idRecibosPage"));
-       
-
-        // this.onClearData();
+        this.onBuscarCliente();
       },
 
       _onClearTable: function (oTable, column) {
@@ -81,6 +76,45 @@ sap.ui.define(
       // ********************************************
       // Paso Datos del Cliente
       // ********************************************
+      onBuscarCliente: async function () {
+        let oMockModel = this.getView().getModel("mockdata"),
+          oRecibo = oMockModel.getProperty("/ReciboActivo"),
+          oModel = this.getOwnerComponent().getModel(),
+          oView = this.getView();
+          oPath = oModel.createKey("/CLIENTESSet", {
+            Codigo: oRecibo.Cliente
+         });
+
+
+         let rta = await this._onreadModel(oModel, oView, oPath);
+
+         if (rta.Respuesta !== "OK") {
+           this._onErrorHandle(rta.Datos);
+         } else {
+           
+           oMockModel.setProperty("/Paso01Cliente", rta.Datos);
+          // let oPayload = {
+          //   Codigo: vObject.Codigo,
+          //   RazonSocial: vObject.RazonSocial,
+          //   Domicilio: vObject.Domicilio,
+          //   Localidad: vObject.Localidad,
+          //   TipoIva: vObject.TipoIVA,
+          //   Cuit: vObject.Cuit,
+          //   Observaciones: vObject.Observaciones,
+          //   Accion: "C",
+          //   Anticipo: anticipo,
+          //   Recibo: recibo,
+          //   TipoComprobante: vObject.TipoComprobante,
+          //   Periodo: oComprobantesControl.results[0].Periodo,
+          //   Sociedad: oComprobantesControl.results[0].Sociedad,
+          // };
+
+
+
+
+         }
+
+      },
 
       onReciboPreliminarCheckBox: function (oEvent) {
         let oMockModel = this.getView().getModel("mockdata"),
@@ -99,16 +133,6 @@ sap.ui.define(
         }
 
         oMockModel.setProperty("/Paso01Cliente", oData);
-      },
-      _onValidateStep: function () {
-        // let oMockModel = this.getOwnerComponent().getModel("mockdata"),
-        //   Step = this.getView().byId("idClienteWizardStep"),
-        //   oData = oMockModel.getProperty("/Paso01Cliente");
-        // if (oData.Codigo !== "") {
-        //   this._wizard.validateStep(Step);
-        // } else {
-        //   this._wizard.invalidateStep(Step);
-        // }
       },
 
       onGuardarButtonClientePress: async function () {
@@ -155,8 +179,6 @@ sap.ui.define(
             oData.Sociedad = rta.Sociedad || "";
 
             oMockModel.setProperty("/Paso01Cliente", oData);
-
-            this._onValidateStep();
           }
         }
       },
@@ -255,10 +277,6 @@ sap.ui.define(
         }
         // ******** Hay documentos para el Cliente ???
       },
-      onWizardStepClienteComplete: async function () {
-        this.onFilterTableCbtes02();
-        this._onCheckPago();
-      },
 
       // ********************************************
       // Paso Descuentos ---------------------------
@@ -331,7 +349,6 @@ sap.ui.define(
           oFecha.setValueState(ValueState.None);
         }
 
-  
         let oValue = false,
           oImportesSuma = 0,
           oDecuentos = "/Descuentos";
@@ -1250,30 +1267,6 @@ sap.ui.define(
       // ********************************************
       // ********************************************
 
-      onAnularButtonPress: function () {
-        this.onNavBack();
-      },
-
-      onNavtoStep2: function (oEvent) {
-        this.onWizardStepClienteComplete();
-        // this._handleNavigationToStep(2);
-      },
-
-      _handleNavigationToStep: function (iStepNumber) {
-        var fnAfterNavigate = function () {
-          this._wizard.goToStep(this._wizard.getSteps()[iStepNumber]);
-          this._oNavContainer.detachAfterNavigate(fnAfterNavigate);
-        }.bind(this);
-
-        this._oNavContainer.attachAfterNavigate(fnAfterNavigate);
-        this._backToWizardContent();
-      },
-
-      wizardCompletedHandler: function () {
-        this._oNavContainer.to(this.byId("idwizardReviewPage"));
-      },
-
-
       // ********************************************
       // Impresion *****************************
       // ********************************************
@@ -1296,8 +1289,6 @@ sap.ui.define(
           },
         });
       },
-
-   
 
       onConfirmarReciboButtonPress: async function () {
         let oMockModel = this.getView().getModel("mockdata"),
@@ -1324,17 +1315,13 @@ sap.ui.define(
             sMessageTitle = this._i18n().getText("msgok");
 
           this._onShowMsgBoxSucces(sMessage, sMessageTitle).then((rta) => {
-           
             oMockModel.setProperty("/NoComprobantes", false);
-           
 
             this.getOwnerComponent().getTargets().display("TargetMainView");
             oModel.refresh();
           });
         }
       },
-
-
 
       onNavBack: async function () {
         // this.getOwnerComponent().getTargets().display("TargetMainView");
@@ -1344,8 +1331,6 @@ sap.ui.define(
           sMessageTitle = this._i18n().getText("msgvolver");
 
         this._onShowMsgBoxConfirm(sMessage, sMessageTitle).then((rta) => {
-         
-
           this.getOwnerComponent().getTargets().display("TargetMainView");
         });
       },

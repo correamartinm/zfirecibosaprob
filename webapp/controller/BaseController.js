@@ -283,7 +283,7 @@ sap.ui.define(
       // Actualizacion de Modelos  ******************
       // ********************************************   
 
-        _oncreateModelNew: function (oModel, oView, oEntity, oPayload) {
+        _oncreateModel: function (oModel, oView, oEntity, oPayload) {
           return new Promise((resolve, reject) => {
             oView.setBusy(true);
             let that = this;
@@ -568,24 +568,7 @@ sap.ui.define(
 
         // Actualizacion Modelos -------------------
 
-        _oncreateModel: function (oModel, oView, oEntity, oPayload) {
-          return new Promise((resolve, reject) => {
-            oView.setBusy(true);
-            oModel.create(oEntity, oPayload, {
-              success: function (oData) {
-                oView.setBusy(false);
 
-                resolve(oData);
-              }.bind(this),
-
-              error: function (oError) {
-                oView.setBusy(false);
-                resolve(oError);
-                // Reiniciar
-              }.bind(this),
-            });
-          });
-        },
 
         onupdateModel: function (oModel, oView, oPath, oPayload) {
           return new Promise((resolve, reject) => {
@@ -637,11 +620,11 @@ sap.ui.define(
             oModel.read(oPath, {
               success: jQuery.proxy(function (oData) {
                 oView.setBusy(false);
-                resolve({ Rta: "OK", Data: oData });
+                resolve({ Respuesta: "OK", Datos: oData });
               }, this),
               error: function (oError) {
                 oView.setBusy(false);
-                resolve({ Rta: "ERROR", Data: oError });
+                resolve({ Respuesta: "ERROR", Datos: oError });
               },
             });
           });

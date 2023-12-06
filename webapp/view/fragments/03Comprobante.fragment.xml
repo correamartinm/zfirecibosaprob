@@ -4,7 +4,7 @@
     <Table id="idComprobanteTable" items="{/ComprobantesSet}" mode="MultiSelect" selectionChange="onTablePagoCtaSelectionChange" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" growingThreshold="6" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
         <headerToolbar>
             <OverflowToolbar>
-                <SearchField width="75%" search="onSearchFieldSearchPagoCta" placeholder="{i18n>lblnumcomprobante}" />
+                
                 <ToolbarSpacer/>
 
 
@@ -84,27 +84,5 @@
         </items>
     </Table>
 
-    <OverflowToolbar visible="{= ${mockdata>/Paso03CantidadComprobantes} > 0 }">
-        <content>
-            <ToolbarSpacer />
-            <!-- <HBox visible="{= ${/Paso03CantidadComprobantes} > 0 }">
-            </HBox> -->
 
-            <!-- <HBox visible="{= ${/Paso03CantidadComprobantes} > 0 }"> -->
-            <Label text="{i18n>lblseleccion}: " />
-            <Label text="{i18n>lblcomprobantes}" />
-            <Label text="{mockdata>/Paso03CantidadComprobantes}" design="Bold" class="sapUiTinyMarginBeginEnd" />
-
-            <Label text="{i18n>lblimpor}" />
-            <Label text="{mockdata>/Paso03ImporteComprobantes}" design="Bold" />
-            <!-- </HBox> -->
-        </content>
-
-    </OverflowToolbar>
-    <HBox alignItems="Center" justifyContent="End" class="sapUiSmallMarginEnd sapUiLargeMarginTop" >
-
-    
-        <!-- <Button  text="{i18n>btnvolver}" type="Emphasized" icon="sap-icon://nav-back" press="onVolverButtonCancelarDescPress" class="sapUiTinyMarginEnd" /> -->
-        <Button  enabled="{= ${mockdata>/Paso03ImporteComprobantes} > 0}" text="{i18n>btnguardar}" type="Emphasized" icon="sap-icon://save" press="onGuardarButtonComprobantesPress" />
-</HBox>
 </core:FragmentDefinition>

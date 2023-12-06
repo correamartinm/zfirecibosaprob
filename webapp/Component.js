@@ -97,14 +97,15 @@ sap.ui.define([
                     TOTAL:"",
                     ANTICIPO:"",
                     SALDO:"",
-                    ActiveStep:"1"
+                    ActiveStep:"1",
+                    ReciboActivo: {}
           
             
                   });
                   this.setModel(oMockDataModel, "mockdata");
           
                   var oLayoutModel = new sap.ui.model.json.JSONModel({
-                  
+                    descuentosadd: false,
                     EdicionRecibo: true,
                     retencionesadd: false,
                     detalleadd: false,
