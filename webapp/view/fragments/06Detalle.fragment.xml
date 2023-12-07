@@ -2,7 +2,7 @@
    
     xmlns:core="sap.ui.core">
 
-    <Table items="{path : '/PagosSet' ,events: {
+    <Table id="idPagosSetTable" items="{path : '/PagosSet' ,events: {
         dataReceived: '.onCheckStep' } }" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders" >
         <headerToolbar>
             <OverflowToolbar>

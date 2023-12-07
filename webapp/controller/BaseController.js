@@ -4,8 +4,10 @@ sap.ui.define(
     "sap/m/MessageBox",
     "sap/ui/core/ValueState",
     "sap/ui/core/routing/History",
+    "sap/ui/model/FilterOperator",
+    "sap/ui/model/Filter",
   ],
-  function (Controller, MessageBox, ValueState, History) {
+  function (Controller, MessageBox, ValueState, History, FilterOperator, Filter) {
     "use strict";
 
     return Controller.extend(
@@ -96,7 +98,7 @@ sap.ui.define(
         if (!this._oDialogUploadSet) {
           this._oDialogUploadSet = sap.ui.xmlfragment(
             "UploadFile",
-            "morixe.zfirecibos.view.fragments.FileUploader",
+            "morixe.zfirecibosaprob.view.fragments.FileUploader",
             this
           );
           this.getView().addDependent(this._oDialogUploadSet);
@@ -111,7 +113,7 @@ sap.ui.define(
         var oFilter1 = new Filter("Cliente", FilterOperator.EQ, oItem.Cliente);
         var oFilter2 = new Filter("NroLinea", FilterOperator.EQ, oItem.Numero);
 
-        // if (oUploadCollection.getItems().length.length > 0) oUploadCollection.getBinding("items").filter([oFilter1 ,oFilter2]);
+        if (oUploadCollection.getItems().length.length > 0) oUploadCollection.getBinding("items").filter([oFilter1 ,oFilter2]);
 
         // Muestro Dialogo
 
@@ -366,211 +368,9 @@ sap.ui.define(
           return this.getOwnerComponent().getModel("i18n").getResourceBundle();
         },
 
-        // *************************
-        // Ficheros
+       // Actualizacion Modelos -------------------
 
-
-
-        onFileDialog: function (oEvent) {
-          let oPath = oEvent.getSource().getBindingContext().getPath(),
-            oItem = oEvent.getSource().getBindingContext().getObject();
-          if (!this._oDialogUploadSet) {
-            this._oDialogUploadSet = sap.ui.xmlfragment(
-              "UploadFile",
-              "morixe.zfirecibosaprob.view.fragments.FileUploader",
-              this
-            );
-            this.getView().addDependent(this._oDialogUploadSet);
-          }
-
-          // Filtro Ficheros
-          // var oUploadCollection = sap.ui.core.Fragment.byId("UploadFile", "attachmentUpl");
-          // var oFilter2 = new Filter("Recibo", FilterOperator.EQ, gOrder);
-
-          // oUploadCollection.getBinding("items").filter([oFilter2]);
-          // Muestro Dialogo
-
-          // this._oDialogUploadSet.setTitle("Ficheros Ficha: " + gOrder + " Intervencion: " + gNumIntervencion);
-          this._oDialogUploadSet.open();
-        },
-
-        onSelectAllAttachments: function (oEvent) {
-          var aUploadedItems = sap.ui.core.Fragment.byId(
-          "UploadFile",
-          "attachmentUpl").getItems(),
-            bSelected = oEvent.getSource().getSelected();
-          if (bSelected) {
-            //if CheckBox is selected
-            aUploadedItems.forEach((oItem) =>
-              oItem.getListItem().setSelected(true)
-            );
-            this.byId("download").setEnabled(true);
-          } else {
-            aUploadedItems.forEach((oItem) =>
-              oItem.getListItem().setSelected(false)
-            );
-            this.byId("remove").setEnabled(false);
-            this.byId("download").setEnabled(false);
-          }
-        },
-        onSelectionChangeAttachment: function () {
-          if (
-            sap.ui.core.Fragment.byId(
-          "UploadFile",
-          "attachmentUpl").getList().getSelectedItems().length > 0
-          ) {
-            //if user selects 1 or more uploaded item
-            this.byId("remove").setEnabled(true);
-            this.byId("download").setEnabled(true);
-          } else {
-            this.byId("remove").setEnabled(false);
-            this.byId("download").setEnabled(false);
-          }
-        },
-        onRemove: function (oEvent) {
-          var oAttachmentUpl = sap.ui.core.Fragment.byId(
-          "UploadFile",
-          "attachmentUpl");
-
-          oAttachmentUpl.setBusy(true);
-          oAttachmentUpl.getItems().forEach((oItem) => {
-            if (oItem.getListItem().getSelected()) {
-              var sPath = oItem.getProperty("url").split("SRV")[1]; //eg /Z9NRS_REQ_ATTACHSet
-              this.getView()
-                .getModel()
-                .remove(sPath, {
-                  success: function () {
-                    oAttachmentUpl.removeItem(oItem); //remove from displayed list
-                  },
-                  error: function (oError) {
-                    that.parseErrorMsg();
-                  },
-                });
-            }
-          });
-          oEvent.getSource().setEnabled(false);
-          this.byId("download").setEnabled(false);
-
-          if (oAttachmentUpl.getItems().length > 0) {
-            this.byId("checkbox").setVisible(true);
-          } else {
-            this.byId("checkbox").setVisible(false);
-          }
-          oAttachmentUpl.setBusy(false);
-        },
-        onDownload: function (oEvent) {
-          var oAttachmentUpl = sap.ui.core.Fragment.byId(
-          "UploadFile",
-          "attachmentUpl");
-          oAttachmentUpl.setBusy(true);
-          oAttachmentUpl.getItems().forEach((oItem) => {
-            if (oItem.getListItem().getSelected()) {
-              oItem.download(true);
-              oItem.getListItem().setSelected(false);
-            }
-          });
-          oAttachmentUpl.setBusy(false);
-          oEvent.getSource().setEnabled(false);
-        },
-        
-        onStartUpload: function () {
-          var oAttachmentUpl = sap.ui.core.Fragment.byId(
-          "UploadFile",
-          "attachmentUpl");
-          var aIncompleteItems = oAttachmentUpl.getIncompleteItems();
-          this.iIncompleteItems = aIncompleteItems.length; //used to turn off busy indicator upon completion of all pending uploads
-          if (this.iIncompleteItems !== 0) {
-            oAttachmentUpl.setBusy(true);
-            this.i = 0; //used to turn off busy indicator when all uploads complete
-            for (var i = 0; i < this.iIncompleteItems; i++) {
-              var sFileName = aIncompleteItems[i].getProperty("fileName");
-              var oXCSRFToken = new sap.ui.core.Item({
-                key: "X-CSRF-Token",
-                text: this.getOwnerComponent().getModel().getSecurityToken(),
-              });
-              var oSlug = new sap.ui.core.Item({
-                key: "SLUG",
-                text: this.sRequestId + "/" + sFileName,
-              });
-              oAttachmentUpl
-                .addHeaderField(oXCSRFToken)
-                .addHeaderField(oSlug)
-                .uploadItem(aIncompleteItems[i]);
-              oAttachmentUpl.removeAllHeaderFields(); //at least slug header field must be reset after each upload
-            }
-          }
-        },
-        onUploadCompleted: function () {
-          this.i += 1;
-          if (this.i === this.iIncompleteItems) {
-            //turn off busy indicator when all attachments have completed uploading
-            sap.ui.core.Fragment.byId(
-          "UploadFile",
-          "attachmentUpl").setBusy(false);
-          }
-        },
-        parseErrorMsg: function (oError) {
-          //parses oData error messages dependent on different return values
-          var oMessage, sType;
-          if (oError.response) {
-            //for update
-            sType = typeof oError.response;
-            if (sType === "string" || sType === "object")
-              oMessage = JSON.parse(oError.response.body).error.message.value;
-            else
-              return MessageBox.error(
-                "Unhandled server error:\n\n" +
-                  oError.response +
-                  "\n\nReport this issue to Admin for a future fix."
-              );
-          } else if (oError.responseText) {
-            //for create
-            sType = typeof oError.responseText;
-            if (sType === "string" || sType === "object")
-              oMessage = JSON.parse(oError.responseText).error.message.value;
-            else
-              return MessageBox.error(
-                "Unhandled server error:\n\n" +
-                  oError.responseText +
-                  "\n\nReport this issue to Admin for a future fix."
-              );
-          } else if (!oError)
-            return MessageToast.show("Error message is undefined");
-          MessageBox.error(oMessage);
-        },
-
-        // Files Individual ------------------------
-
-        OnFileUploadMethod: function (FileUploader, oValue) {
-          var that = this;
-          FileUploader.addHeaderParameter(
-            new sap.ui.unified.FileUploaderParameter({
-              name: "slug",
-              value: oValue,
-            })
-          );
-
-          // var sAttachmentURL = oModel.sServiceUrl + oModel.createKey("/AttachDocSet", {
-          //   ticketNumber: oData.ticketNumber
-          //   }) + "/attachments";
-
-          FileUploader.setSendXHR(true);
-          // FileUploader.setUploadUrl(sAttachmentURL);
-          FileUploader.upload();
-          FileUploader.setValue("");
-          FileUploader.removeAllHeaderParameters();
-
-          // FileUploader.addHeaderParameter(new sap.ui.unified.FileUploaderParameter({
-          //   name: "x-csrf-token",
-          //   value: that.getOwnerComponent().getModel("oVendorChangeRequest").getSecurityToken()
-          // }));
-        },
-
-        // Actualizacion Modelos -------------------
-
-
-
-        onupdateModel: function (oModel, oView, oPath, oPayload) {
+       onupdateModel: function (oModel, oView, oPath, oPayload) {
           return new Promise((resolve, reject) => {
             oView.setBusy(true);
             oModel.update(oPath, oPayload, {
@@ -648,21 +448,6 @@ sap.ui.define(
 
         // Mensajeria -----------------------
 
-        _onShowMsgBoxConfirm: function (sMessage, sMessageTitle) {
-          return new Promise((resolve, reject) => {
-            MessageBox.confirm(sMessage, {
-              icon: MessageBox.Icon.QUESTION,
-              title: sMessageTitle,
-              onClose: function (oAction) {
-                resolve(oAction);
-              }.bind(this),
-              styleClass: "",
-              actions: [MessageBox.Action.OK, MessageBox.Action.CANCEL],
-              emphasizedAction: MessageBox.Action.OK,
-            });
-          });
-        },
-
         _onErrorHandle: function (oError) {
           if (oError.Mensaje === undefined) {
             var oErrorMsg = JSON.parse(oError.responseText);
@@ -683,6 +468,7 @@ sap.ui.define(
 
           this._onShowMsgBox(objectMsg).then((rta) => {});
         },
+
         _onShowMsgBox: function (MsgObj) {
           return new Promise((resolve, reject) => {
             MessageBox.show(MsgObj.mensaje, {
@@ -699,35 +485,7 @@ sap.ui.define(
           });
         },
 
-        _onShowMsgBoxError: function (sMessage, sMessageTitle) {
-          return new Promise((resolve, reject) => {
-            MessageBox.error(sMessage, {
-              icon: MessageBox.Icon.ERROR,
-              title: sMessageTitle,
-              onClose: function (oAction) {
-                resolve(oAction);
-              }.bind(this),
-              styleClass: "",
-              actions: MessageBox.Action.CLOSE,
-              emphasizedAction: MessageBox.Action.CLOSE,
-            });
-          });
-        },
 
-        _onShowMsgBoxSucces: function (sMessage, sMessageTitle) {
-          return new Promise((resolve, reject) => {
-            MessageBox.success(sMessage, {
-              icon: MessageBox.Icon.SUCCESS,
-              title: sMessageTitle,
-              onClose: function (oAction) {
-                resolve(oAction);
-              }.bind(this),
-              styleClass: "",
-              actions: sap.m.MessageBox.Action.OK,
-              emphasizedAction: sap.m.MessageBox.Action.OK,
-            });
-          });
-        },
       }
     );
   }

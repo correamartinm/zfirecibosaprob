@@ -25,11 +25,7 @@
 						<core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.Table" type="XML"/>
 					</VBox>
 
-					<VBox visible="{= ${layout>/EdicionRecibo} === false }">
-						<!-- <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.EditaDetalle" type="XML"/> -->
-					</VBox>
-
-
+				
 				</content>
 			</Panel>
 

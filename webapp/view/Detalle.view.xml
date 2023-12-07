@@ -1,7 +1,6 @@
 <mvc:View controllerName="morixe.zfirecibosaprob.controller.Detalle"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns:core="sap.ui.core"
-    xmlns:f="sap.f"
     xmlns="sap.m">
     <Page >
         <content>
@@ -52,42 +51,35 @@
                         <Panel expandable="true" expanded="false" headerText="{i18n>resumentitle}">
                             <List class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom" id="idResumenSetList" width="95%" items="{
                                 path: '/ResumenSet' }">
-                        <CustomListItem >
-                            <VBox  >
+                                <CustomListItem >
+                                    <VBox  >
 
-                                <HBox class="sapUiTinyMarginBottom sapUiTinyMarginTop" alignItems="Center" justifyContent="SpaceBetween" alignContent="SpaceBetween" width="100%">
-                                    <Text text="{TipoLinea}" class="BoldOK sapUiTinyMarginBegin" />
-                                    <Text text="        " width="200px" />
-                                    
-
-                                    <ObjectNumber unit="$" number="{parts: ['Importe'], formatter: '.formatNumber'}" state="{parts: ['Importe'], formatter: '.formatState'}" class="Bold sapUiTinyMarginEnd" />
-                                </HBox>
-                            </VBox>
-                        </CustomListItem>
-
-                    </List>
+                                        <HBox class="sapUiTinyMarginBottom sapUiTinyMarginTop" alignItems="Center" justifyContent="SpaceBetween" alignContent="SpaceBetween" width="100%">
+                                            <Text text="{TipoLinea}" class="BoldOK sapUiTinyMarginBegin" />
+                                            <Text text="        " width="200px" />
 
 
+                                            <ObjectNumber unit="$" number="{parts: ['Importe'], formatter: '.formatNumber'}" state="{parts: ['Importe'], formatter: '.formatState'}" class="Bold sapUiTinyMarginEnd" />
+                                        </HBox>
+                                    </VBox>
+                                </CustomListItem>
 
-                    <MessageStrip text="{i18n>lblimporteacta} {mockdata>/SALDO}" showIcon="true" visible="{= ${mockdata>/SALDO} !== '' }" class=" BoldOK sapUiSmallMarginTopBottom"/>
+                            </List>
 
-                    <OverflowToolbar >
-                        <ToolbarSpacer/>
 
-                        <Button icon="sap-icon://sys-cancel" text="{i18n>btnanular}" type="Critical" press="onNavBack" class="sapUiTinyMarginEnd"/>
-                        <Button icon="sap-icon://message-success" text="{i18n>btnconfirmar}" type="Success" press="onConfirmarReciboButtonPress" />
-                        <ToolbarSpacer/>
-                    </OverflowToolbar>
+
+                            <MessageStrip text="{i18n>lblimporteacta} {mockdata>/SALDO}" showIcon="true" visible="{= ${mockdata>/SALDO} !== '' }" class=" BoldOK sapUiSmallMarginTopBottom"/>
+
+                            <OverflowToolbar >
+                                <ToolbarSpacer/>
+
+                                <Button icon="sap-icon://sys-cancel" text="{i18n>btnanular}" type="Critical" press="onNavBack" class="sapUiTinyMarginEnd"/>
+                                <Button icon="sap-icon://message-success" text="{i18n>btnconfirmar}" type="Success" press="onConfirmarReciboButtonPress" />
+                                <ToolbarSpacer/>
+                            </OverflowToolbar>
                         </Panel>
 
 
-
- 
-                    </Page>
-                    <Page id="idwizardReviewPage" showHeader="false" class="PanelLightCyan">
-
-
-                        <!-- <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.Review" type="XML"/> -->
 
 
 

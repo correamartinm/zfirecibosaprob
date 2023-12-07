@@ -7,12 +7,16 @@
         <Button icon="sap-icon://sys-add" press="onAgregarButtonPress" text="{i18n>btnagregar}" type="Emphasized" />
     </Toolbar>
 
-    <Table id="idTable" mode="MultiSelect" items="{path : '/RECIBOSSet'}" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
+    <Table id="idTable" mode="MultiSelect" selectionChange="onTableSelectionChange"  items="{path : '/RECIBOSSet' ,events: {
+        dataReceived: '.onTableSelectionChange' } }" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
         <headerToolbar>
             <OverflowToolbar>
                 <SearchField width="95%" placeholder="{i18n>lblrazonsocial}" search="onSearchRS" visible="{= ${device>/system/desktop} === false }" />
-                <ToolbarSpacer/>
-                <!-- <Button icon="sap-icon://sys-help" press="onAgregarButtonPress"  type="Emphasized" visible="{= ${device>/system/phone} === false }" /> -->
+                    <ToolbarSpacer/>
+                        
+                    <Button tooltip="POST" text="Contabilizar" icon="sap-icon://checklist-item" press="onPostSelection" class="sapUiTinyMarginBegin" enabled="{= ${mockdata>/SelectedItems} > 0 }" type="Success" /> 
+                    <Button icon="sap-icon://excel-attachment"  press="onDownloadMessage"  type="Emphasized" enabled="{= ${mockdata>/Items} > 0 }"   /> 
+
 
 
             </OverflowToolbar>
@@ -77,13 +81,10 @@
                     <Label text="{i18n>lblfechaproceso}" wrapping="true"/>
                 </header>
             </Column>
-            <Column width="8rem">
+            <Column width="11rem">
                 <header/>
             </Column>
-            <Column width="8rem">
-                <header/>
-            </Column>
-
+          
 
 
 
@@ -122,12 +123,11 @@
 
                     <Text text="{path : 'FechaProceso' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"/>
                     <HBox >
-
                         <Button icon="sap-icon://print" enabled="{= ${Procesado} === 'X' }" press="onButtonPrintPress" />
                         <Button icon="sap-icon://attachment"  press="onFileDialog"  class="sapUiTinyMarginBegin"/>
                         <Button icon="sap-icon://detail-view" press="onDetailPress" class="sapUiTinyMarginBegin" />
+                      
                     </HBox>
-                    <Button tooltip="POST" text="Contabilizar" icon="sap-icon://checklist-item" press="onPostPress" class="sapUiTinyMarginBegin" />
 
                 </cells>
             </ColumnListItem>
