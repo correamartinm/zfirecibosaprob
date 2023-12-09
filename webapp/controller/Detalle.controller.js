@@ -107,11 +107,11 @@ sap.ui.define(
           oFilters.push(new Filter("Numero", FilterOperator.EQ, Recibo.Numero));
           oFilters.push(new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente));
           
-          TablaPagosaCta.getBinding("items").filter([oFilters]);
-          TablaComprobantes.getBinding("items").filter([oFilters]);
-          TablaDescuentos.getBinding("items").filter([oFilters]);
-          TableRetenciones.getBinding("items").filter([oFilters]);
-          TablaMediosPagosa.getBinding("items").filter([oFilters]);
+          // TablaPagosaCta.getBinding("items").filter([oFilters]);
+          // TablaComprobantes.getBinding("items").filter([oFilters]);
+          // TablaDescuentos.getBinding("items").filter([oFilters]);
+          // TableRetenciones.getBinding("items").filter([oFilters]);
+          // TablaMediosPagosa.getBinding("items").filter([oFilters]);
 
       },
 

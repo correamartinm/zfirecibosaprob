@@ -205,27 +205,19 @@ sap.ui.define(
       onDownloadMessage: function () {
         let oMockModel = this.getOwnerComponent().getModel("mockdata"),
           items = oMockModel.getProperty("/SelectedItems");
-
-        let Action;
+      
 
         if (items > 0) {
-          Action = [
-            this._i18n().getText("btnseleccion"),
-            this._i18n().getText("btntodos"),
-            sap.m.MessageBox.Action.CLOSE,
-          ];
-        } else {
-          Action = [
-            this._i18n().getText("btntodos"),
-            sap.m.MessageBox.Action.CLOSE,
-          ];
-        }
 
         let objectMsg = {
           titulo: this._i18n().getText("descargafile"),
           mensaje: this._i18n().getText("msgdownload"),
           icono: sap.m.MessageBox.Icon.QUESTION,
-          acciones: Action,
+          acciones: [
+            this._i18n().getText("btnseleccion"),
+            this._i18n().getText("btntodos"),
+            sap.m.MessageBox.Action.CLOSE,
+          ],
           resaltar: this._i18n().getText("btnseleccion"),
         };
 
@@ -244,6 +236,12 @@ sap.ui.define(
               break;
           }
         });
+
+      } else {
+        this.onDownloadAll();
+      }
+
+
       },
       onDownloadAll: function () {
         let oEntity = "/RECIBOSSet",
