@@ -5,41 +5,86 @@
 
        
 
+        <form:Form editable="true">
+            <form:layout>
+                <form:ColumnLayout columnsL="2" columnsXL="2" labelCellsLarge="2"/>
+            </form:layout>
+            <form:formContainers>
+
+                <form:FormContainer>
+                    <form:formElements>
+
+                        <form:FormElement label="{i18n>lblrazonsocial}">
+                            <form:fields>
+                                <ComboBox id="idRSInput" selectedKey="{mockdata>/Paso01Cliente/Codigo}" selectionChange="onInputRazonSocialChange" items="{/CLIENTESSet}" enabled="false">
+                                    <core:Item key="{Codigo}" text="{RazonSocial}" />
+                                </ComboBox>
+                
+
+                            </form:fields>
+
+                        </form:FormElement>
+                        <form:FormElement label="{i18n>lbldomicilio}" >
+                            <form:fields>
+                              
+                            <Input id="idCodigoClienteInput" editable="false" value="{mockdata>/Paso01Cliente/Codigo}"/>
+                            </form:fields>
+                        </form:FormElement>
+                        <!-- Fin Elemento -->
+
+                        <form:FormElement label="{i18n>lbllocalidad}">
+                            <form:fields>
+                                <Input id="idLocalidadInput" editable="false" value="{mockdata>/Paso01Cliente/Localidad}"/>  
+                            </form:fields>
+                        </form:FormElement>
+                        <form:FormElement   label="{i18n>lblcuit}">
+                            <form:fields>
+
+                            <Input id="idCuitInput" editable="false" value="{mockdata>/Paso01Cliente/Cuit}"/>
+
+                            </form:fields>
+                        </form:FormElement>
+                        <!-- Fin Elemento -->
+
+                        <form:FormElement label="{i18n>lbliva}" >
+                            <form:fields>
+                                <Input id="idTipoIvaInput" editable="false" value="{mockdata>/Paso01Cliente/TipoIva}"/>
+
+                            </form:fields>
+                        </form:FormElement>
+
+                        <form:FormElement  label="{i18n>lblobservaciones}">
+                            <form:fields>
+
+                            <TextArea id="idObservacionesTextArea" rows="3" value="{mockdata>/Paso01Cliente/Observaciones}"/>
 
 
-<form:SimpleForm id="idClienteSimpleForm" editable="false"  >
-            <form:content>
 
-                <Label text="{i18n>lblrazonsocial}"  labelFor="idRSInput"/>
+                            </form:fields>
+                        </form:FormElement>
 
-                <ComboBox id="idRSInput" selectedKey="{mockdata>/Paso01Cliente/Codigo}" selectionChange="onInputRazonSocialChange" items="{/CLIENTESSet}" enabled="false">
-                    <core:Item key="{Codigo}" text="{RazonSocial}" />
-                </ComboBox>
+                        <form:FormElement  >
+                            <form:fields>
 
-                <Label text="{i18n>lblcodigo}" labelFor="idCodigoClienteInput" />
-                <Input id="idCodigoClienteInput" editable="false" value="{mockdata>/Paso01Cliente/Codigo}"/>
+                                    
+                            <Text text="{i18n>lbltipocomprobante}" labelFor="idDocumentoSegmentedButton" class="sapUiSmallMarginEnd" />
 
-                <Label text="{i18n>lbldomicilio}" labelFor="idDomicilioInput" />
-                <Input id="idDomicilioInput" editable="false" value="{mockdata>/Paso01Cliente/Domicilio}"/>
+                            </form:fields>
+                        </form:FormElement>
+                        <!-- Fin Elemento -->
 
-                <Label text="{i18n>lbllocalidad}" labelFor="idLocalidadInput"/>
-                <Input id="idLocalidadInput" editable="false" value="{mockdata>/Paso01Cliente/Localidad}"/>
 
-  
 
-                <Label text="{i18n>lblcuit}" labelFor="idIvaInput" />
-                <Input id="idCuitInput" editable="false" value="{mockdata>/Paso01Cliente/Cuit}"/>
 
-                <Label text="{i18n>lbliva}" labelFor="idIvaInput" />
-                <Input id="idTipoIvaInput" editable="false" value="{mockdata>/Paso01Cliente/TipoIva}"/>
+                    </form:formElements>
 
-                <Label text="{i18n>lblobservaciones}" labelFor="idObsTextArea"/>
-                <TextArea id="idObservacionesTextArea" rows="3" value="{mockdata>/Paso01Cliente/Observaciones}"/>
+                </form:FormContainer>
 
-                <Label text="{i18n>lbltipocomprobante}" labelFor="idDocumentoSegmentedButton" class="sapUiSmallMarginEnd" />
+                <!-- Fin de do Contenedor -->
 
-            </form:content>
-        </form:SimpleForm>
+            </form:formContainers>
+        </form:Form>
+
 
 </Panel>
 
