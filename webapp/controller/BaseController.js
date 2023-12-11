@@ -289,6 +289,7 @@ sap.ui.define(
 
         let oPayload = {
           Numero: oItem.Numero,
+          Accion: oItem.Accion
         };
 
         let rta = await this._oncreateModel(oModel, oView, oEntidad, oPayload);
@@ -300,7 +301,7 @@ sap.ui.define(
         }
       },
 
-      
+
 
         _oncreateModel: function (oModel, oView, oEntity, oPayload) {
           return new Promise((resolve, reject) => {
