@@ -164,12 +164,36 @@ sap.ui.define(
             vObject = oModel.getObject(oPath);
 
             if (oItems[index].getSelected() === true) {
-              this.onPostPress(oItems[index]);
+              vObject.Accion = "P"
+              this.onPostPress(vObject);
               oModel.refresh(true);
             }
           }
         }
       },
+
+      onAnultSelection: function () {
+        let oTable = this.getView().byId("idTable"),
+          oMockModel = this.getView().getModel("mockdata"),
+          oModel = this.getOwnerComponent().getModel(),
+          vObject,
+          oPath,
+          oItems = oTable.getSelectedItems();
+
+        if (oItems.length > 0) {
+          for (var index = 0; index < oItems.length; index++) {
+            oPath = oItems[index].getBindingContextPath();
+            vObject = oModel.getObject(oPath);
+
+            if (oItems[index].getSelected() === true) {
+              vObject.Accion = "A"
+              this.onPostPress(vObject);
+              oModel.refresh(true);
+            }
+          }
+        }
+      },
+
 
       // *** Post
       onPostPress: async function (oItem) {

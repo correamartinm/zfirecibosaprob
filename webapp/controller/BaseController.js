@@ -89,11 +89,7 @@ sap.ui.define(
         if (oEvent.getSource().getBindingContext() !== undefined) {
           oItem = oEvent.getSource().getBindingContext().getObject();
           oMockModel.setProperty("/Paso01Cliente", oItem);
-        } else {
-          let paso1 = oMockModel.getProperty("/Paso01Cliente");
-          oItem.Cliente = paso1.Cliente;
-          oItem.Numero = paso1.Numero;
-        }
+        } 
 
         if (!this._oDialogUploadSet) {
           this._oDialogUploadSet = sap.ui.xmlfragment(
@@ -110,10 +106,11 @@ sap.ui.define(
           "UploadFile",
           "attachmentUpl"
         );
-        var oFilter1 = new Filter("Cliente", FilterOperator.EQ, oItem.Cliente);
-        var oFilter2 = new Filter("NroLinea", FilterOperator.EQ, oItem.Numero);
+        var oFilter1 = new Filter("Recibo", FilterOperator.EQ, oItem.Numero);
+        var oFilter2 = new Filter("Tipo", FilterOperator.EQ, "RECIB");
+        var oFilter3 = new Filter("Cliente", FilterOperator.EQ, oItem.Cliente);
 
-        if (oUploadCollection.getItems().length.length > 0) oUploadCollection.getBinding("items").filter([oFilter1 ,oFilter2]);
+        if (oUploadCollection.getItems().length.length > 0) oUploadCollection.getBinding("items").filter([oFilter1 ,oFilter2, oFilter3 ]);
 
         // Muestro Dialogo
 

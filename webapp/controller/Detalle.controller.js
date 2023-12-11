@@ -107,11 +107,11 @@ sap.ui.define(
           oFilters.push(new Filter("Numero", FilterOperator.EQ, Recibo.Numero));
           oFilters.push(new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente));
           
-          // TablaPagosaCta.getBinding("items").filter([oFilters]);
-          // TablaComprobantes.getBinding("items").filter([oFilters]);
-          // TablaDescuentos.getBinding("items").filter([oFilters]);
-          // TableRetenciones.getBinding("items").filter([oFilters]);
-          // TablaMediosPagosa.getBinding("items").filter([oFilters]);
+          TablaPagosaCta.getBinding("items").filter([oFilters]);
+          TablaComprobantes.getBinding("items").filter([oFilters]);
+          TablaDescuentos.getBinding("items").filter([oFilters]);
+          TableRetenciones.getBinding("items").filter([oFilters]);
+          TablaMediosPagosa.getBinding("items").filter([oFilters]);
 
       },
 
@@ -268,9 +268,20 @@ sap.ui.define(
           oMockModel = this.getView().getModel("mockdata"),
           sMessageTitle = this._i18n().getText("msgvolver");
 
-        this._onShowMsgBoxConfirm(sMessage, sMessageTitle).then((rta) => {
-          this.getOwnerComponent().getTargets().display("TargetMainView");
-        });
+
+          let objectMsg = {
+            titulo: sMessageTitle,
+            mensaje: sMessage,
+            icono: sap.m.MessageBox.Icon.QUESTION,
+            acciones: [sap.m.MessageBox.Action.CLOSE, sap.m.MessageBox.Action.OK],
+            resaltar: sap.m.MessageBox.Action.CLOSE,
+          };
+
+          this._onShowMsgBox(objectMsg).then((rta) => {
+            if (rta === "OK")    this.getOwnerComponent().getTargets().display("TargetMainView");
+          });
+
+
       },
     });
   }
