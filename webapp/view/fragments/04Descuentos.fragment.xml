@@ -31,7 +31,7 @@
                 <Label text="{i18n>lblimpor}"/>
 
             </Column>
-            <Column width="3rem">
+            <Column width="3rem" visible="false">
                 <header/>
             </Column>
 
@@ -53,7 +53,7 @@
                     <!-- <ObjectStatus title="" state="Error" inverted="true" /> -->
                     <HBox >
 
-                        <!-- <Button icon="sap-icon://print" enabled="{= ${PAID_STATUS} === 1 }" press="onButtonPrintPress" /> -->
+                        <Button icon="sap-icon://print" enabled="{= ${PAID_STATUS} === 1 }" press="onButtonPrintPress" />
                         <Button icon="sap-icon://delete" class="sapUiTinyMarginEnd" press="onButtonDeleteDescuentoPressMsg"/>
                         <Button icon="sap-icon://edit" press="onButtonEditaDescuentoPress"/>
                     </HBox>

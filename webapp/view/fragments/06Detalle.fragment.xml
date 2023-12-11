@@ -28,7 +28,7 @@
                     <Label text="{i18n>lblimpor}"/>
                 </header>
             </Column>
-            <Column width="3rem">
+            <Column width="3rem" visible="false">
                 <header/>
             </Column>
 
@@ -48,7 +48,7 @@
 
                     <HBox>
                         <Button icon="sap-icon://delete" press="onButtonDeletePagoPressMsg" class="sapUiTinyMarginEnd"/>
-                        <!-- <Button icon="sap-icon://attachment" press="onButtonAtachPress" /> -->
+                        <Button icon="sap-icon://attachment" press="onButtonAtachPress" />
                     </HBox>
 
                 </cells>

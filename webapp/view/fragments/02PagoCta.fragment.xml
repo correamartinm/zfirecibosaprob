@@ -3,7 +3,7 @@
 
 
 
-    <Table id="idPagoCtaTable" items="{/PagoCuentaSet}" mode="MultiSelect" selectionChange="onTablePagoCtaSelectionChange" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" growingThreshold="6" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
+    <Table id="idPagoCtaTable" items="{/PagoCuentaSet}" mode="None" selectionChange="onTablePagoCtaSelectionChange" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" growingThreshold="6" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
         <headerToolbar>
             <OverflowToolbar>
                 
@@ -73,11 +73,11 @@
                         <Label text="{Aplicado}"/>
                         <Label text="{Saldo}"/>
                         <Label text="{Total}"/>
+                        <Label text="{Total}"/>
                     
-                    <Input enabled="false" value="{mockdata>Aplicado}" textAlign="End" change="onInputImporteChangePagos"/>
                     <HBox visible="false">
                         <Button icon="sap-icon://delete" press="onButtonDeletePress" class="sapUiTinyMarginBeginEnd" />
-                        <Button icon="sap-icon://edit" press="onButtonEditPress" />
+                        <!-- <Button icon="sap-icon://edit" press="onButtonEditPress" /> -->
                     </HBox>
 
 
