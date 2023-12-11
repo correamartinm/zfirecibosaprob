@@ -27,29 +27,73 @@
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.01Cliente" type="XML"/>
                         </Panel>
 
-                        <Panel expandable="true" expanded="false" headerText="{i18n>pagoactatitle}">
+
+
+
+
+                        <Panel  visible="{= ${layout>/activePanel} === '^Pagos a Cuenta' }">
+
+                            <Toolbar>
+                                <content>
+                                    <Text  text="{i18n>pagoactatitle}" />
+                                    <ToolbarSpacer /> 
+                                    <Button icon="sap-icon://hide" press="onOcultarPanel" text="{i18n>lblocultar}"  />
+                                </content>
+                            </Toolbar>
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.02PagoCta" type="XML"/>
                         </Panel>
 
-                        <Panel expandable="true" expanded="false" headerText="{i18n>comprobantetitle}">
+                        <Panel  visible="{= ${layout>/activePanel} === 'Documentos Afectados' }">
+
+                            
+                            <Toolbar>
+                                <content>
+                                    <Text  text="{i18n>comprobantetitle}" />
+                                    <ToolbarSpacer /> 
+                                    <Button icon="sap-icon://hide" press="onOcultarPanel" text="{i18n>lblocultar}"  />
+                                </content>
+                            </Toolbar>
+
+
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.03Comprobante" type="XML"/>
                         </Panel>
 
-                        <Panel expandable="true" expanded="false" headerText="{i18n>descuentotitle}">
+                        <Panel   visible="{= ${layout>/activePanel} === 'Descuentos' }">
+                            <Toolbar>
+                                <content>
+                                    <Text  text="{i18n>descuentotitle}" />
+                                    <ToolbarSpacer /> 
+                                    <Button icon="sap-icon://hide" press="onOcultarPanel" text="{i18n>lblocultar}"  />
+                                </content>
+                            </Toolbar>
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.04Descuentos" type="XML"/>
                         </Panel>
 
-                        <Panel expandable="true" expanded="false" headerText="{i18n>retencionestitle}">
+                        <Panel  visible="{= ${layout>/activePanel} === 'Retenciones' }">
+                            <Toolbar>
+                                <content>
+                                    <Text  text="{i18n>retencionestitle}" />
+                                    <ToolbarSpacer /> 
+                                    <Button icon="sap-icon://hide" press="onOcultarPanel" text="{i18n>lblocultar}"  />
+                                </content>
+                            </Toolbar>
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.05Retenciones" type="XML"/>
                         </Panel>
 
 
-                        <Panel expandable="true" expanded="false" headerText="{i18n>detalletitle}">
+                        <Panel  visible="{= ${layout>/activePanel} === 'Pago' }">
+                            <Toolbar>
+                                <content>
+                                    <Text  text="{i18n>detalletitle}" />
+                                    <ToolbarSpacer /> 
+                                    <Button icon="sap-icon://hide" press="onOcultarPanel" text="{i18n>lblocultar}"  />
+                                </content>
+                            </Toolbar>
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.06Detalle" type="XML"/>
                         </Panel>
 
-                        <Panel expandable="true" expanded="false" headerText="{i18n>resumentitle}">
-                            <List class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom" id="idResumenSetList" width="95%" items="{
+                        <Panel  headerText="{i18n>resumentitle}">
+                            <List class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom" mode="SingleSelectLeft" selectionChange="onDetailItemPress" id="idResumenSetList" width="95%" items="{
                                 path: '/ResumenSet' }">
                                 <CustomListItem >
                                     <VBox  >
@@ -68,20 +112,16 @@
 
 
 
-                            <MessageStrip text="{i18n>lblimporteacta} {mockdata>/SALDO}" showIcon="true" visible="{= ${mockdata>/SALDO} !== '' }" class=" BoldOK sapUiSmallMarginTopBottom"/>
+                            <!-- <MessageStrip text="{i18n>lblimporteacta} {mockdata>/SALDO}" showIcon="true" visible="{= ${mockdata>/SALDO} !== '' }" class=" BoldOK sapUiSmallMarginTopBottom"/> -->
 
                             <OverflowToolbar >
                                 <ToolbarSpacer/>
 
-                                <Button icon="sap-icon://sys-cancel" text="{i18n>btnanular}" type="Critical" press="onNavBack" class="sapUiTinyMarginEnd"/>
-                                <Button icon="sap-icon://message-success" text="{i18n>btnconfirmar}" type="Success" press="onConfirmarReciboButtonPress" />
+                                <Button icon="sap-icon://sys-cancel" text="{i18n>btnanular}" type="Critical" press="onAnularINDV" class="sapUiTinyMarginEnd"/>
+                                <Button icon="sap-icon://accept" text="{i18n>btnconfirmar}" type="Success" press="onContabilizarINDV" />
                                 <ToolbarSpacer/>
                             </OverflowToolbar>
                         </Panel>
-
-
-
-
 
                     </Page>
                 </pages>

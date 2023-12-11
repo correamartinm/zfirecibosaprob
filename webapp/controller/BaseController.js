@@ -280,7 +280,27 @@ sap.ui.define(
 
       // ********************************************
       // Actualizacion de Modelos  ******************
-      // ********************************************   
+      // ********************************************
+      
+      onPostPress: async function (oItem) {
+        let oModel = this.getOwnerComponent().getModel(),
+          oEntidad = "/RECIBOSSet",
+          oView = this.getView();
+
+        let oPayload = {
+          Numero: oItem.Numero,
+        };
+
+        let rta = await this._oncreateModel(oModel, oView, oEntidad, oPayload);
+
+        if (rta.Respuesta !== "OK") {
+          this._onErrorHandle(rta.Datos);
+        } else {
+          console.log(rta);
+        }
+      },
+
+      
 
         _oncreateModel: function (oModel, oView, oEntity, oPayload) {
           return new Promise((resolve, reject) => {

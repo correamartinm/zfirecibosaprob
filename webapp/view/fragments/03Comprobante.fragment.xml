@@ -1,15 +1,8 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:core="sap.ui.core">
 
-    <Table id="idComprobanteTable" items="{/ComprobantesSet}" mode="MultiSelect" selectionChange="onTablePagoCtaSelectionChange" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" growingThreshold="6" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
-        <headerToolbar>
-            <OverflowToolbar>
-                
-                <ToolbarSpacer/>
+    <Table id="idComprobanteTable" items="{/ComprobantesSet}" mode="None" selectionChange="onTablePagoCtaSelectionChange" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" growingThreshold="6" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
 
-
-            </OverflowToolbar>
-        </headerToolbar>
         <columns>
 
             <Column width="3rem" hAlign="Center">
@@ -61,8 +54,6 @@
             <ColumnListItem type="Active" highlight="Information">
                 <cells>
 
-
-
                     <Text text="{Tipo}" wrapping="false"/>
                    
                     <Label text="{Numero}"/>
@@ -71,8 +62,8 @@
                         <Label text="{Aplicado}"/>
                         <Label text="{Saldo}"/>
                         <Label text="{Total}"/>
+                        <Label text="{Total}"/>
                     
-                    <Input enabled="false" value="{mockdata>Aplicado}" textAlign="End" change="onInputImporteChangePagos"/>
                     <HBox visible="false">
                         <Button icon="sap-icon://delete" press="onButtonDeletePress" class="sapUiTinyMarginBeginEnd" />
                         <Button icon="sap-icon://edit" press="onButtonEditPress" />

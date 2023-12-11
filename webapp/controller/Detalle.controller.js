@@ -109,22 +109,54 @@ sap.ui.define(
           oFiltersDETA = [],
           oFilters = [];
 
+        oFilters.push(new Filter("Numero", FilterOperator.EQ, Recibo.Numero));
+        oFilters.push(new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente));
 
-          oFilters.push(new Filter("Numero", FilterOperator.EQ, Recibo.Numero));
-          oFilters.push(new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente));
+        oFiltersACTA.push(new Filter("Tipo", FilterOperator.EQ, "ACTA"));
+        oFiltersRETE.push(new Filter("Tipo", FilterOperator.EQ, "RETE"));
+        oFiltersDESC.push(new Filter("Tipo", FilterOperator.EQ, "DESC"));
+        oFiltersDETA.push(new Filter("Tipo", FilterOperator.EQ, "DETA"));
+        oFiltersCBTE.push(new Filter("Tipo", FilterOperator.EQ, "APLIC"));
 
-          oFiltersACTA.push(new Filter("Tipo", FilterOperator.EQ, "ACTA"));
-          oFiltersRETE.push(new Filter("Tipo", FilterOperator.EQ, "RETE"));
-          oFiltersDESC.push(new Filter("Tipo", FilterOperator.EQ, "DESC"));
-          oFiltersDETA.push(new Filter("Tipo", FilterOperator.EQ, "DETA"));
-          oFiltersCBTE.push(new Filter("Tipo", FilterOperator.EQ, "APLIC"))
-          
-          TablaPagosaCta.getBinding("items").filter([oFilters, oFiltersACTA]);
-          TablaComprobantes.getBinding("items").filter([oFilters, oFiltersCBTE]);
-          TablaDescuentos.getBinding("items").filter([oFilters, oFiltersDESC]);
-          TableRetenciones.getBinding("items").filter([oFilters, oFiltersRETE]);
-          TablaMediosPagosa.getBinding("items").filter([oFilters, oFiltersDETA]);
+        TablaPagosaCta.getBinding("items").filter([oFilters, oFiltersACTA]);
+        TablaComprobantes.getBinding("items").filter([oFilters, oFiltersCBTE]);
+        TablaDescuentos.getBinding("items").filter([oFilters, oFiltersDESC]);
+        TableRetenciones.getBinding("items").filter([oFilters, oFiltersRETE]);
+        TablaMediosPagosa.getBinding("items").filter([oFilters, oFiltersDETA]);
+      },
 
+      onDetailItemPress: function (oEvent) {
+        let Model = this.getOwnerComponent().getModel(),
+          oLayModel = this.getOwnerComponent().getModel("layout"),
+          oItem = oEvent.getSource().getSelectedItem(),
+          vObject = oItem.getBindingContext().getObject();
+
+        oLayModel.setProperty("/activePanel", vObject.TipoLinea);
+      },
+
+      onOcultarPanel: function () {
+        let oLayModel = this.getOwnerComponent().getModel("layout"),
+        ListaReview = this.getView().byId("idResumenSetList");
+        oLayModel.setProperty("/activePanel", "");
+        ListaReview.removeSelections();
+        // 
+      },
+
+      onContabilizarINDV: function () {
+        let oMockModel = this.getView().getModel("mockdata"),
+        oRecibo = oMockModel.getProperty("/ReciboActivo");
+
+        oRecibo.Accion = "P"
+        this.onPostPress(oRecibo);
+        this.getOwnerComponent().getModel().refresh(true);
+      },
+
+      onAnularINDV: function () {
+        let oMockModel = this.getView().getModel("mockdata"),
+        oRecibo = oMockModel.getProperty("/ReciboActivo");
+        oRecibo.Accion = "A"
+        this.onPostPress(oRecibo);
+        this.getOwnerComponent().getModel().refresh(true);
       },
 
       // ********************************************
@@ -280,20 +312,18 @@ sap.ui.define(
           oMockModel = this.getView().getModel("mockdata"),
           sMessageTitle = this._i18n().getText("msgvolver");
 
+        let objectMsg = {
+          titulo: sMessageTitle,
+          mensaje: sMessage,
+          icono: sap.m.MessageBox.Icon.QUESTION,
+          acciones: [sap.m.MessageBox.Action.NO, sap.m.MessageBox.Action.YES],
+          resaltar: sap.m.MessageBox.Action.NO,
+        };
 
-          let objectMsg = {
-            titulo: sMessageTitle,
-            mensaje: sMessage,
-            icono: sap.m.MessageBox.Icon.QUESTION,
-            acciones: [sap.m.MessageBox.Action.NO, sap.m.MessageBox.Action.YES],
-            resaltar: sap.m.MessageBox.Action.NO,
-          };
-
-          this._onShowMsgBox(objectMsg).then((rta) => {
-            if (rta === "YES")    this.getOwnerComponent().getTargets().display("TargetMainView");
-          });
-
-
+        this._onShowMsgBox(objectMsg).then((rta) => {
+          if (rta === "YES")
+            this.getOwnerComponent().getTargets().display("TargetMainView");
+        });
       },
     });
   }

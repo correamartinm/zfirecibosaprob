@@ -60,6 +60,7 @@ sap.ui.define([
                     retencionesadd: false,
                     detalleadd: false,
                     controlrecibo: false,
+                    activePanel: "",
                     MpKey: 1,
                     RsKey: 0,
                   });
