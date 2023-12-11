@@ -273,12 +273,12 @@ sap.ui.define(
             titulo: sMessageTitle,
             mensaje: sMessage,
             icono: sap.m.MessageBox.Icon.QUESTION,
-            acciones: [sap.m.MessageBox.Action.CLOSE, sap.m.MessageBox.Action.OK],
-            resaltar: sap.m.MessageBox.Action.CLOSE,
+            acciones: [sap.m.MessageBox.Action.NO, sap.m.MessageBox.Action.YES],
+            resaltar: sap.m.MessageBox.Action.NO,
           };
 
           this._onShowMsgBox(objectMsg).then((rta) => {
-            if (rta === "OK")    this.getOwnerComponent().getTargets().display("TargetMainView");
+            if (rta === "YES")    this.getOwnerComponent().getTargets().display("TargetMainView");
           });
 
 

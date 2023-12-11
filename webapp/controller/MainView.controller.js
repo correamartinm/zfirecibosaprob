@@ -27,6 +27,7 @@ sap.ui.define(
 
       _onRefreshTable: function (oFilter) {
         var oTable = this.byId("idTable"); //
+        oTable.removeSelections();
         var binding = oTable.getBinding("items");
         binding.filter(oFilter, "Application");
       },
@@ -167,6 +168,7 @@ sap.ui.define(
               vObject.Accion = "P"
               this.onPostPress(vObject);
               oModel.refresh(true);
+              this._onRefreshTable();
             }
           }
         }
@@ -189,6 +191,7 @@ sap.ui.define(
               vObject.Accion = "A"
               this.onPostPress(vObject);
               oModel.refresh(true);
+              this._onRefreshTable();
             }
           }
         }
