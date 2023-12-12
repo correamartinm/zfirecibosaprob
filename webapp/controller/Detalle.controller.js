@@ -125,13 +125,15 @@ sap.ui.define(
         TablaMediosPagosa.getBinding("items").filter([oFilters, oFiltersDETA]);
       },
 
+    
+
       onDetailItemPress: function (oEvent) {
         let Model = this.getOwnerComponent().getModel(),
           oLayModel = this.getOwnerComponent().getModel("layout"),
-          oItem = oEvent.getSource().getSelectedItem(),
-          vObject = oItem.getBindingContext().getObject();
+          oPath = oEvent.getSource().getBindingContext().getPath(),
+          oItem = oEvent.getSource().getBindingContext().getObject();
 
-        oLayModel.setProperty("/activePanel", vObject.TipoLinea);
+        oLayModel.setProperty("/activePanel", oItem.TipoLinea);
       },
 
       onOcultarPanel: function () {

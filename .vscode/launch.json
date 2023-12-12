@@ -16,7 +16,7 @@
             ],
             "args": [
                 "--open",
-                "test/flpSandbox.html#morixezfirecibosaprob-display"
+                "index.html?sap-client=100&sap-ui-xx-viewCache=false"
             ],
             "console": "internalConsole",
             "internalConsoleOptions": "openOnSessionStart",

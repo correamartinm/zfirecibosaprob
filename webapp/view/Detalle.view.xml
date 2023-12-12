@@ -23,7 +23,7 @@
                             </Bar>
                         </customHeader>
 
-                        <Panel headerText="{i18n>clientetitle}" class="sapUiSmallMarginTop">
+                        <Panel headerText="{i18n>clientetitle}" class="sapUiSmallMarginTop" stickyHeader="true">
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.01Cliente" type="XML"/>
                         </Panel>
 
@@ -31,79 +31,44 @@
 
 
 
-                        <Panel  visible="{= ${layout>/activePanel} === '^Pagos a Cuenta' }">
-
-                            <Toolbar>
-                                <content>
-                                    <Text  text="{i18n>pagoactatitle}" />
-                                    <ToolbarSpacer /> 
-                                    <Button icon="sap-icon://hide" press="onOcultarPanel" text="{i18n>lblocultar}"  />
-                                </content>
-                            </Toolbar>
+                        <Panel expandable="true" headerText="{i18n>pagoactatitle}" stickyHeader="true">                           
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.02PagoCta" type="XML"/>
                         </Panel>
 
-                        <Panel  visible="{= ${layout>/activePanel} === 'Documentos Afectados' }">
-
-                            
-                            <Toolbar>
-                                <content>
-                                    <Text  text="{i18n>comprobantetitle}" />
-                                    <ToolbarSpacer /> 
-                                    <Button icon="sap-icon://hide" press="onOcultarPanel" text="{i18n>lblocultar}"  />
-                                </content>
-                            </Toolbar>
-
-
+                        <Panel expandable="true" headerText="{i18n>comprobantetitle}">                          
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.03Comprobante" type="XML"/>
                         </Panel>
 
-                        <Panel   visible="{= ${layout>/activePanel} === 'Descuentos' }">
-                            <Toolbar>
-                                <content>
-                                    <Text  text="{i18n>descuentotitle}" />
-                                    <ToolbarSpacer /> 
-                                    <Button icon="sap-icon://hide" press="onOcultarPanel" text="{i18n>lblocultar}"  />
-                                </content>
-                            </Toolbar>
+                        <Panel expandable="true" headerText="{i18n>descuentotitle}" stickyHeader="true">
+                           
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.04Descuentos" type="XML"/>
                         </Panel>
 
-                        <Panel  visible="{= ${layout>/activePanel} === 'Retenciones' }">
-                            <Toolbar>
-                                <content>
-                                    <Text  text="{i18n>retencionestitle}" />
-                                    <ToolbarSpacer /> 
-                                    <Button icon="sap-icon://hide" press="onOcultarPanel" text="{i18n>lblocultar}"  />
-                                </content>
-                            </Toolbar>
+                        <Panel  expandable="true" headerText="{i18n>retencionestitle}" stickyHeader="true">
+                          
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.05Retenciones" type="XML"/>
                         </Panel>
 
 
-                        <Panel  visible="{= ${layout>/activePanel} === 'Pago' }">
-                            <Toolbar>
-                                <content>
-                                    <Text  text="{i18n>detalletitle}" />
-                                    <ToolbarSpacer /> 
-                                    <Button icon="sap-icon://hide" press="onOcultarPanel" text="{i18n>lblocultar}"  />
-                                </content>
-                            </Toolbar>
+                        <Panel  expandable="true" headerText="{i18n>detalletitle}" stickyHeader="true">
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.06Detalle" type="XML"/>
                         </Panel>
 
-                        <Panel  headerText="{i18n>resumentitle}">
-                            <List class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom" mode="SingleSelectLeft" selectionChange="onDetailItemPress" id="idResumenSetList" width="95%" items="{
+                        <Panel headerText="{i18n>resumentitle}" expandable="true" stickyHeader="true">
+                            <List class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom" mode="SingleSelectMaster" selectionChange="onDetailItemPress" id="idResumenSetList" width="95%" items="{
                                 path: '/ResumenSet' }">
                                 <CustomListItem >
                                     <VBox  >
 
                                         <HBox class="sapUiTinyMarginBottom sapUiTinyMarginTop" alignItems="Center" justifyContent="SpaceBetween" alignContent="SpaceBetween" width="100%">
                                             <Text text="{TipoLinea}" class="BoldOK sapUiTinyMarginBegin" />
-                                            <Text text="        " width="200px" />
 
 
-                                            <ObjectNumber unit="$" number="{parts: ['Importe'], formatter: '.formatNumber'}" state="{parts: ['Importe'], formatter: '.formatState'}" class="Bold sapUiTinyMarginEnd" />
+                                            <HBox alignItems="Center" justifyContent="Center" alignContent="Center" >
+
+                                                <ObjectNumber unit="$" number="{parts: ['Importe'], formatter: '.formatNumber'}" state="{parts: ['Importe'], formatter: '.formatState'}" class="Bold sapUiTinyMarginEnd" />
+                                              
+                                            </HBox>
                                         </HBox>
                                     </VBox>
                                 </CustomListItem>
