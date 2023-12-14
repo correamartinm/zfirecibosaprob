@@ -10,7 +10,7 @@
                 <fb:control>
                   
                     <MultiInput id="idRazonSocialMultiInput" width="auto" showSuggestion="true" suggestionItems="{/CLIENTESSet}">
-                        <core:Item key="{RazonSocial}" text="{RazonSocial} {Cuit}" />
+                        <core:Item key="{Codigo}" text="{RazonSocial}" />
                     </MultiInput>
                 </fb:control>
             </fb:FilterGroupItem>

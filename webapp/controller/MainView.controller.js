@@ -39,9 +39,9 @@ sap.ui.define(
           oProcesado = oView.byId("idProcesadoFilter"),
           oFecha = oView.byId("idFechaDateRangeSelection");
 
-        oRazonsocial.setValue(null);
+        oRazonsocial.removeAllTokens;
         oProcesado.setSelectedKey(null);
-        oCuit.setValue(null);
+        oCuit.removeAllTokens;
         oFecha.setValue(null);
         let oFilter = [];
         this._onRefreshTable(oFilter);
@@ -59,23 +59,23 @@ sap.ui.define(
           });
 
         if (oRazonsocial.getTokens().length !== 0) {
-          var orFilterL = [];
+         
           for (var l = 0; l < oRazonsocial.getTokens().length; l++) {
-            orFilterL.push(
+            oFilter.push(
               new sap.ui.model.Filter(
-                "RazonSocial",
+                "Cliente",
                 sap.ui.model.FilterOperator.Contains,
                 oRazonsocial.getTokens()[l].getKey()
               )
             );
           }
-          oFilter.push(new sap.ui.model.Filter(orFilterL, true));
+         
         }
 
         if (oCuit.getTokens().length !== 0) {
-          var orFilterL = [];
+          
           for (var l = 0; l < oCuit.getTokens().length; l++) {
-            orFilterL.push(
+            oFilter.push(
               new sap.ui.model.Filter(
                 "Cuit",
                 sap.ui.model.FilterOperator.EQ,
@@ -83,15 +83,15 @@ sap.ui.define(
               )
             );
           }
-          oFilter.push(new sap.ui.model.Filter(orFilterL, true));
+          
         }
 
         if (oRangoFecha.getValue().length !== 0) {
-          var oFInicio = oDateFormat.format(oRangoFecha.getFrom());
-          var oFFin = oDateFormat.format(oRangoFecha.getTo());
+          // var oFInicio = oDateFormat.formatoRangoFecha.getDateValue());
+          // var oFFin = oDateFormat.format(oRangoFecha.getSecondDateValue());
 
           oFilter.push(
-            new Filter("Fecha", sap.ui.model.FilterOperator.BT, oFInicio, oFFin)
+            new sap.ui.model.Filter("Fecha", sap.ui.model.FilterOperator.BT, oRangoFecha.getDateValue(), oRangoFecha.getSecondDateValue())
           );
         }
 
@@ -115,9 +115,9 @@ sap.ui.define(
           }
         }
 
-        let AllFilter = new sap.ui.model.Filter(oFilter, true);
+        // let AllFilter = new sap.ui.model.Filter(oFilter, true);
 
-        this._onRefreshTable(AllFilter);
+        this._onRefreshTable(oFilter);
       },
       onSearchRS: function (oEvent) {
         let oTable = oEvent.getSource().getParent().getParent(),

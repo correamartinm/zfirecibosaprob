@@ -23,7 +23,7 @@
         </headerToolbar>
         <columns>
 
-            <Column  >
+            <Column width="90px" >
                 <header>
                     <Label text="{i18n>lblnumero}"/>
                 </header>

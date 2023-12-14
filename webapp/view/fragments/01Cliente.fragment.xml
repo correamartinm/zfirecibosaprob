@@ -56,7 +56,7 @@
                         <form:FormElement  label="{i18n>lblobservaciones}">
                             <form:fields>
 
-                            <TextArea id="idObservacionesTextArea" rows="3" value="{mockdata>/Paso01Cliente/Observaciones}"/>
+                            <TextArea id="idObservacionesTextArea" rows="3" enabled="false" value="{mockdata>/Paso01Cliente/Observaciones}"/>
 
 
 

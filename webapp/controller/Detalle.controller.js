@@ -143,7 +143,7 @@ sap.ui.define(
         ListResumen.getBinding("items").filter(oFiltersRESU);
 
 
-        console.log(oFiltersCBTE);
+        console.log(oFiltersRESU);
       },
 
     
