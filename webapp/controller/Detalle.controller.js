@@ -102,27 +102,45 @@ sap.ui.define(
           TablaDescuentos = oView.byId("idDescuentosTable"),
           TableRetenciones = oView.byId("idRetencionesTable"),
           TablaMediosPagosa = oView.byId("idPagosSetTable"),
+          ListResumen = oView.byId("idResumenSetList"),
           oFiltersACTA = [],
           oFiltersRETE = [],
           oFiltersCBTE = [],
           oFiltersDESC = [],
           oFiltersDETA = [],
+          oFiltersRESU = [],
           oFilters = [];
 
-        oFilters.push(new Filter("Numero", FilterOperator.EQ, Recibo.Numero));
-        oFilters.push(new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente));
-
         oFiltersACTA.push(new Filter("Tipo", FilterOperator.EQ, "ACTA"));
-        oFiltersRETE.push(new Filter("Tipo", FilterOperator.EQ, "RETE"));
-        oFiltersDESC.push(new Filter("Tipo", FilterOperator.EQ, "DESC"));
-        oFiltersDETA.push(new Filter("Tipo", FilterOperator.EQ, "DETA"));
-        oFiltersCBTE.push(new Filter("Tipo", FilterOperator.EQ, "APLIC"));
+        oFiltersACTA.push(new Filter("Codigo", FilterOperator.EQ, Recibo.Numero));
+        oFiltersACTA.push(new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente));
 
-        TablaPagosaCta.getBinding("items").filter([oFilters, oFiltersACTA]);
-        TablaComprobantes.getBinding("items").filter([oFilters, oFiltersCBTE]);
-        TablaDescuentos.getBinding("items").filter([oFilters, oFiltersDESC]);
-        TableRetenciones.getBinding("items").filter([oFilters, oFiltersRETE]);
-        TablaMediosPagosa.getBinding("items").filter([oFilters, oFiltersDETA]);
+        oFiltersRETE.push(new Filter("TipoLinea", FilterOperator.EQ, "RETE"));
+        oFiltersRETE.push(new Filter("Numero", FilterOperator.EQ, Recibo.Numero));
+        oFiltersRETE.push(new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente));
+
+        oFiltersDESC.push(new Filter("TipoLinea", FilterOperator.EQ, "DESC"));
+        oFiltersDESC.push(new Filter("Codigo", FilterOperator.EQ, Recibo.Numero));
+        oFiltersDESC.push(new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente));
+
+        oFiltersDETA.push(new Filter("TipoLinea", FilterOperator.EQ, "DETA"));
+        oFiltersDETA.push(new Filter("Codigo", FilterOperator.EQ, Recibo.Numero));
+        oFiltersDETA.push(new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente));
+
+        oFiltersCBTE.push(new Filter("Tipo", FilterOperator.EQ, "APLIC"));
+        oFiltersCBTE.push(new Filter("Codigo", FilterOperator.EQ, Recibo.Numero));
+        oFiltersCBTE.push(new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente));
+
+        oFiltersRESU.push(new Filter("Codigo", FilterOperator.EQ, Recibo.Numero));
+
+        TablaComprobantes.getBinding("items").filter(oFiltersCBTE);
+        TablaDescuentos.getBinding("items").filter(oFiltersDESC);
+        TableRetenciones.getBinding("items").filter(oFiltersRETE);
+        TablaMediosPagosa.getBinding("items").filter(oFiltersDETA);
+        TablaPagosaCta.getBinding("items").filter(oFiltersACTA);
+        ListResumen.getBinding("items").filter(oFiltersRESU);
+
+        console.log(oFiltersCBTE);
       },
 
     

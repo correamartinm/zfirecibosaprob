@@ -67,7 +67,7 @@
                             <form:fields>
 
                                     
-                            <Text text="{i18n>lbltipocomprobante}" labelFor="idDocumentoSegmentedButton" class="sapUiSmallMarginEnd" />
+                            <Text text="{i18n>lbltipocomprobante}" class="sapUiSmallMarginEnd" />
 
                             </form:fields>
                         </form:FormElement>

@@ -1,13 +1,12 @@
 <core:FragmentDefinition xmlns="sap.m"
-   
     xmlns:core="sap.ui.core">
 
     <Table id="idPagosSetTable" items="{path : '/PagosSet' ,events: {
-        dataReceived: '.onCheckStep' } }" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders" >
+        dataReceived: '.onCheckStep' } }" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
         <headerToolbar>
             <OverflowToolbar>
                 <ToolbarSpacer/>
-               
+
 
             </OverflowToolbar>
         </headerToolbar>
@@ -40,9 +39,16 @@
 
                     <Text text=" {TipoComprobante}"/>
                     <HBox >
-                        <Text text="{Numero}" wrapping="false"/>
-                        <Text text="{path : 'FechaEmision', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"/>
-                        <Text text="{NroCheque}"/>
+                        <VBox >
+                            <Text text="{Numero}" wrapping="false"/>
+                            <Text text="{path : 'FechaEmision', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"/>
+                            <Text text="{path : 'FechaVencimiento', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"/>
+                        </VBox>
+                        <VBox >
+                            <Text text="{NroCheque}"/>
+                            <Text text="{BancoEmisor}"/>
+                            <Text text="{BancoDestino}"/>
+                        </VBox>
                     </HBox>
                     <Text text="{Importe}"/>
 

@@ -54,10 +54,12 @@
             </EntityType>
             <EntityType Name="Comprobantes" sap:content-version="1">
                 <Key>
+                    <PropertyRef Name="Codigo"/>
                     <PropertyRef Name="Numero"/>
                     <PropertyRef Name="Sociedad"/>
                     <PropertyRef Name="Periodo"/>
                 </Key>
+                <Property Name="Codigo" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
                 <Property Name="Cliente" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
                 <Property Name="Tipo" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
                 <Property Name="Numero" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
@@ -74,10 +76,12 @@
             </EntityType>
             <EntityType Name="PagoCuenta" sap:content-version="1">
                 <Key>
+                    <PropertyRef Name="Codigo"/>
                     <PropertyRef Name="Numero"/>
                     <PropertyRef Name="Sociedad"/>
                     <PropertyRef Name="Periodo"/>
                 </Key>
+                <Property Name="Codigo" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
                 <Property Name="Cliente" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
                 <Property Name="Tipo" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
                 <Property Name="Numero" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
