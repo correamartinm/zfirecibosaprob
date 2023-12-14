@@ -7,6 +7,12 @@
 
             <Column width="3rem" hAlign="Center">
                 <header>
+                   
+                </header>
+            </Column>
+
+            <Column width="3rem" hAlign="Center">
+                <header>
                     <Label text="{i18n>lbltc}" tooltip="{i18n>lbltipocomprobante}"/>
                 </header>
             </Column>
@@ -53,7 +59,7 @@
         <items>
             <ColumnListItem type="Active" highlight="Information">
                 <cells>
-
+                    <Text text="{Codigo}" wrapping="false"/>
                     <Text text="{Tipo}" wrapping="false"/>
                    
                     <Label text="{Numero}"/>
