@@ -141,7 +141,7 @@ sap.ui.define(
          let AllFilter = new sap.ui.model.Filter(oFilter, true);
 
         this._onRefreshTable(AllFilter);
-        console.log(oFilter);
+        console.log(AllFilter);
       },
       onSearchRS: function (oEvent) {
         let oTable = oEvent.getSource().getParent().getParent(),
@@ -198,7 +198,11 @@ sap.ui.define(
           }
         }
         
-        this._informationDialog();
+        let oData = oMockModel.getProperty("/RtaData");
+        if (oData.length > 0){
+          this._informationDialog();
+        }
+        
       },
 
       onAnultSelection: function () {

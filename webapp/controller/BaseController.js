@@ -302,7 +302,7 @@ sap.ui.define(
         } else {
           console.log(rta);
           // RtaData
-          oMockModel.setProperty("/RtaData", OldData.concat({ Recibo: rta.Datos.Numero , Rta: rta.Datos.Cliente }));
+          oMockModel.setProperty("/RtaData", OldData.concat({ Recibo: rta.Datos.Numero , Rta: rta.Datos.Resultado, MSG: rta.Datos.Mensaje }));
         
         }
       },
@@ -399,13 +399,13 @@ sap.ui.define(
                   path: "mockdata>/RtaData",
                   template: new sap.m.StandardListItem({
                     title: this._i18n().getText("lblrecibo")+": "+"{mockdata>Numero}",
-                    description: "{mockdata>Rta}"
+                    description: "{mockdata>Rta} {mockdata>MSG}"
                   })
                 }
               }),
               beginButton: new sap.m.Button({
                 type: ButtonType.Emphasized,
-                text: this._i18n().getText("btncerrar"),
+                text: this._i18n().getText("btnvolver"),
                 press: function () {
                   this._refreshData();
                   this.oDefaultDialog.close();
