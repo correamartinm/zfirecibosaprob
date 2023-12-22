@@ -138,9 +138,9 @@ sap.ui.define(
           }
         }
 
-        // let AllFilter = new sap.ui.model.Filter(oFilter, true);
+         let AllFilter = new sap.ui.model.Filter(oFilter, true);
 
-        this._onRefreshTable(oFilter);
+        this._onRefreshTable(AllFilter);
         console.log(oFilter);
       },
       onSearchRS: function (oEvent) {
@@ -193,9 +193,12 @@ sap.ui.define(
               this.onPostPress(vObject);
               oModel.refresh(true);
               this._onRefreshTable();
+
             }
           }
         }
+        
+        this._informationDialog();
       },
 
       onAnultSelection: function () {

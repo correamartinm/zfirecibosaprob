@@ -284,9 +284,12 @@ sap.ui.define(
       
       onPostPress: async function (oItem) {
         let oModel = this.getOwnerComponent().getModel(),
+        oMockModel = this.getOwnerComponent().getModel("mockdata"),
+        
           oEntidad = "/RECIBOSSet",
           oView = this.getView();
 
+          let OldData = oMockModel.getProperty("/RtaData");
         let oPayload = {
           Numero: oItem.Numero,
           Accion: oItem.Accion
@@ -298,6 +301,9 @@ sap.ui.define(
           this._onErrorHandle(rta.Datos);
         } else {
           console.log(rta);
+          // RtaData
+          oMockModel.setProperty("/RtaData", OldData.concat({ Recibo: rta.Datos.Numero , Rta: rta.Datos.Cliente }));
+        
         }
       },
 
@@ -381,6 +387,40 @@ sap.ui.define(
 
           return rta;
         },
+
+        _informationDialog: function () {
+
+          // 
+          if (!this.oDefaultDialog) {
+            this.oDefaultDialog = new sap.m.Dialog({
+              title: this._i18n().getText("lbltitulo"),
+              content: new sap.m.List({
+                items: {
+                  path: "mockdata>/RtaData",
+                  template: new sap.m.StandardListItem({
+                    title: this._i18n().getText("lblrecibo")+": "+"{mockdata>Numero}",
+                    description: "{mockdata>Rta}"
+                  })
+                }
+              }),
+              beginButton: new sap.m.Button({
+                type: ButtonType.Emphasized,
+                text: this._i18n().getText("btncerrar"),
+                press: function () {
+                  this._refreshData();
+                  this.oDefaultDialog.close();
+  
+                }.bind(this)
+              })
+            });
+  
+  
+            this.getView().addDependent(this.oDefaultDialog);
+          }
+  
+          this.oDefaultDialog.open();
+        },
+
 
         _i18n: function () {
           return this.getOwnerComponent().getModel("i18n").getResourceBundle();

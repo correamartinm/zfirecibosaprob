@@ -48,6 +48,7 @@ sap.ui.define([
                     SelectedItems:"",
                     Items: "",
                     PrintData: [],
+                    RtaData: [],
                     ReciboActivo: {}
           
             
