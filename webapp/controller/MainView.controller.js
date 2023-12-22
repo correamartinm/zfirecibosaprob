@@ -26,8 +26,8 @@ sap.ui.define(
       // Filtros **************************
 
       _onRefreshTable: function (oFilter) {
+       
         var oTable = this.byId("idTable"); //
-        oTable.removeSelections();
         var binding = oTable.getBinding("items");
         binding.filter(oFilter, "Application");
       },
@@ -44,6 +44,8 @@ sap.ui.define(
         oCuit.removeAllTokens;
         oFecha.setValue(null);
         let oFilter = [];
+        var oTable = this.byId("idTable"); 
+        oTable.removeSelections();
         this._onRefreshTable(oFilter);
       },
 
@@ -90,6 +92,16 @@ sap.ui.define(
               )
             );
           }
+        } else {
+          if (oCuit.getValue()) {
+            oFilter.push(
+              new sap.ui.model.Filter(
+                "Cuit",
+                sap.ui.model.FilterOperator.Contains,
+                oCuit.getValue()
+              )
+            );
+          }
         }
 
         if (oRangoFecha.getValue().length !== 0) {
@@ -107,20 +119,20 @@ sap.ui.define(
         }
 
         if (oProcesado) {
-          if (oProcesado === "X") {
+          if (oProcesado === null) {
             oFilter.push(
               new sap.ui.model.Filter(
                 "Procesado",
                 sap.ui.model.FilterOperator.EQ,
-                oProcesado
+                ""
               )
             );
           } else {
             oFilter.push(
               new sap.ui.model.Filter(
                 "Procesado",
-                sap.ui.model.FilterOperator.NE,
-                "X"
+                sap.ui.model.FilterOperator.EQ,
+                oProcesado
               )
             );
           }
@@ -129,6 +141,7 @@ sap.ui.define(
         // let AllFilter = new sap.ui.model.Filter(oFilter, true);
 
         this._onRefreshTable(oFilter);
+        console.log(oFilter);
       },
       onSearchRS: function (oEvent) {
         let oTable = oEvent.getSource().getParent().getParent(),
