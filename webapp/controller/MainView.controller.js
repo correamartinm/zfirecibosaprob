@@ -59,7 +59,6 @@ sap.ui.define(
           });
 
         if (oRazonsocial.getTokens().length !== 0) {
-         
           for (var l = 0; l < oRazonsocial.getTokens().length; l++) {
             oFilter.push(
               new sap.ui.model.Filter(
@@ -69,11 +68,19 @@ sap.ui.define(
               )
             );
           }
-         
+        } else {
+          if (oRazonsocial.getValue()) {
+            oFilter.push(
+              new sap.ui.model.Filter(
+                "RazonSocial",
+                sap.ui.model.FilterOperator.Contains,
+                oRazonsocial.getValue()
+              )
+            );
+          }
         }
 
         if (oCuit.getTokens().length !== 0) {
-          
           for (var l = 0; l < oCuit.getTokens().length; l++) {
             oFilter.push(
               new sap.ui.model.Filter(
@@ -83,7 +90,6 @@ sap.ui.define(
               )
             );
           }
-          
         }
 
         if (oRangoFecha.getValue().length !== 0) {
@@ -91,7 +97,12 @@ sap.ui.define(
           // var oFFin = oDateFormat.format(oRangoFecha.getSecondDateValue());
 
           oFilter.push(
-            new sap.ui.model.Filter("Fecha", sap.ui.model.FilterOperator.BT, oRangoFecha.getDateValue(), oRangoFecha.getSecondDateValue())
+            new sap.ui.model.Filter(
+              "Fecha",
+              sap.ui.model.FilterOperator.BT,
+              oRangoFecha.getDateValue(),
+              oRangoFecha.getSecondDateValue()
+            )
           );
         }
 
@@ -165,7 +176,7 @@ sap.ui.define(
             vObject = oModel.getObject(oPath);
 
             if (oItems[index].getSelected() === true) {
-              vObject.Accion = "P"
+              vObject.Accion = "P";
               this.onPostPress(vObject);
               oModel.refresh(true);
               this._onRefreshTable();
@@ -188,7 +199,7 @@ sap.ui.define(
             vObject = oModel.getObject(oPath);
 
             if (oItems[index].getSelected() === true) {
-              vObject.Accion = "A"
+              vObject.Accion = "A";
               this.onPostPress(vObject);
               oModel.refresh(true);
               this._onRefreshTable();
@@ -197,9 +208,7 @@ sap.ui.define(
         }
       },
 
-
       // *** Post
-
 
       onDetailPress: function (oEvent) {
         let Model = this.getOwnerComponent().getModel(),
@@ -216,51 +225,46 @@ sap.ui.define(
       onDownloadMessage: function () {
         let oMockModel = this.getOwnerComponent().getModel("mockdata"),
           items = oMockModel.getProperty("/SelectedItems");
-      
 
         if (items > 0) {
+          let objectMsg = {
+            titulo: this._i18n().getText("descargafile"),
+            mensaje: this._i18n().getText("msgdownload"),
+            icono: sap.m.MessageBox.Icon.QUESTION,
+            acciones: [
+              this._i18n().getText("btnseleccion"),
+              this._i18n().getText("btntodos"),
+              sap.m.MessageBox.Action.CLOSE,
+            ],
+            resaltar: this._i18n().getText("btnseleccion"),
+          };
 
-        let objectMsg = {
-          titulo: this._i18n().getText("descargafile"),
-          mensaje: this._i18n().getText("msgdownload"),
-          icono: sap.m.MessageBox.Icon.QUESTION,
-          acciones: [
-            this._i18n().getText("btnseleccion"),
-            this._i18n().getText("btntodos"),
-            sap.m.MessageBox.Action.CLOSE,
-          ],
-          resaltar: this._i18n().getText("btnseleccion"),
-        };
+          this._onShowMsgBox(objectMsg).then((rta) => {
+            switch (rta) {
+              case "CLOSE":
+                break;
 
-        this._onShowMsgBox(objectMsg).then((rta) => {
-          switch (rta) {
-            case "CLOSE":
-              break;
+              case this._i18n().getText("btnseleccion"):
+                this.onDownloadSelection();
 
-            case this._i18n().getText("btnseleccion"):
-              this.onDownloadSelection();
+                break;
 
-              break;
-
-            case this._i18n().getText("btntodos"):
-              this.onDownloadAll();
-              break;
-          }
-        });
-
-      } else {
-        this.onDownloadAll();
-      }
-
-
+              case this._i18n().getText("btntodos"):
+                this.onDownloadAll();
+                break;
+            }
+          });
+        } else {
+          this.onDownloadAll();
+        }
       },
       onDownloadAll: function () {
         let oEntity = "/RECIBOSSet",
           oModel = this.getOwnerComponent().getModel(),
           oColumns = this.oClumnsCreations(),
           oFilename = this._i18n().getText("appTitle");
-          
-          oModel.setSizeLimit(999999);
+
+        oModel.setSizeLimit(999999);
         this.onDownloadFile(oModel, oEntity, oColumns, oFilename);
       },
 
@@ -330,7 +334,6 @@ sap.ui.define(
       },
 
       onDownloadFile: function (oModel, oEntity, oColumns, oFilename) {
-       
         let oExport = new Export({
           exportType: new ExportTypeCSV({
             fileExtension: "csv",
