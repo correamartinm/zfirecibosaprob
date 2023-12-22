@@ -63,8 +63,8 @@ sap.ui.define(
           for (var l = 0; l < oRazonsocial.getTokens().length; l++) {
             oFilter.push(
               new sap.ui.model.Filter(
-                "Cliente",
-                sap.ui.model.FilterOperator.Contains,
+                "RazonSocial",
+                sap.ui.model.FilterOperator.EQ,
                 oRazonsocial.getTokens()[l].getKey()
               )
             );

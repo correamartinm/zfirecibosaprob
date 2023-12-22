@@ -329,24 +329,24 @@ sap.ui.define(
       },
 
       onNavBack: async function () {
-        // this.getOwnerComponent().getTargets().display("TargetMainView");
+        this.getOwnerComponent().getTargets().display("TargetMainView");
 
-        let sMessage = this._i18n().getText("msgcancel"),
-          oMockModel = this.getView().getModel("mockdata"),
-          sMessageTitle = this._i18n().getText("msgvolver");
+        // let sMessage = this._i18n().getText("msgcancel"),
+        //   oMockModel = this.getView().getModel("mockdata"),
+        //   sMessageTitle = this._i18n().getText("msgvolver");
 
-        let objectMsg = {
-          titulo: sMessageTitle,
-          mensaje: sMessage,
-          icono: sap.m.MessageBox.Icon.QUESTION,
-          acciones: [sap.m.MessageBox.Action.NO, sap.m.MessageBox.Action.YES],
-          resaltar: sap.m.MessageBox.Action.NO,
-        };
+        // let objectMsg = {
+        //   titulo: sMessageTitle,
+        //   mensaje: sMessage,
+        //   icono: sap.m.MessageBox.Icon.QUESTION,
+        //   acciones: [sap.m.MessageBox.Action.NO, sap.m.MessageBox.Action.YES],
+        //   resaltar: sap.m.MessageBox.Action.NO,
+        // };
 
-        this._onShowMsgBox(objectMsg).then((rta) => {
-          if (rta === "YES")
-            this.getOwnerComponent().getTargets().display("TargetMainView");
-        });
+        // this._onShowMsgBox(objectMsg).then((rta) => {
+        //   if (rta === "YES")
+        //     this.getOwnerComponent().getTargets().display("TargetMainView");
+        // });
       },
     });
   }
