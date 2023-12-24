@@ -1,6 +1,9 @@
 sap.ui.define(
   [
     "sap/ui/core/mvc/Controller",
+    "sap/m/Dialog",
+    "sap/m/Button",
+    "sap/m/library",
     "sap/m/MessageBox",
     "sap/ui/core/ValueState",
     "sap/ui/core/routing/History",
@@ -9,6 +12,9 @@ sap.ui.define(
   ],
   function (
     Controller,
+    Dialog,
+    Button,
+    mobileLibrary,
     MessageBox,
     ValueState,
     History,
@@ -16,39 +22,14 @@ sap.ui.define(
     Filter
   ) {
     "use strict";
+    var ButtonType = mobileLibrary.ButtonType;
+		var DialogType = mobileLibrary.DialogType;
 
     return Controller.extend(
       "morixe.zfirecibosaprob.controller.BaseController",
       {
-        _onUpdateModel: function (oModel, entity, values) {
-          oModel.setProperty(entity, values);
-        },
 
-        _onGetDataModel: function (model, entity) {
-          if (model) {
-            let data = model.getProperty(entity);
-            return data;
-          }
-        },
 
-        _onFocusControl: function (oControl) {
-          jQuery.sap.delayedCall(600, this, function () {
-            oControl.focus;
-          });
-        },
-        formatItem: function (text, value) {
-          if (!text) {
-            return "";
-          } else {
-            let ovalue = parseFloat(value);
-            if (text.toUpperCase() === "SALDO" && value !== "") {
-              this.getOwnerComponent()
-                .getModel("mockdata")
-                .setProperty("/SALDO", value);
-            }
-          }
-          return value;
-        },
 
         formatNumber: function (value) {
           if (!value) return 0;
@@ -85,6 +66,24 @@ sap.ui.define(
               break;
           }
         },
+
+        formatText: function (param) {
+          switch (param) {
+            case "X":
+              return this._i18n().getText("btnprocesado");
+
+              break;
+            case "A":
+              return  this._i18n().getText("btnanulado");
+
+              break;
+
+            default:
+              return "";
+              break;
+          }
+        },
+
 
         formatStateBool: function (param) {
 
@@ -346,7 +345,7 @@ sap.ui.define(
             // RtaData
             oMockModel.setProperty(
               "/RtaData",
-              OldData.concat({ MSG: rta.Datos.Mensaje })
+              OldData.concat(rta.Datos)
             );
           }
         },
@@ -432,24 +431,20 @@ sap.ui.define(
           //
           if (!this.oDefaultDialog) {
             this.oDefaultDialog = new sap.m.Dialog({
-              title: this._i18n().getText("lbltitulo"),
+              title: this._i18n().getText("resumentitle"),
               content: new sap.m.List({
                 items: {
                   path: "mockdata>/RtaData",
                   template: new sap.m.StandardListItem({
-                    title:
-                      this._i18n().getText("lblrecibo") +
-                      ": " +
-                      "{mockdata>MSG}",
-                    description: "{mockdata>Rta} {mockdata>MSG}",
+                    title: this._i18n().getText("lblrecibo") +": " +"{mockdata>Numero}"+"  "+this._i18n().getText("lblprocesado") +": " +"{mockdata>Resultado}",
+                    description: "{mockdata>Mensaje}",
                   }),
                 },
               }),
               beginButton: new sap.m.Button({
                 type: ButtonType.Emphasized,
                 text: this._i18n().getText("btnvolver"),
-                press: function () {
-                  this._refreshData();
+                press: function () {                 
                   this.oDefaultDialog.close();
                 }.bind(this),
               }),

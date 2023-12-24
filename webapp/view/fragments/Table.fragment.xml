@@ -8,7 +8,7 @@
     </Toolbar>
 
     <Table id="idTable" mode="MultiSelect" selectionChange="onTableSelectionChange" items="{path : '/RECIBOSSet' ,events: {
-        dataReceived: '.onTableSelectionChange' } }" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
+        dataReceived: '.onTableSelection' } }" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
         <headerToolbar>
             <OverflowToolbar>
                 <!-- <SearchField width="95%" placeholder="{i18n>lblrazonsocial}" search="onSearchRS" visible="{= ${device>/system/desktop} === false }" /> -->
@@ -23,7 +23,7 @@
         </headerToolbar>
         <columns>
 
-            <Column width="90px" >
+            <Column width="90px">
                 <header>
                     <Label text="{i18n>lblnumero}"/>
                 </header>
@@ -40,7 +40,7 @@
                 </header>
             </Column>
 
-            <Column width="auto" visible="{= ${device>/system/phone} === false }" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+            <Column width="auto" visible="{= ${device>/system/phone} === false }" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Begin">
                 <header>
                     <Label text="{i18n>lblrazonsocial}"/>
                 </header>
@@ -51,18 +51,18 @@
                     <Label text="{i18n>lblcuit}"/>
                 </header>
             </Column>
-            <Column width="120px" visible="false" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+            <Column width="120px" visible="false" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
                 <header>
                     <Label text="{i18n>lbltotalrecibo}"/>
                 </header>
             </Column>
-            <Column width="120px" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+            <Column width="120px" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
                 <header>
                     <Label text="{i18n>lbltotal}"/>
                 </header>
             </Column>
 
-            <Column visible="{device>/system/phone}"  popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
+            <Column visible="{device>/system/phone}" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
                 <header>
                     <Label text="{i18n>lblprocesado}"/>
                 </header>
@@ -104,23 +104,22 @@
 
                     <ObjectNumber number="{Total}" unit="{Moneda}" />
                     <ObjectNumber number="{Total}" unit="{Moneda}" />
-                    
-                    <ObjectStatus icon="sap-icon://{
+
+                    <ObjectStatus text="{path: 'Procesado',
+                    formatter: '.formatText'}" icon="sap-icon://{
                             path: 'Procesado',
                             formatter: '.formatIconBool'
                         }" state="{
                             path: 'Procesado',
                             formatter: '.formatStateBool'
-                        }" inverted="true" title="{FechaProcesado}"  visible="{= ${Procesado} !== '' }" />
+                        }" inverted="true" title="{FechaProcesado}" visible="{= ${Procesado} !== '' }" />
 
-                    <ObjectStatus icon="sap-icon://{
-                        path: 'Procesado',
-                        formatter: '.formatIconBool'
-                    }" state="{
+                    <ObjectStatus text="{path: 'Procesado',
+                    formatter: '.formatText'}" state="{
                         path: 'Procesado',
                         formatter: '.formatStateBool'
                     }" inverted="true" visible="{= ${Procesado} !== '' }" />
-               
+
                     <Text text="{path : 'FechaProcesado' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"/>
                     <HBox >
                         <Button icon="sap-icon://print" enabled="{= ${Procesado} === 'X' }" press="onButtonPrintPress" />

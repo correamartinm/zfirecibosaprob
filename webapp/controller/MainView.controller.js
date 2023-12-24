@@ -18,6 +18,10 @@ sap.ui.define(
         oTarget.attachDisplay(this._onObjectMatched, this);
       },
 
+      _i18n: function () {
+        return this.getOwnerComponent().getModel("i18n").getResourceBundle();
+      },
+
       _onObjectMatched: function () {
         this._onRefreshTable([]);
       },
@@ -26,7 +30,6 @@ sap.ui.define(
       // Filtros **************************
 
       _onRefreshTable: function (oFilter) {
-       
         var oTable = this.byId("idTable"); //
         var binding = oTable.getBinding("items");
         binding.filter(oFilter, "Application");
@@ -44,7 +47,7 @@ sap.ui.define(
         oCuit.removeAllTokens;
         oFecha.setValue(null);
         let oFilter = [];
-        var oTable = this.byId("idTable"); 
+        var oTable = this.byId("idTable");
         oTable.removeSelections();
         this._onRefreshTable(oFilter);
       },
@@ -123,8 +126,15 @@ sap.ui.define(
             oFilter.push(
               new sap.ui.model.Filter(
                 "Procesado",
-                sap.ui.model.FilterOperator.EQ,
-                ""
+                sap.ui.model.FilterOperator.NE,
+                "P"
+              )
+            );
+            oFilter.push(
+              new sap.ui.model.Filter(
+                "Procesado",
+                sap.ui.model.FilterOperator.NE,
+                "A"
               )
             );
           } else {
@@ -138,7 +148,7 @@ sap.ui.define(
           }
         }
 
-         let AllFilter = new sap.ui.model.Filter(oFilter, true);
+        let AllFilter = new sap.ui.model.Filter(oFilter, true);
 
         this._onRefreshTable(AllFilter);
         console.log(AllFilter);
@@ -165,17 +175,35 @@ sap.ui.define(
         oTable.getBinding("items").filter([oFilters]);
       },
 
-      onTableSelectionChange: function () {
+      onTableSelection: function () {
         let oTable = this.getView().byId("idTable"),
           oMockModel = this.getView().getModel("mockdata"),
-          oItems = oTable.getItems(),
-          oSelectedItems = oTable.getSelectedItems();
-
+          oSelectedItems = oTable.getSelectedItems(),
+          oItems = oTable.getItems();
         oMockModel.setProperty("/Items", oItems.length);
         oMockModel.setProperty("/SelectedItems", oSelectedItems.length);
       },
 
-      onPostSelection: function () {
+      onTableSelectionChange: function (oEvent) {
+        let oTable = this.getView().byId("idTable"),
+          oMockModel = this.getView().getModel("mockdata"),
+          oModel = this.getOwnerComponent().getModel(),
+          oItems = oTable.getItems();
+
+        if (!oEvent.getParameters("listItem")) return;
+
+        let oItem = oEvent.getParameters("listItem"),
+          oPath = oItem.listItem.getBindingContextPath(),
+          vObject = oModel.getObject(oPath);
+
+        if (vObject.Procesado !== "P" && vObject.Procesado !== "A") {
+          oItem.listItem.setSelected = false;
+        }
+
+        this.onTableSelection();
+      },
+
+      onPostSelection: async function () {
         let oTable = this.getView().byId("idTable"),
           oMockModel = this.getView().getModel("mockdata"),
           oModel = this.getOwnerComponent().getModel(),
@@ -190,19 +218,17 @@ sap.ui.define(
 
             if (oItems[index].getSelected() === true) {
               vObject.Accion = "P";
-              this.onPostPress(vObject);
-              oModel.refresh(true);
-              this._onRefreshTable();
-
+              await this.onPostPress(vObject);
+              //this._onRefreshTable();
             }
           }
         }
-        
+
+        oModel.refresh(true);
         let oData = oMockModel.getProperty("/RtaData");
-        if (oData.length > 0){
+        if (oData.length > 0) {
           this._informationDialog();
         }
-        
       },
 
       onAnultSelection: function () {

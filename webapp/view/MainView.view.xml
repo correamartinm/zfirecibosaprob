@@ -8,7 +8,7 @@
 			<f:DynamicPageHeader pinnable="false" visible="{= ${device>/system/phone} === false }">
 
 				<f:content  >
-					<VBox visible="{layout>/EdicionRecibo}">					
+					<VBox >					
 						<core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.FilterBar" type="XML"/>
 					</VBox>
 
@@ -17,11 +17,11 @@
 		</f:header>
 		<f:content>
 
-			<Panel height="80%">
+			<Panel height="85%" width="auto">
 				<content>
 
 
-					<VBox visible="{layout>/EdicionRecibo}">
+					<VBox >
 						<core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.Table" type="XML"/>
 					</VBox>
 
