@@ -1,1 +1,13 @@
-/* Enter your custom styles here */
+.BoldOK {
+    color: rgba(20, 3, 177, 0.966);
+    font-size: 20px;
+    font-weight: bold;
+    vertical-align: middle;
+
+}
+
+.BoldBig { 
+    color: rgba(44, 44, 121, 0.966);
+    font-size: 18px;
+    font-weight: bold;
+}

@@ -122,7 +122,7 @@ sap.ui.define(
         }
 
         if (oProcesado) {
-          if (oProcesado === null) {
+          if (oProcesado === "null" || oProcesado === "") {
             oFilter.push(
               new sap.ui.model.Filter(
                 "Procesado",
@@ -180,6 +180,7 @@ sap.ui.define(
           oMockModel = this.getView().getModel("mockdata"),
           oSelectedItems = oTable.getSelectedItems(),
           oItems = oTable.getItems();
+       
         oMockModel.setProperty("/Items", oItems.length);
         oMockModel.setProperty("/SelectedItems", oSelectedItems.length);
       },
@@ -190,14 +191,17 @@ sap.ui.define(
           oModel = this.getOwnerComponent().getModel(),
           oItems = oTable.getItems();
 
-        if (!oEvent.getParameters("listItem")) return;
-
         let oItem = oEvent.getParameters("listItem"),
           oPath = oItem.listItem.getBindingContextPath(),
           vObject = oModel.getObject(oPath);
 
-        if (vObject.Procesado !== "P" && vObject.Procesado !== "A") {
-          oItem.listItem.setSelected = false;
+        for (var index = 0; index < oItems.length; index++) {
+          oPath = oItems[index].getBindingContextPath();
+          vObject = oModel.getObject(oPath);
+
+          if (vObject.Procesado === "P" || vObject.Procesado === "A") {
+            oItems[index].setSelected() === false;
+          }
         }
 
         this.onTableSelection();
@@ -231,7 +235,7 @@ sap.ui.define(
         }
       },
 
-      onAnultSelection: function () {
+      onAnultSelection: async function () {
         let oTable = this.getView().byId("idTable"),
           oMockModel = this.getView().getModel("mockdata"),
           oModel = this.getOwnerComponent().getModel(),
@@ -246,11 +250,17 @@ sap.ui.define(
 
             if (oItems[index].getSelected() === true) {
               vObject.Accion = "A";
-              this.onPostPress(vObject);
-              oModel.refresh(true);
-              this._onRefreshTable();
+              await this.onPostPress(vObject);
+
+              // this._onRefreshTable();
             }
           }
+        }
+
+        oModel.refresh(true);
+        let oData = oMockModel.getProperty("/RtaData");
+        if (oData.length > 0) {
+          this._informationDialog();
         }
       },
 

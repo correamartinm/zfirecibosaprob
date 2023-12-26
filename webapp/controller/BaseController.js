@@ -23,14 +23,11 @@ sap.ui.define(
   ) {
     "use strict";
     var ButtonType = mobileLibrary.ButtonType;
-		var DialogType = mobileLibrary.DialogType;
+    var DialogType = mobileLibrary.DialogType;
 
     return Controller.extend(
       "morixe.zfirecibosaprob.controller.BaseController",
       {
-
-
-
         formatNumber: function (value) {
           if (!value) return 0;
 
@@ -49,6 +46,14 @@ sap.ui.define(
         },
 
         //  Detalle
+        formatUrl: function (ID, Name) {
+          let srv = "/sap/opu/odata/sap/ZGWFI_COBRANZAS_APROB_SRV/",
+            id = "AttachDocSet(Codigo='" + ID + "',",
+            file = "Filename='" + Name;
+            let rta = srv + id + file + "')/$value";
+            return rta;
+            
+        },
 
         formatIconBool: function (param) {
           switch (param) {
@@ -74,7 +79,7 @@ sap.ui.define(
 
               break;
             case "A":
-              return  this._i18n().getText("btnanulado");
+              return this._i18n().getText("btnanulado");
 
               break;
 
@@ -84,9 +89,7 @@ sap.ui.define(
           }
         },
 
-
         formatStateBool: function (param) {
-
           switch (param) {
             case "X":
               return "Success";
@@ -101,9 +104,6 @@ sap.ui.define(
               return "None";
               break;
           }
-
-
-          
         },
         // ********************************************
         // Ficheros *******************
@@ -267,11 +267,11 @@ sap.ui.define(
               });
               var oSlug = new sap.ui.core.Item({
                 key: "SLUG",
-                text: paso1.Cliente + "/" + paso1.Tipo || "" + "/" + sFileName,
+                text: paso1.Numero || "" + "/" + sFileName,
               });
               oAttachmentUpl.addHeaderField(oXCSRFToken).addHeaderField(oSlug);
               // .uploadItem(aIncompleteItems[i]);
-              // oAttachmentUpl.removeAllHeaderFields();
+              oAttachmentUpl.removeAllHeaderFields();
             }
           }
         },
@@ -343,10 +343,7 @@ sap.ui.define(
           } else {
             console.log(rta);
             // RtaData
-            oMockModel.setProperty(
-              "/RtaData",
-              OldData.concat(rta.Datos)
-            );
+            oMockModel.setProperty("/RtaData", OldData.concat(rta.Datos));
           }
         },
 
@@ -436,7 +433,14 @@ sap.ui.define(
                 items: {
                   path: "mockdata>/RtaData",
                   template: new sap.m.StandardListItem({
-                    title: this._i18n().getText("lblrecibo") +": " +"{mockdata>Numero}"+"  "+this._i18n().getText("lblprocesado") +": " +"{mockdata>Resultado}",
+                    title:
+                      this._i18n().getText("lblrecibo") +
+                      ": " +
+                      "{mockdata>Numero}" +
+                      "  " +
+                      this._i18n().getText("lblprocesado") +
+                      ": " +
+                      "{mockdata>Resultado}",
                     description: "{mockdata>Mensaje}",
                   }),
                 },
@@ -444,8 +448,11 @@ sap.ui.define(
               beginButton: new sap.m.Button({
                 type: ButtonType.Emphasized,
                 text: this._i18n().getText("btnvolver"),
-                press: function () {                 
+                press: function () {
                   this.oDefaultDialog.close();
+                  this.getOwnerComponent()
+                    .getModel("mockdata")
+                    .setProperty("/RtaData", []);
                 }.bind(this),
               }),
             });
@@ -541,18 +548,19 @@ sap.ui.define(
         // Mensajeria -----------------------
 
         _onErrorHandle: function (oError) {
-          if (oError.Mensaje === undefined) {
-            var oErrorMsg = JSON.parse(oError.responseText);
-            var oText = oErrorMsg.error.message.value;
-          } else {
-            var oText = oError.Mensaje;
-          }
+          // if (oError.Mensaje === undefined) {
+          //   var oErrorMsg = JSON.parse(oError.responseText);
+          //   var oText = oErrorMsg.error.message.value;
+          // } else {
+          //   var oText = oError.Mensaje;
+          // }
 
           var sMessageTitle = this._i18n().getText("msgerror");
 
           let objectMsg = {
             titulo: sMessageTitle,
-            mensaje: oText,
+            mensaje: oError.responseText,
+
             icono: sap.m.MessageBox.Icon.ERROR,
             acciones: [sap.m.MessageBox.Action.CLOSE],
             resaltar: sap.m.MessageBox.Action.CLOSE,

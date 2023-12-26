@@ -23,38 +23,19 @@
                             </Bar>
                         </customHeader>
 
-                        <Panel headerText="{i18n>clientetitle}" class="sapUiSmallMarginTop">
+                        <!-- <Panel headerText="{i18n>clientetitle}" class="sapUiSmallMarginTop">
                             <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.01Cliente" type="XML"/>
-                        </Panel>
+                        </Panel> -->
 
+                        <Panel headerText="{i18n>resumentitle} " expandable="true" expanded="true">
+                            <Toolbar>
+                                <content>
+                                    <ToolbarSpacer />
+                                    <Text text="{mockdata>/Paso01Cliente/Codigo} {mockdata>/Paso01Cliente/RazonSocial}" class="BoldBig" />
+                                    <ToolbarSpacer />
+                                </content>
+                            </Toolbar>
 
-
-
-
-                        <Panel expandable="true" headerText="{i18n>pagoactatitle}">                           
-                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.02PagoCta" type="XML"/>
-                        </Panel>
-
-                        <Panel expandable="true" headerText="{i18n>comprobantetitle}">                          
-                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.03Comprobante" type="XML"/>
-                        </Panel>
-
-                        <Panel expandable="true" headerText="{i18n>descuentotitle}">
-                           
-                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.04Descuentos" type="XML"/>
-                        </Panel>
-
-                        <Panel  expandable="true" headerText="{i18n>retencionestitle}">
-                          
-                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.05Retenciones" type="XML"/>
-                        </Panel>
-
-
-                        <Panel  expandable="true" headerText="{i18n>detalletitle}">
-                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.06Detalle" type="XML"/>
-                        </Panel>
-
-                        <Panel headerText="{i18n>resumentitle}" expandable="true">
                             <List class="sapUiSmallMarginBeginEnd sapUiSmallMarginTopBottom" mode="SingleSelectMaster" selectionChange="onDetailItemPress" id="idResumenSetList" width="95%" items="{
                                 path: '/ResumenSet' }">
                                 <CustomListItem >
@@ -64,10 +45,10 @@
                                             <Text text="{TipoLinea}" class="BoldOK sapUiTinyMarginBegin" />
 
 
-                                            <HBox alignItems="Center" justifyContent="Center" alignContent="Center" >
+                                            <HBox alignItems="Center" justifyContent="Center" alignContent="Center">
 
                                                 <ObjectNumber unit="$" number="{parts: ['Importe'], formatter: '.formatNumber'}" state="{parts: ['Importe'], formatter: '.formatState'}" class="Bold sapUiTinyMarginEnd" />
-                                              
+
                                             </HBox>
                                         </HBox>
                                     </VBox>
@@ -87,6 +68,33 @@
                                 <ToolbarSpacer/>
                             </OverflowToolbar>
                         </Panel>
+
+
+
+                        <Panel expandable="true" headerText="{i18n>pagoactatitle}">
+                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.02PagoCta" type="XML"/>
+                        </Panel>
+
+                        <Panel expandable="true" headerText="{i18n>comprobantetitle}">
+                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.03Comprobante" type="XML"/>
+                        </Panel>
+
+                        <Panel expandable="true" headerText="{i18n>descuentotitle}">
+
+                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.04Descuentos" type="XML"/>
+                        </Panel>
+
+                        <Panel expandable="true" headerText="{i18n>retencionestitle}">
+
+                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.05Retenciones" type="XML"/>
+                        </Panel>
+
+
+                        <Panel expandable="true" headerText="{i18n>detalletitle}">
+                            <core:Fragment fragmentName="morixe.zfirecibosaprob.view.fragments.06Detalle" type="XML"/>
+                        </Panel>
+
+
 
                     </Page>
                 </pages>
