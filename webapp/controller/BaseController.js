@@ -116,6 +116,7 @@ sap.ui.define(
             oItem = oEvent.getSource().getBindingContext().getObject();
             oMockModel.setProperty("/Paso01Cliente", oItem);
           }
+          oMockModel.setProperty("/FileParameters", oItem);
 
           if (!this._oDialogUploadSet) {
             this._oDialogUploadSet = sap.ui.xmlfragment(
@@ -231,13 +232,19 @@ sap.ui.define(
           oAttachmentUpl.setBusy(false);
         },
         onDownload: function (oEvent) {
-          var oAttachmentUpl = sap.ui.core.Fragment.byId(
-            "UploadFile",
-            "attachmentUpl"
-          );
+          let 
+          oMockModel = this.getOwnerComponent().getModel("mockdata"),
+          File = oMockModel.getProperty("/FileParameters"),
+            oAttachmentUpl = sap.ui.core.Fragment.byId(
+              "UploadFile",
+              "attachmentUpl"
+            );
+  
           oAttachmentUpl.setBusy(true);
           oAttachmentUpl.getItems().forEach((oItem) => {
             if (oItem.getListItem().getSelected()) {
+              let uri = this.formatUrl(File.Recibo, oItem.getFileName());
+              oItem.setUrl(uri);
               oItem.download(true);
               oItem.getListItem().setSelected(false);
             }
@@ -453,6 +460,7 @@ sap.ui.define(
                   this.getOwnerComponent()
                     .getModel("mockdata")
                     .setProperty("/RtaData", []);
+                    this.getOwnerComponent().getTargets().display("TargetMainView");
                 }.bind(this),
               }),
             });

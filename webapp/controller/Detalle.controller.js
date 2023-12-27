@@ -97,7 +97,7 @@ sap.ui.define(
 
       onFilterTables: function (Recibo) {
         let oView = this.getView(),
-        oModel = this.getOwnerComponent().getModel(),
+          oModel = this.getOwnerComponent().getModel(),
           TablaPagosaCta = oView.byId("idPagoCtaTable"),
           TablaComprobantes = oView.byId("idComprobanteTable"),
           TablaDescuentos = oView.byId("idDescuentosTable"),
@@ -115,38 +115,57 @@ sap.ui.define(
         oModel.refresh(true);
 
         oFiltersACTA.push(new Filter("Tipo", FilterOperator.EQ, "ACTA"));
-        oFiltersACTA.push(new Filter("Codigo", FilterOperator.EQ, Recibo.Numero));
-        oFiltersACTA.push(new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente));
+        oFiltersACTA.push(
+          new Filter("Codigo", FilterOperator.EQ, Recibo.Numero)
+        );
+        oFiltersACTA.push(
+          new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente)
+        );
         TablaPagosaCta.getBinding("items").filter(oFiltersACTA);
 
         oFiltersRETE.push(new Filter("TipoLinea", FilterOperator.EQ, "RETE"));
-        oFiltersRETE.push(new Filter("Numero", FilterOperator.EQ, Recibo.Numero));
-        oFiltersRETE.push(new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente));
+        oFiltersRETE.push(
+          new Filter("Numero", FilterOperator.EQ, Recibo.Numero)
+        );
+        oFiltersRETE.push(
+          new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente)
+        );
         TableRetenciones.getBinding("items").filter(oFiltersRETE);
 
         oFiltersDESC.push(new Filter("TipoLinea", FilterOperator.EQ, "DESC"));
-        oFiltersDESC.push(new Filter("Codigo", FilterOperator.EQ, Recibo.Numero));
-        oFiltersDESC.push(new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente));
+        oFiltersDESC.push(
+          new Filter("Codigo", FilterOperator.EQ, Recibo.Numero)
+        );
+        oFiltersDESC.push(
+          new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente)
+        );
         TablaDescuentos.getBinding("items").filter(oFiltersDESC);
 
         oFiltersDETA.push(new Filter("TipoLinea", FilterOperator.EQ, "DETA"));
-        oFiltersDETA.push(new Filter("Codigo", FilterOperator.EQ, Recibo.Numero));
-        oFiltersDETA.push(new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente));
+        oFiltersDETA.push(
+          new Filter("Codigo", FilterOperator.EQ, Recibo.Numero)
+        );
+        oFiltersDETA.push(
+          new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente)
+        );
         TablaMediosPagosa.getBinding("items").filter(oFiltersDETA);
 
         oFiltersCBTE.push(new Filter("Tipo", FilterOperator.EQ, "APLIC"));
-        oFiltersCBTE.push(new Filter("Codigo", FilterOperator.EQ, Recibo.Numero));
-        oFiltersCBTE.push(new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente));
+        oFiltersCBTE.push(
+          new Filter("Codigo", FilterOperator.EQ, Recibo.Numero)
+        );
+        oFiltersCBTE.push(
+          new Filter("Cliente", FilterOperator.EQ, Recibo.Cliente)
+        );
         TablaComprobantes.getBinding("items").filter(oFiltersCBTE);
 
-        oFiltersRESU.push(new Filter("Codigo", FilterOperator.EQ, Recibo.Numero));
+        oFiltersRESU.push(
+          new Filter("Codigo", FilterOperator.EQ, Recibo.Numero)
+        );
         ListResumen.getBinding("items").filter(oFiltersRESU);
-
 
         console.log(oFiltersRESU);
       },
-
-    
 
       onDetailItemPress: function (oEvent) {
         let Model = this.getOwnerComponent().getModel(),
@@ -159,27 +178,35 @@ sap.ui.define(
 
       onOcultarPanel: function () {
         let oLayModel = this.getOwnerComponent().getModel("layout"),
-        ListaReview = this.getView().byId("idResumenSetList");
+          ListaReview = this.getView().byId("idResumenSetList");
         oLayModel.setProperty("/activePanel", "");
         ListaReview.removeSelections();
-        // 
+        //
       },
 
-      onContabilizarINDV: function () {
+      onContabilizarINDV: async function () {
         let oMockModel = this.getView().getModel("mockdata"),
-        oRecibo = oMockModel.getProperty("/ReciboActivo");
+          oRecibo = oMockModel.getProperty("/ReciboActivo");
 
-        oRecibo.Accion = "P"
-        this.onPostPress(oRecibo);
+        oRecibo.Accion = "P";
+        await this.onPostPress(oRecibo);
         this.getOwnerComponent().getModel().refresh(true);
+        let oData = oMockModel.getProperty("/RtaData");
+        if (oData.length > 0) {
+          this._informationDialog();
+        }
       },
 
-      onAnularINDV: function () {
+      onAnularINDV: async function () {
         let oMockModel = this.getView().getModel("mockdata"),
-        oRecibo = oMockModel.getProperty("/ReciboActivo");
-        oRecibo.Accion = "A"
-        this.onPostPress(oRecibo);
+          oRecibo = oMockModel.getProperty("/ReciboActivo");
+        oRecibo.Accion = "A";
+        await this.onPostPress(oRecibo);
         this.getOwnerComponent().getModel().refresh(true);
+        let oData = oMockModel.getProperty("/RtaData");
+        if (oData.length > 0) {
+          this._informationDialog();
+        }
       },
 
       // ********************************************

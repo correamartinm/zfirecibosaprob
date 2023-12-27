@@ -15,7 +15,7 @@
 							</OverflowToolbar>
 						</upload:toolbar>
 						<upload:items>
-							<upload:UploadSetItem  fileName="{Filename}"   mediaType="{MimeType}" visibleEdit="false" visibleRemove="false"   url="{parts:['Recibo', 'Filename'], formatter:'.formatUrl' }">
+							<upload:UploadSetItem  fileName="{Filename}"   mediaType="{MimeType}" visibleEdit="false" visibleRemove="false"   >
 
 							</upload:UploadSetItem>
 						</upload:items>

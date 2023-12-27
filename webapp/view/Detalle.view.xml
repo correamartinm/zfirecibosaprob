@@ -31,7 +31,7 @@
                             <Toolbar>
                                 <content>
                                     <ToolbarSpacer />
-                                    <Text text="{mockdata>/Paso01Cliente/Codigo} {mockdata>/Paso01Cliente/RazonSocial}" class="BoldBig" />
+                                    <Text text="({mockdata>/Paso01Cliente/Codigo}) {mockdata>/Paso01Cliente/RazonSocial}" class="BoldBig" />
                                     <ToolbarSpacer />
                                 </content>
                             </Toolbar>
@@ -63,8 +63,8 @@
                             <OverflowToolbar >
                                 <ToolbarSpacer/>
 
-                                <Button icon="sap-icon://sys-cancel" text="{i18n>btnanular}" type="Critical" press="onAnularINDV" class="sapUiTinyMarginEnd"/>
-                                <Button icon="sap-icon://accept" text="{i18n>btnconfirmar}" type="Success" press="onContabilizarINDV" />
+                                <Button icon="sap-icon://sys-cancel" text="{i18n>btnanular}" type="Critical" press="onAnularINDV" class="sapUiTinyMarginEnd" enabled="{= ${mockdata>/ReciboActivo/Procesado} === '' }"/>
+                                <Button icon="sap-icon://accept" text="{i18n>btnconfirmar}" type="Success" press="onContabilizarINDV" enabled="{= ${mockdata>/ReciboActivo/Procesado} === '' }"/>
                                 <ToolbarSpacer/>
                             </OverflowToolbar>
                         </Panel>

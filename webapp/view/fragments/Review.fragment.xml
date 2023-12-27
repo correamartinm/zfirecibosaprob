@@ -62,8 +62,8 @@
     <OverflowToolbar >
         <ToolbarSpacer/>
        
-        <Button icon="sap-icon://sys-cancel" text="{i18n>btnanular}" type="Reject" press="onNavBack" class="sapUiTinyMarginEnd"/>
-        <Button icon="sap-icon://message-success" text="{i18n>btnconfirmar}" type="Success" press="onConfirmarReciboButtonPress"  />
+        <Button icon="sap-icon://sys-cancel" text="{i18n>btnanular}" type="Reject" press="onNavBack" class="sapUiTinyMarginEnd"   enabled="{= ${mockdata>/ReciboActivo/Procesado} === '' }"/>
+        <Button icon="sap-icon://message-success" text="{i18n>btnconfirmar}" type="Success" press="onConfirmarReciboButtonPress"  enabled="{= ${mockdata>/ReciboActivo/Procesado} === '' }"/>
         <ToolbarSpacer/>
     </OverflowToolbar>
 

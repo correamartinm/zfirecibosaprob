@@ -122,29 +122,11 @@ sap.ui.define(
         }
 
         if (oProcesado) {
-          if (oProcesado === "null" || oProcesado === "") {
-            oFilter.push(
-              new sap.ui.model.Filter(
-                "Procesado",
-                sap.ui.model.FilterOperator.NE,
-                "P"
-              )
-            );
-            oFilter.push(
-              new sap.ui.model.Filter(
-                "Procesado",
-                sap.ui.model.FilterOperator.NE,
-                "A"
-              )
-            );
+          if (oProcesado === "N" || oProcesado === "") {
+            oFilter.push( new sap.ui.model.Filter("Procesado", sap.ui.model.FilterOperator.NE, "X" ) );
+            oFilter.push( new sap.ui.model.Filter("Procesado", sap.ui.model.FilterOperator.NE, "A" ) );
           } else {
-            oFilter.push(
-              new sap.ui.model.Filter(
-                "Procesado",
-                sap.ui.model.FilterOperator.EQ,
-                oProcesado
-              )
-            );
+            oFilter.push( new sap.ui.model.Filter("Procesado", sap.ui.model.FilterOperator.EQ, oProcesado ) );
           }
         }
 

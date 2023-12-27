@@ -45,6 +45,11 @@ sap.ui.define([
                       TipoComprobante:"",
                       Completo: false
                     },
+                    FileParameters: {
+                      Cliente: "",
+                      Tipo: "",
+                      Recibo: ""
+                    },
                     SelectedItems:"",
                     Items: "",
                     PrintData: [],
