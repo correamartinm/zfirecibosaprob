@@ -60,7 +60,7 @@ sap.ui.define(
           oCuit = oView.byId("idCuitMultiInput"),
           oRangoFecha = oView.byId("idFechaDateRangeSelection"),
           oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({
-            pattern: "dd/mm/yyyy",
+            pattern: "dd/mm/yyyy" , UTC: true,
           });
 
         if (oRazonsocial.getTokens().length !== 0) {

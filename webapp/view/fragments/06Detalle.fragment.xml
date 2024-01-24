@@ -41,8 +41,8 @@
                     <HBox >
                         <VBox >
                             <Text text="{Numero}" wrapping="false"/>
-                            <Text text="{path : 'FechaEmision', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"/>
-                            <Text text="{path : 'FechaVencimiento', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy'}}"/>
+                            <Text text="{path : 'FechaEmision', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy' , UTC: true}}"/>
+                            <Text text="{path : 'FechaVencimiento', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy' , UTC: true}}"/>
                         </VBox>
                         <VBox >
                             <Text text="{NroCheque}"/>
