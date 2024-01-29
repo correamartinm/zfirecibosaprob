@@ -22,6 +22,12 @@
             </OverflowToolbar>
         </headerToolbar>
         <columns>
+            <Column width="90px">
+                <header>
+                    <Label text="{i18n>lblvendedor}"/>
+                </header>
+            </Column>
+
 
             <Column width="90px">
                 <header>
@@ -51,12 +57,12 @@
                     <Label text="{i18n>lblcuit}"/>
                 </header>
             </Column>
-            <Column width="120px" visible="false" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+            <Column width="160px" visible="false" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
                 <header>
                     <Label text="{i18n>lbltotalrecibo}"/>
                 </header>
             </Column>
-            <Column width="120px" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+            <Column width="160px" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
                 <header>
                     <Label text="{i18n>lbltotal}"/>
                 </header>
@@ -93,7 +99,7 @@
             <ColumnListItem type="Active" highlight="Information">
                 <cells>
 
-
+                    <Label text="{Vendedor} " design="Bold"/>
                     <Label text="{Numero} " design="Bold"/>
                     <Text text="{path : 'Fecha' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy' , UTC: true}}" />
 
@@ -101,9 +107,11 @@
                     <Label text="{RazonSocial}" design="Bold"/>
                     <Label text="{Cuit}" design="Bold"/>
 
-
+                    <Label text="{path : 'Total' , formatter : '.formatCurrency'} {Moneda}"/>
+                    <Label text="{path : 'Total' , formatter : '.formatCurrency'} {Moneda}"/>
+<!-- 
                     <ObjectNumber number="{Total}" unit="{Moneda}" />
-                    <ObjectNumber number="{Total}" unit="{Moneda}" />
+                    <ObjectNumber number="{Total}" unit="{Moneda}" /> -->
 
                     <ObjectStatus text="{path: 'Procesado',
                     formatter: '.formatText'}" icon="sap-icon://{

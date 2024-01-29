@@ -72,6 +72,20 @@ sap.ui.define(
           }
         },
 
+        formatCurrency: function (param) {
+          let oValue,
+            oCurrencyFormat = sap.ui.core.format.NumberFormat.getCurrencyInstance(
+              { currencyCode: false }
+            );
+  
+          if (param) {
+            oValue = oCurrencyFormat.format(param);
+            return oValue;
+          } else {
+            return param;
+          }
+        },
+
         formatText: function (param) {
           switch (param) {
             case "X":

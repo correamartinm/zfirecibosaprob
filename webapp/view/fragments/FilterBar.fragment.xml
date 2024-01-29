@@ -6,11 +6,22 @@
 
         <fb:filterGroupItems>
 
+        <fb:FilterGroupItem groupName="search" name="vendedor" label="{i18n>lblvendedor}" visibleInFilterBar="true">
+            <fb:control>
+              
+                <MultiInput id="idVendedorMultiInput" width="200px" showSuggestion="true" suggestionItems="{/VendedoresSet}">
+                    <core:Item key="{Codigo}" text="{Codigo} {Descripcion}" />
+                </MultiInput>
+            </fb:control>
+        </fb:FilterGroupItem>
+
+
+
             <fb:FilterGroupItem groupName="search" name="razonsocial" label="{i18n>lblrazonsocial}" visibleInFilterBar="true">
                 <fb:control>
                   
                     <MultiInput id="idRazonSocialMultiInput" width="200px" showSuggestion="true" suggestionItems="{/CLIENTESSet}">
-                        <core:Item key="{RazonSocial}" text="{RazonSocial}" />
+                        <core:Item key="{Codigo}" text="{RazonSocial}" />
                     </MultiInput>
                 </fb:control>
             </fb:FilterGroupItem>

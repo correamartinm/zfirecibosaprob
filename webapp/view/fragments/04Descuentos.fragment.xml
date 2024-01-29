@@ -48,7 +48,8 @@
                     <Label text="{Numero}"/>
                     <Text text="{path : 'Fecha' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy' , UTC: true}}"/>
                     <!-- <Label text="{Fecha}" design="Bold"/> -->
-                    <Label text="{Importe}"/>
+                    <!-- <Label text="{Importe}"/> -->
+                    <Label text="{path : 'Importe' , formatter : '.formatCurrency'}"/>
 
                     <!-- <ObjectStatus title="" state="Error" inverted="true" /> -->
                     <HBox >

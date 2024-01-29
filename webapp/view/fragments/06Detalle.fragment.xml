@@ -40,6 +40,7 @@
                     <Text text=" {TipoComprobante}"/>
                     <HBox >
                         <VBox >
+                            <Text text="{Detalle}" wrapping="false"/>
                             <Text text="{Numero}" wrapping="false"/>
                             <Text text="{path : 'FechaEmision', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy' , UTC: true}}"/>
                             <Text text="{path : 'FechaVencimiento', type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy' , UTC: true}}"/>
@@ -50,7 +51,8 @@
                             <Text text="{BancoDestino}"/>
                         </VBox>
                     </HBox>
-                    <Text text="{Importe}"/>
+                    <!-- <Text text="{Importe}"/> -->
+                    <Label text="{path : 'Importe' , formatter : '.formatCurrency'}"/>
 
                     <HBox>
                         <Button icon="sap-icon://delete" press="onButtonDeletePagoPressMsg" class="sapUiTinyMarginEnd"/>

@@ -6,7 +6,7 @@
     <Table id="idPagoCtaTable" items="{/PagoCuentaSet}" mode="None" selectionChange="onTablePagoCtaSelectionChange" noDataText="{i18n>msgnodata}" growing="true" growingTriggerText="{i18n>lblvermas}" fixedLayout="false" growingThreshold="6" alternateRowColors="true" sticky="HeaderToolbar,ColumnHeaders">
         <headerToolbar>
             <OverflowToolbar>
-                
+
                 <ToolbarSpacer/>
 
 
@@ -34,12 +34,12 @@
             <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
                 <header>
                     <Label text="{i18n>lblimpor}"/>
-                    </header>
-                </Column>
+                </header>
+            </Column>
             <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
                 <header>
                     <Label text="{i18n>lblaplicado}"/>
-                    </header>
+                </header>
             </Column>
             <Column width="100px" popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
                 <header>
@@ -52,9 +52,9 @@
                 </header>
             </Column>
             <Column popinDisplay="Inline" minScreenWidth="Tablet" demandPopin="true" hAlign="Center">
-                <header> 
+                <header>
                     <Label text="{i18n>lbltotal}"/>
-                     </header>
+                </header>
             </Column>
 
 
@@ -66,15 +66,22 @@
 
 
                     <Text text="{Tipo}" wrapping="false"/>
-                   
+
                     <Label text="{Numero}"/>
-                    <Label text="{path : 'mockdata>Fecha' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy' , UTC: true}}" design="Bold"/>                    
-                        <Label text="{Importe}"/>
-                        <Label text="{Aplicado}"/>
-                        <Label text="{Saldo}"/>
-                        <Label text="{Total}"/>
-                        <Label text="{Total}"/>
-                    
+                    <Label text="{path : 'Fecha' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy' , UTC: true}}" design="Bold"/>
+
+                    <Label text="{path : 'Importe' , formatter : '.formatCurrency'}"/>
+                    <Label text="{path : 'Aplicado' , formatter : '.formatCurrency'}"/>                   
+                    <Label text="{path : 'Saldo' , formatter : '.formatCurrency'}"/>
+                    <Label text="{path : 'Total' , formatter : '.formatCurrency'}"/>
+                    <Label text="{path : 'Total' , formatter : '.formatCurrency'}"/>
+
+                    <!-- <Label text="{Importe}"/>
+                    <Label text="{Aplicado}"/>
+                    <Label text="{Saldo}"/>
+                    <Label text="{Total}"/>
+                    <Label text="{Total}"/> -->
+
                     <HBox visible="false">
                         <Button icon="sap-icon://delete" press="onButtonDeletePress" class="sapUiTinyMarginBeginEnd" />
                         <!-- <Button icon="sap-icon://edit" press="onButtonEditPress" /> -->
@@ -85,6 +92,6 @@
             </ColumnListItem>
         </items>
     </Table>
-   
+
 
 </core:FragmentDefinition>

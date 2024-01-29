@@ -56,12 +56,40 @@ sap.ui.define(
         let oView = this.getView(),
           oFilter = [],
           oRazonsocial = oView.byId("idRazonSocialMultiInput"),
+          oVendedor = oView.byId("idVendedorMultiInput"),
           oProcesado = oView.byId("idProcesadoFilter").getSelectedKey(),
           oCuit = oView.byId("idCuitMultiInput"),
           oRangoFecha = oView.byId("idFechaDateRangeSelection"),
           oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({
             pattern: "dd/mm/yyyy" , UTC: true,
           });
+
+
+          if (oVendedor.getTokens().length !== 0) {
+            for (var l = 0; l < oVendedor.getTokens().length; l++) {
+              oFilter.push(
+                new sap.ui.model.Filter(
+                  "Vendedor",
+                  sap.ui.model.FilterOperator.EQ,
+                  oVendedor.getTokens()[l].getKey()
+                )
+              );
+            }
+          } else {
+            if (oVendedor.getValue()) {
+              oFilter.push(
+                new sap.ui.model.Filter(
+                  "Vendedor",
+                  sap.ui.model.FilterOperator.Contains,
+                  oVendedor.getValue()
+                )
+              );
+            }
+          }
+
+
+
+
 
         if (oRazonsocial.getTokens().length !== 0) {
           for (var l = 0; l < oRazonsocial.getTokens().length; l++) {
@@ -84,6 +112,9 @@ sap.ui.define(
             );
           }
         }
+
+
+
 
         if (oCuit.getTokens().length !== 0) {
           for (var l = 0; l < oCuit.getTokens().length; l++) {
