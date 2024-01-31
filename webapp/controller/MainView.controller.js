@@ -39,10 +39,12 @@ sap.ui.define(
         let oView = this.getView(),
           oRazonsocial = oView.byId("idRazonSocialMultiInput"),
           oCuit = oView.byId("idCuitMultiInput"),
+          oVendedor = oView.byId("idVendedorMultiInput"),
           oProcesado = oView.byId("idProcesadoFilter"),
           oFecha = oView.byId("idFechaDateRangeSelection");
 
         oRazonsocial.removeAllTokens;
+        oVendedor.removeAllTokens;
         oProcesado.setSelectedKey(null);
         oCuit.removeAllTokens;
         oFecha.setValue(null);
