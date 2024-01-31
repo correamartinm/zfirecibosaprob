@@ -139,7 +139,7 @@ sap.ui.define(
         onButtonAtachPressRET: function () {
           let oMockModel = this.getOwnerComponent().getModel("mockdata");
           let oFilter = new Array;
-          ReciboActivo
+          
           let oItem = oMockModel.getProperty("/ReciboActivo");
           oFilter.push(new Filter("Recibo", FilterOperator.EQ, oItem.Numero));
           oFilter.push(new Filter("Tipo", FilterOperator.EQ, "RETE"));
