@@ -31,7 +31,7 @@
                 <Label text="{i18n>lblimpor}"/>
 
             </Column>
-            <Column width="3rem" visible="false">
+            <Column width="3rem" >
                 <header/>
             </Column>
 
@@ -47,16 +47,10 @@
                     <Label text="{Descripcion}"/>
                     <Label text="{Numero}"/>
                     <Text text="{path : 'Fecha' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy' , UTC: true}}"/>
-                    <!-- <Label text="{Fecha}" design="Bold"/> -->
-                    <!-- <Label text="{Importe}"/> -->
                     <Label text="{path : 'Importe' , formatter : '.formatCurrency'}"/>
 
-                    <!-- <ObjectStatus title="" state="Error" inverted="true" /> -->
                     <HBox >
-
-                        <Button icon="sap-icon://print" enabled="{= ${PAID_STATUS} === 1 }" press="onButtonPrintPress" />
-                        <Button icon="sap-icon://delete" class="sapUiTinyMarginEnd" press="onButtonDeleteDescuentoPressMsg"/>
-                        <Button icon="sap-icon://edit" press="onButtonEditaDescuentoPress"/>
+                        <Button icon="sap-icon://attachment" press="onButtonAtachPressDES" class="sapUiTinyMarginBegin"/>
                     </HBox>
 
                 </cells>

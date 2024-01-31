@@ -277,6 +277,41 @@ sap.ui.define(
         }
       },
 
+      onButtonPrintPress: function (oEvent) {
+        let oPath = oEvent.getSource().getBindingContext().getPath(),
+          oModel = this.getOwnerComponent().getModel(),
+          oView = this.getView(),
+          oItem = oEvent.getSource().getBindingContext().getObject();
+
+        var oData = {
+          Codigo: oItem.Numero,
+        };
+
+        oView.setBusy(true);
+        oModel.callFunction("/PrintDoc", {
+          method: "GET",
+          urlParameters: oData,
+
+          success: jQuery.proxy(function (oData) {
+            oView.setBusy(false);
+
+              if (oData.PrintDoc.URL) {
+              
+              let url =window.location.protocol  + "//" + window.location.host + oData.PrintDoc.URL;
+              
+              window.open(url);
+            }
+          }, this),
+          error: jQuery.proxy(function (oError) {
+            oView.setBusy(false);
+
+            MessageToast.show(that.getResourceBundle().getText("printError"));
+          }, this),
+        });
+      },
+
+      
+
       // *** Post
 
       onDetailPress: function (oEvent) {

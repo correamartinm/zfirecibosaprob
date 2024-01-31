@@ -27,7 +27,7 @@
                     <Label text="{i18n>lblimpor}"/>
                 </header>
             </Column>
-            <Column width="3rem" visible="false">
+            <Column width="3rem" visible="true">
                 <header/>
             </Column>
 
@@ -51,12 +51,11 @@
                             <Text text="{BancoDestino}"/>
                         </VBox>
                     </HBox>
-                    <!-- <Text text="{Importe}"/> -->
                     <Label text="{path : 'Importe' , formatter : '.formatCurrency'}"/>
 
                     <HBox>
-                        <Button icon="sap-icon://delete" press="onButtonDeletePagoPressMsg" class="sapUiTinyMarginEnd"/>
-                        <Button icon="sap-icon://attachment" press="onButtonAtachPress" />
+
+                        <Button icon="sap-icon://attachment" press="onButtonAtachPressDET" />
                     </HBox>
 
                 </cells>

@@ -123,7 +123,7 @@ sap.ui.define(
         // Ficheros *******************
         // ********************************************
 
-        onFileDialog: function (oEvent) {
+        onButtonAtachPressREC: function (oEvent) {
           let oItem = [];
           let oMockModel = this.getOwnerComponent().getModel("mockdata");
           if (oEvent.getSource().getBindingContext() !== undefined) {
@@ -131,6 +131,40 @@ sap.ui.define(
             oMockModel.setProperty("/Paso01Cliente", oItem);
           }
           oMockModel.setProperty("/FileParameters", oItem);
+          var oFilter = new Filter("Recibo", FilterOperator.EQ, oItem.Numero);
+          this.onFileDialog(oFilter, oItem);
+        },    
+
+        
+        onButtonAtachPressRET: function () {
+          let oMockModel = this.getOwnerComponent().getModel("mockdata");
+          let oFilter = new Array;
+          ReciboActivo
+          let oItem = oMockModel.getProperty("/ReciboActivo");
+          oFilter.push(new Filter("Recibo", FilterOperator.EQ, oItem.Numero));
+          oFilter.push(new Filter("Tipo", FilterOperator.EQ, "RETE"));
+          this.onFileDialog(oFilter, oItem);
+        },        
+
+        onButtonAtachPressDET: function () {
+          let oMockModel = this.getOwnerComponent().getModel("mockdata");
+          let oFilter = new Array;
+          let oItem = oMockModel.getProperty("/ReciboActivo");
+          oFilter.push(new Filter("Recibo", FilterOperator.EQ, oItem.Numero));
+          oFilter.push(new Filter("Tipo", FilterOperator.EQ, "DETA"));
+          this.onFileDialog(oFilter, oItem);
+        },        
+        onButtonAtachPressDES: function () {
+          let oMockModel = this.getOwnerComponent().getModel("mockdata");
+          let oFilter = new Array;
+          let oItem = oMockModel.getProperty("/ReciboActivo");
+          oFilter.push(new Filter("Recibo", FilterOperator.EQ, oItem.Numero));
+          oFilter.push(new Filter("Tipo", FilterOperator.EQ, "DESC"));
+          this.onFileDialog(oFilter, oItem);
+        },
+
+        onFileDialog: function (oFilter, oItem) {
+        
 
           if (!this._oDialogUploadSet) {
             this._oDialogUploadSet = sap.ui.xmlfragment(
@@ -147,10 +181,10 @@ sap.ui.define(
             "UploadFile",
             "attachmentUpl"
           );
-          var oFilter1 = new Filter("Recibo", FilterOperator.EQ, oItem.Numero);
+          // var oFilter = new Filter("Recibo", FilterOperator.EQ, oItem.Numero);
 
           let oBinding = oUploadCollection.getBinding("items");
-          oBinding.filter(oFilter1);
+          oBinding.filter(oFilter);
 
           // Muestro Dialogo
 

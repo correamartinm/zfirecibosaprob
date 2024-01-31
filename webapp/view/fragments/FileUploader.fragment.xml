@@ -5,12 +5,12 @@
 		<Panel width="auto" height="auto">
 			<content>
 				<HBox justifyContent="Center" alignContent="Center" alignItems="Center">
-					<upload:UploadSet items="{path: '/AttachDocSet'}" id="attachmentUpl"  maxFileSize="5" beforeUploadStarts="onStartUpload" selectionChanged="onSelectionChangeAttachment" uploadCompleted="onUploadCompleted" uploadUrl="/sap/opu/odata/sap/ZGWFI_COBRANZAS_APROB_SRV/AttachDocSet">
+					<upload:UploadSet items="{path: '/AttachDocSet'}"  id="attachmentUpl"  maxFileSize="5" beforeUploadStarts="onStartUpload" selectionChanged="onSelectionChangeAttachment" uploadCompleted="onUploadCompleted" uploadUrl="/sap/opu/odata/sap/ZGWFI_COBRANZAS_APROB_SRV/AttachDocSet">
 						<upload:toolbar>
 							<OverflowToolbar>
 								<CheckBox id="checkbox" select="onSelectAllAttachments" visible="false" />
 								<ToolbarSpacer/>
-								<Button id="remove" enabled="false" icon="sap-icon://delete" press="onRemove" type="Transparent" />
+								<Button id="remove" enabled="false" icon="sap-icon://delete" press="onRemove" type="Transparent"  visible="false"/>
 								<Button id="download" enabled="false" icon="sap-icon://download" press="onDownload" type="Transparent" />
 							</OverflowToolbar>
 						</upload:toolbar>

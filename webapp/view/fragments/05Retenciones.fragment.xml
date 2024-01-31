@@ -36,7 +36,7 @@
                     <Label text="{i18n>lblimpor}"/>
                 </header>
             </Column>
-            <Column width="3rem" visible="false">
+            <Column width="3rem" visible="true">
                 <header/>
             </Column>
 
@@ -54,8 +54,7 @@
                     <!-- <Label text="{Importe}"/> -->
 
                     <HBox>
-                        <Button icon="sap-icon://delete" class="sapUiTinyMarginEnd" press="onButtonDeleteRetencionPressMsg" />
-                        <Button icon="sap-icon://edit" press="onButtonEditaRetencionPress" />
+                        <Button icon="sap-icon://attachment" press="onButtonAtachPressRET" class="sapUiTinyMarginBegin"/>
                     </HBox>
 
                 </cells>
