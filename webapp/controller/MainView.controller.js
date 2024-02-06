@@ -170,7 +170,7 @@ sap.ui.define(
         let AllFilter = new sap.ui.model.Filter(oFilter, true);
 
         this._onRefreshTable(AllFilter);
-        console.log(AllFilter);
+        // console.log(AllFilter);
       },
       onSearchRS: function (oEvent) {
         let oTable = oEvent.getSource().getParent().getParent(),
@@ -218,8 +218,8 @@ sap.ui.define(
           oPath = oItems[index].getBindingContextPath();
           vObject = oModel.getObject(oPath);
 
-          if (vObject.Procesado === "P" || vObject.Procesado === "A") {
-            oItems[index].setSelected() === false;
+          if (vObject.Procesado !== "" ) {          
+            oItems[index].setSelected() === false;            
           }
         }
 

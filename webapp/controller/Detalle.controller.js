@@ -164,7 +164,7 @@ sap.ui.define(
         );
         ListResumen.getBinding("items").filter(oFiltersRESU);
 
-        console.log(oFiltersRESU);
+        // console.log(oFiltersRESU);
       },
 
       onDetailItemPress: function (oEvent) {

@@ -2,7 +2,7 @@
     xmlns:core="sap.ui.core">
     <Toolbar visible="{= ${device>/system/phone} === true }" class="sapUiTinyMarginBottom">
 
-        <Label text="{i18n>tabletitle}" class="Bold"/>
+        <Label text="{i18n>tabletitle}:" class="Bold"/>
         <ToolbarSpacer />
         <Button icon="sap-icon://sys-add" press="onAgregarButtonPress" text="{i18n>btnagregar}" type="Emphasized" />
     </Toolbar>

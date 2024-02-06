@@ -338,7 +338,7 @@ sap.ui.define(
               false
             );
           }
-          console.log("Fichero Cargado");
+          // console.log("Fichero Cargado");
         },
         parseErrorMsg: function (oError) {
           //parses oData error messages dependent on different return values
@@ -396,7 +396,7 @@ sap.ui.define(
           if (rta.Respuesta !== "OK") {
             this._onErrorHandle(rta.Datos);
           } else {
-            console.log(rta);
+            // console.log(rta);
             // RtaData
             oMockModel.setProperty("/RtaData", OldData.concat(rta.Datos));
           }
@@ -468,7 +468,7 @@ sap.ui.define(
           };
 
           let oEntidad = "/DocumenPosSet";
-          console.log(oPayload);
+          // console.log(oPayload);
           let rta = await this._oncreateModel(
             oModel,
             oView,

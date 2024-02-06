@@ -20,6 +20,6 @@ builder:
           name: ZFIRECIBOAPB
           description: Cobranzas Aprobador App
           package: ZFIORI
-          transport: MXDK900861
+          transport: MXDK901750
         exclude:
           - /test/
