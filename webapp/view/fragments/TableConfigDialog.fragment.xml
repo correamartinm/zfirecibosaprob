@@ -1,0 +1,23 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="handleSortDialogConfirm">
+		<sortItems>
+			<ViewSettingsItem text="{i18n>lblvendedor}" key="Vendedor" selected="true" />
+			<ViewSettingsItem text="{i18n>lblnumero}" key="Numero" selected="true" />
+
+			<ViewSettingsItem text="{i18n>lblfecha}" key="Fecha" />
+			<ViewSettingsItem text="{i18n>lblrazonsocial}" key="RazonSocial" />
+			<ViewSettingsItem text="{i18n>lblcuit}" key="Cuit" />
+
+				<ViewSettingsItem text="{i18n>lblfechaproceso}" key="FechaProcesado" />
+
+					<ViewSettingsItem text="{i18n>lblprocesado}" key="Procesado" />
+
+		
+			
+		</sortItems>
+
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

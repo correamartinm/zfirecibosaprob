@@ -15,6 +15,7 @@
                 <Button tooltip="POST" text="{i18n>lblanular}" icon="sap-icon://decline" press="onAnultSelection" enabled="{= ${mockdata>/SelectedItems} > 0 }" type="Critical" />
                 <Button tooltip="POST" text="{i18n>lblcontabilizar}" icon="sap-icon://accept" press="onPostSelection" class="sapUiTinyMarginBegin" enabled="{= ${mockdata>/SelectedItems} > 0 }" type="Success" />
                 <ToolbarSpacer/>
+                <Button  icon="sap-icon://sort" press="openConfigDialog"/>
                 <Button icon="sap-icon://excel-attachment" press="onDownloadMessage" type="Emphasized" enabled="{= ${mockdata>/Items} > 0 }" />
 
 
@@ -130,7 +131,8 @@
 
                     <Text text="{path : 'FechaProcesado' , type: 'sap.ui.model.type.Date', formatOptions: {pattern: 'dd/MM/yyyy' , UTC: true}}"/>
                     <HBox >
-                        <Button icon="sap-icon://print" enabled="{= ${Procesado} === 'X' }" press="onButtonPrintPress" />
+                        <Button icon="sap-icon://print"  press="onButtonPrintPress" />
+                        <!-- <Button icon="sap-icon://print" enabled="{= ${Procesado} === 'X' }" press="onButtonPrintPress" /> -->
                         <Button icon="sap-icon://attachment" press="onButtonAtachPressREC" class="sapUiTinyMarginBegin"/>
                         <Button icon="sap-icon://detail-view" press="onDetailPress" class="sapUiTinyMarginBegin" />
                      

@@ -5,7 +5,7 @@
 		<Panel width="auto" height="auto">
 			<content>
 				<HBox justifyContent="Center" alignContent="Center" alignItems="Center">
-					<upload:UploadSet items="{path: '/AttachDocSet'}"  id="attachmentUpl"  maxFileSize="5" beforeUploadStarts="onStartUpload" selectionChanged="onSelectionChangeAttachment" uploadCompleted="onUploadCompleted" uploadUrl="/sap/opu/odata/sap/ZGWFI_COBRANZAS_APROB_SRV/AttachDocSet">
+					<upload:UploadSet items="{path: '/AttachDocSet'}"   id="attachmentUpl"  maxFileSize="5" beforeUploadStarts="onStartUpload" selectionChanged="onSelectionChangeAttachment" uploadCompleted="onUploadCompleted" uploadUrl="/sap/opu/odata/sap/ZGWFI_COBRANZAS_APROB_SRV/AttachDocSet">
 						<upload:toolbar>
 							<OverflowToolbar>
 								<CheckBox id="checkbox" select="onSelectAllAttachments" visible="false" />

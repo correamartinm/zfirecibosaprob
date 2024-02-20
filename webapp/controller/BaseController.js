@@ -28,6 +28,7 @@ sap.ui.define(
     return Controller.extend(
       "morixe.zfirecibosaprob.controller.BaseController",
       {
+
         formatNumber: function (value) {
           if (!value) return 0;
 
@@ -46,13 +47,16 @@ sap.ui.define(
         },
 
         //  Detalle
-        formatUrl: function (ID, Name) {
-          let srv = "/sap/opu/odata/sap/ZGWFI_COBRANZAS_APROB_SRV/",
+        formatUrl: function (Item) {
+          let srv = "/sap/opu/odata/sap/ZGWFI_COBRANZAS_APROB_SRV",
+          ID =Item.Codigo,
+          oName = Item.Filename,
             id = "AttachDocSet(Codigo='" + ID + "',",
-            file = "Filename='" + Name;
-            let rta = srv + id + file + "')/$value";
-            return rta;
-            
+            file = "Filename='" + oName,
+            Adjunto = "', Adjunto='" + Item.Adjunto;
+          let rta = srv + Item +"/$value";
+          // let rta = srv + id + file + Adjunto +"')/$value";
+          return rta;
         },
 
         formatIconBool: function (param) {
@@ -74,10 +78,11 @@ sap.ui.define(
 
         formatCurrency: function (param) {
           let oValue,
-            oCurrencyFormat = sap.ui.core.format.NumberFormat.getCurrencyInstance(
-              { currencyCode: false }
-            );
-  
+            oCurrencyFormat =
+              sap.ui.core.format.NumberFormat.getCurrencyInstance({
+                currencyCode: false,
+              });
+
           if (param) {
             oValue = oCurrencyFormat.format(param);
             return oValue;
@@ -128,44 +133,56 @@ sap.ui.define(
           let oMockModel = this.getOwnerComponent().getModel("mockdata");
           if (oEvent.getSource().getBindingContext() !== undefined) {
             oItem = oEvent.getSource().getBindingContext().getObject();
+            oItem.Tipo = "RECIB";
             oMockModel.setProperty("/Paso01Cliente", oItem);
           }
           oMockModel.setProperty("/FileParameters", oItem);
           var oFilter = new Filter("Recibo", FilterOperator.EQ, oItem.Numero);
           this.onFileDialog(oFilter, oItem);
-        },    
+        },
 
-        
         onButtonAtachPressRET: function () {
           let oMockModel = this.getOwnerComponent().getModel("mockdata");
-          let oFilter = new Array;
-          
+          let oFilter = new Array();
+          let oFile = oMockModel.getProperty("/FileParameters");
           let oItem = oMockModel.getProperty("/ReciboActivo");
           oFilter.push(new Filter("Recibo", FilterOperator.EQ, oItem.Numero));
           oFilter.push(new Filter("Tipo", FilterOperator.EQ, "RETE"));
+          oFile.Tipo = "RETE";
+          oFile.Recibo = oItem.Numero;
+          oFile.Cliente = oItem.Cliente;
+          oMockModel.setProperty("/FileParameters", oFile);
           this.onFileDialog(oFilter, oItem);
-        },        
+        },
 
         onButtonAtachPressDET: function () {
           let oMockModel = this.getOwnerComponent().getModel("mockdata");
-          let oFilter = new Array;
+          let oFilter = new Array();
+          let oFile = oMockModel.getProperty("/FileParameters");
           let oItem = oMockModel.getProperty("/ReciboActivo");
           oFilter.push(new Filter("Recibo", FilterOperator.EQ, oItem.Numero));
           oFilter.push(new Filter("Tipo", FilterOperator.EQ, "DETA"));
+          oFile.Tipo = "DETA";
+          oFile.Recibo = oItem.Numero;
+          oFile.Cliente = oItem.Cliente;
+          oMockModel.setProperty("/FileParameters", oFile);
           this.onFileDialog(oFilter, oItem);
-        },        
+        },
         onButtonAtachPressDES: function () {
           let oMockModel = this.getOwnerComponent().getModel("mockdata");
-          let oFilter = new Array;
+          let oFilter = new Array();
+          let oFile = oMockModel.getProperty("/FileParameters");
           let oItem = oMockModel.getProperty("/ReciboActivo");
           oFilter.push(new Filter("Recibo", FilterOperator.EQ, oItem.Numero));
           oFilter.push(new Filter("Tipo", FilterOperator.EQ, "DESC"));
+          oFile.Tipo = "DESC";
+          oFile.Recibo = oItem.Numero;
+          oFile.Cliente = oItem.Cliente;
+          oMockModel.setProperty("/FileParameters", oFile);
           this.onFileDialog(oFilter, oItem);
         },
 
         onFileDialog: function (oFilter, oItem) {
-        
-
           if (!this._oDialogUploadSet) {
             this._oDialogUploadSet = sap.ui.xmlfragment(
               "UploadFile",
@@ -174,6 +191,10 @@ sap.ui.define(
             );
             this.getView().addDependent(this._oDialogUploadSet);
           }
+
+          let check = this.getOwnerComponent()
+          .getModel("mockdata")
+          .getProperty("/FileParameters");
 
           // Filtro Ficheros
 
@@ -191,6 +212,12 @@ sap.ui.define(
           this._oDialogUploadSet.setTitle(
             "Cliente: " + oItem.Cliente + " Numero: " + oItem.Numero
           );
+
+          if (check.Tipo === "RECIB") {
+            oUploadCollection.setUploadEnabled(false);
+            // oUploadCollection.setUploadButtonInvisible(false);
+          } 
+
           this._oDialogUploadSet.open();
         },
 
@@ -280,18 +307,18 @@ sap.ui.define(
           oAttachmentUpl.setBusy(false);
         },
         onDownload: function (oEvent) {
-          let 
-          oMockModel = this.getOwnerComponent().getModel("mockdata"),
-          File = oMockModel.getProperty("/FileParameters"),
+          let oMockModel = this.getOwnerComponent().getModel("mockdata"),
+            File = oMockModel.getProperty("/FileParameters"),
             oAttachmentUpl = sap.ui.core.Fragment.byId(
               "UploadFile",
               "attachmentUpl"
             );
-  
+
           oAttachmentUpl.setBusy(true);
           oAttachmentUpl.getItems().forEach((oItem) => {
             if (oItem.getListItem().getSelected()) {
-              let uri = this.formatUrl(File.Recibo, oItem.getFileName());
+              
+              let uri = this.formatUrl(oItem.getBindingContext().getPath());
               oItem.setUrl(uri);
               oItem.download(true);
               oItem.getListItem().setSelected(false);
@@ -307,7 +334,7 @@ sap.ui.define(
           );
 
           let oMockModel = this.getOwnerComponent().getModel("mockdata"),
-            paso1 = oMockModel.getProperty("/Paso01Cliente");
+            paso1 = oMockModel.getProperty("/FileParameters");
 
           var aIncompleteItems = oAttachmentUpl.getIncompleteItems();
           this.iIncompleteItems = aIncompleteItems.length;
@@ -320,10 +347,24 @@ sap.ui.define(
                 key: "X-CSRF-Token",
                 text: this.getOwnerComponent().getModel().getSecurityToken(),
               });
-              var oSlug = new sap.ui.core.Item({
+
+              let oSlug = new sap.ui.core.Item({
                 key: "SLUG",
-                text: paso1.Numero || "" + "/" + sFileName,
+                text:
+                  "Clientes=" +
+                  paso1.Cliente +
+                  ",Tipo=" +
+                  paso1.Tipo +
+                  ",Recibo=" +
+                  paso1.Recibo +
+                  ",Nombre=" +
+                  sFileName,
               });
+
+              // var oSlug = new sap.ui.core.Item({
+              //   key: "SLUG",
+              //   text: paso1.Numero || "" + "/" + sFileName,
+              // });
               oAttachmentUpl.addHeaderField(oXCSRFToken).addHeaderField(oSlug);
               // .uploadItem(aIncompleteItems[i]);
               oAttachmentUpl.removeAllHeaderFields();
@@ -339,6 +380,8 @@ sap.ui.define(
             );
           }
           // console.log("Fichero Cargado");
+
+         
         },
         parseErrorMsg: function (oError) {
           //parses oData error messages dependent on different return values
@@ -393,12 +436,10 @@ sap.ui.define(
             oPayload
           );
 
-          if (rta.Respuesta !== "OK") {
-            this._onErrorHandle(rta.Datos);
-          } else {
-            // console.log(rta);
-            // RtaData
+          if (rta.Datos.Resultado === "S") {
             oMockModel.setProperty("/RtaData", OldData.concat(rta.Datos));
+          } else {
+            this._onErrorHandle(rta.Datos);
           }
         },
 
@@ -490,12 +531,11 @@ sap.ui.define(
                   template: new sap.m.StandardListItem({
                     title:
                       this._i18n().getText("lblrecibo") +
-                      ": " +
+                      "  " +
                       "{mockdata>Numero}" +
                       "  " +
-                      this._i18n().getText("lblprocesado") +
-                      ": " +
-                      "{mockdata>Resultado}",
+                      this._i18n().getText("lblprocesado")
+                      ,
                     description: "{mockdata>Mensaje}",
                   }),
                 },
@@ -508,7 +548,9 @@ sap.ui.define(
                   this.getOwnerComponent()
                     .getModel("mockdata")
                     .setProperty("/RtaData", []);
-                    this.getOwnerComponent().getTargets().display("TargetMainView");
+                  this.getOwnerComponent()
+                    .getTargets()
+                    .display("TargetMainView");
                 }.bind(this),
               }),
             });
@@ -615,7 +657,7 @@ sap.ui.define(
 
           let objectMsg = {
             titulo: sMessageTitle,
-            mensaje: oError.responseText,
+            mensaje: oError.Mensaje,
 
             icono: sap.m.MessageBox.Icon.ERROR,
             acciones: [sap.m.MessageBox.Action.CLOSE],

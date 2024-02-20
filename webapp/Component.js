@@ -49,6 +49,7 @@ sap.ui.define([
                       Cliente: "",
                       Tipo: "",
                       Recibo: ""
+                      
                     },
                     SelectedItems:"",
                     Items: "",

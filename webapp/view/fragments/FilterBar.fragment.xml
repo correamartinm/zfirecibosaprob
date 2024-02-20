@@ -2,34 +2,51 @@
     xmlns:core="sap.ui.core"
     xmlns:fb="sap.ui.comp.filterbar">
 
-    <fb:FilterBar id="idFilterBar" header="{i18n>tabletitle}:" reset="onFilterBarReset" showRestoreOnFB="true" search="onFilterBarSearch" showRestoreButton="false"   showFilterConfiguration="false">
+    <fb:FilterBar id="idFilterBar" header="{i18n>tabletitle}:" reset="onFilterBarReset" showRestoreOnFB="true" search="onFilterBarSearch" showRestoreButton="false" showFilterConfiguration="false">
 
         <fb:filterGroupItems>
 
-        <fb:FilterGroupItem groupName="search" name="vendedor" label="{i18n>lblvendedor}" visibleInFilterBar="true">
-            <fb:control>
-              
-                <MultiInput id="idVendedorMultiInput" width="200px" showSuggestion="true" suggestionItems="{/VendedoresSet}">
-                    <core:Item key="{Codigo}" text="{Codigo} {Descripcion}" />
-                </MultiInput>
-            </fb:control>
-        </fb:FilterGroupItem>
+            <fb:FilterGroupItem groupName="search" name="numero" label="{i18n>lblnumero}" visibleInFilterBar="true">
+                <fb:control>
+
+                    <MultiInput id="idnumeroMultiInput" width="auto" showSuggestion="true" valueHelpIconSrc="" suggestionItems="{/RECIBOSSet}">
+                        <core:Item key="{Numero}" text="{Numero}" />
+                    </MultiInput>
+
+                    <!-- <Input id="idnumeroMultiInput" /> -->
+                </fb:control>
+            </fb:FilterGroupItem>
+
+            <fb:FilterGroupItem groupName="search" name="vendedor" label="{i18n>lblvendedor}" visibleInFilterBar="true">
+                <fb:control>
+
+                    <MultiInput id="idVendedorMultiInput" width="200px" valueHelpIconSrc="" showSuggestion="true" suggestionItems="{/VendedoresSet}">
+                        <core:Item key="{Codigo}" text="{Codigo} {Descripcion}" />
+                    </MultiInput>
+
+
+                    <!-- <Input id="idVendedorMultiInput"/> -->
+
+                </fb:control>
+            </fb:FilterGroupItem>
 
 
 
             <fb:FilterGroupItem groupName="search" name="razonsocial" label="{i18n>lblrazonsocial}" visibleInFilterBar="true">
                 <fb:control>
-                  
-                    <MultiInput id="idRazonSocialMultiInput" width="200px" showSuggestion="true" suggestionItems="{/CLIENTESSet}">
+
+                    <MultiInput id="idRazonSocialMultiInput" width="200px" showSuggestion="true" valueHelpIconSrc="" suggestionItems="{/CLIENTESSet}">
                         <core:Item key="{Codigo}" text="{RazonSocial}" />
                     </MultiInput>
+
+                    <!-- <Input id="idRazonSocialMultiInput"/> -->
                 </fb:control>
             </fb:FilterGroupItem>
 
             <fb:FilterGroupItem groupName="search" name="cuit" label="{i18n>lblcuit}" visibleInFilterBar="true">
                 <fb:control>
-                    
-                    <MultiInput id="idCuitMultiInput" width="200px" showSuggestion="true" suggestionItems="{/CLIENTESSet}">
+
+                    <MultiInput id="idCuitMultiInput" width="200px" showSuggestion="true" valueHelpIconSrc="" suggestionItems="{/CLIENTESSet}">
                         <core:Item key="{Cuit}" text="{Cuit}"/>
                     </MultiInput>
                 </fb:control>
@@ -37,20 +54,20 @@
 
             <fb:FilterGroupItem groupName="search" name="fecha" label="{i18n>lblfecharango}" visibleInFilterBar="true">
                 <fb:control>
-                    <DateRangeSelection  id="idFechaDateRangeSelection" displayFormat="dd/MM/yyyy"/>                                          
-                    
+                    <DateRangeSelection id="idFechaDateRangeSelection" displayFormat="dd/MM/yyyy" />
+
                 </fb:control>
             </fb:FilterGroupItem>
 
-            
+
             <fb:FilterGroupItem groupName="search" name="procesado" label="{i18n>lblprocesado}" visibleInFilterBar="true">
                 <fb:control>
-                    <ComboBox id="idProcesadoFilter"  width="60px" >
+                    <ComboBox id="idProcesadoFilter" width="60px">
                         <core:Item key="X" text="SI" />
                         <core:Item key="N" text="NO" />
                         <core:Item key="A" text="ANULADO" />
                     </ComboBox>
-                    
+
                 </fb:control>
             </fb:FilterGroupItem>
 

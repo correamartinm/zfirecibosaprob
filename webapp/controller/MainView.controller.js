@@ -1,13 +1,14 @@
 sap.ui.define(
   [
     "./BaseController",
+    "sap/ui/model/Sorter",
     "sap/ui/core/util/Export",
     "sap/ui/core/util/ExportTypeCSV",
   ],
   /**
    * @param {typeof sap.ui.core.mvc.BaseController} Controller
    */
-  function (BaseController, Export, ExportTypeCSV) {
+  function (BaseController, Sorter, Export, ExportTypeCSV) {
     "use strict";
 
     return BaseController.extend("morixe.zfirecibosaprob.controller.MainView", {
@@ -24,6 +25,7 @@ sap.ui.define(
 
       _onObjectMatched: function () {
         this._onRefreshTable([]);
+        this.getOwnerComponent().getModel().setSizeLimit("20000");
       },
 
       onButtonPrintPress: function (params) {},
@@ -40,17 +42,23 @@ sap.ui.define(
           oRazonsocial = oView.byId("idRazonSocialMultiInput"),
           oCuit = oView.byId("idCuitMultiInput"),
           oVendedor = oView.byId("idVendedorMultiInput"),
+          oNumero = oView.byId("idnumeroMultiInput"),
           oProcesado = oView.byId("idProcesadoFilter"),
           oFecha = oView.byId("idFechaDateRangeSelection");
 
         oRazonsocial.removeAllTokens();
+        oNumero.removeAllTokens();
         oVendedor.removeAllTokens();
         oCuit.removeAllTokens();
+
+        oNumero.setValue("");
+        oRazonsocial.setValue("");
+        oVendedor.setValue("");
 
         oProcesado.setSelectedKey(null);
         oFecha.setValue(null);
 
-        let oFilter = [];        
+        let oFilter = [];
         var oTable = this.byId("idTable");
         oTable.removeSelections();
         this._onRefreshTable(oFilter);
@@ -61,13 +69,40 @@ sap.ui.define(
           oFilter = [],
           oRazonsocial = oView.byId("idRazonSocialMultiInput"),
           oVendedor = oView.byId("idVendedorMultiInput"),
+          oNumero = oView.byId("idnumeroMultiInput"),
           oProcesado = oView.byId("idProcesadoFilter").getSelectedKey(),
           oCuit = oView.byId("idCuitMultiInput"),
           oRangoFecha = oView.byId("idFechaDateRangeSelection"),
-          oDateFormat = sap.ui.core.format.DateFormat.getDateInstance({
-            pattern: "dd/mm/yyyy",
-            UTC: true,
+          oDateFormat = sap.ui.core.format.DateFormat.getDateTimeInstance({
+            UTC: false,
           });
+
+        if (oNumero.getTokens().length !== 0) {
+          let ofnum = new Array();
+          for (var l = 0; l < oNumero.getTokens().length; l++) {
+            ofnum.push(
+              new sap.ui.model.Filter(
+                "Numero",
+                sap.ui.model.FilterOperator.EQ,
+                oNumero.getTokens()[l].getKey()
+              )
+            );
+          }
+          oFilter.push(new sap.ui.model.Filter(ofnum, false));
+        } else {
+          if (oNumero.getValue()) {
+            oFilter.push(
+              new sap.ui.model.Filter(
+                "Numero",
+                sap.ui.model.FilterOperator.EQ,
+                oNumero.getValue()
+              )
+            );
+          }
+        }
+
+
+
 
         if (oVendedor.getTokens().length !== 0) {
           var orFilterSTF = [];
@@ -83,13 +118,37 @@ sap.ui.define(
           oFilter.push(new sap.ui.model.Filter(orFilterSTF, false));
         } else {
           if (oVendedor.getValue()) {
-            oFilter.push(
+            var orFilterSTF2 = [];
+            orFilterSTF2.push(
+              new sap.ui.model.Filter(
+                "Vendedor",
+                sap.ui.model.FilterOperator.Contains,
+                oVendedor.getValue().toUpperCase()
+              )
+            );
+            orFilterSTF2.push(
+              new sap.ui.model.Filter(
+                "Vendedor",
+                sap.ui.model.FilterOperator.EQ,
+                oVendedor.getValue().toUpperCase()
+              )
+            );
+
+            orFilterSTF2.push(
               new sap.ui.model.Filter(
                 "Vendedor",
                 sap.ui.model.FilterOperator.Contains,
                 oVendedor.getValue()
               )
             );
+            orFilterSTF2.push(
+              new sap.ui.model.Filter(
+                "Vendedor",
+                sap.ui.model.FilterOperator.EQ,
+                oVendedor.getValue()
+              )
+            );
+            oFilter.push(new sap.ui.model.Filter(orFilterSTF2, false));
           }
         }
 
@@ -142,15 +201,18 @@ sap.ui.define(
         }
 
         if (oRangoFecha.getValue().length !== 0) {
-          // var oFInicio = oDateFormat.formatoRangoFecha.getDateValue());
-          // var oFFin = oDateFormat.format(oRangoFecha.getSecondDateValue());
+          var oFInicio = oDateFormat.format(oRangoFecha.getDateValue());
+          var oFFin = oDateFormat.format(oRangoFecha.getSecondDateValue());
+
+          let fini = new Date(oRangoFecha.getDateValue() + "GMT");
+          let ffin = new Date(oRangoFecha.getSecondDateValue() + "GMT");
 
           oFilter.push(
             new sap.ui.model.Filter(
               "Fecha",
               sap.ui.model.FilterOperator.BT,
-              oRangoFecha.getDateValue(),
-              oRangoFecha.getSecondDateValue()
+              fini,
+              ffin
             )
           );
         }
@@ -158,12 +220,23 @@ sap.ui.define(
         if (oProcesado) {
           if (oProcesado === "N" || oProcesado === "") {
             var orFilterPro = [];
-            oFilter.push( new sap.ui.model.Filter("Procesado", sap.ui.model.FilterOperator.NE, "V"  ) );
+            oFilter.push(
+              new sap.ui.model.Filter(
+                "Procesado",
+                sap.ui.model.FilterOperator.NE,
+                "V"
+              )
+            );
             // oFilter.push( new sap.ui.model.Filter( "Procesado",  sap.ui.model.FilterOperator.NE,  "A" ) );
             // oFilter.push(new sap.ui.model.Filter(orFilterPro, false));
-
           } else {
-            oFilter.push( new sap.ui.model.Filter( "Procesado", sap.ui.model.FilterOperator.EQ, oProcesado  ) );
+            oFilter.push(
+              new sap.ui.model.Filter(
+                "Procesado",
+                sap.ui.model.FilterOperator.EQ,
+                oProcesado
+              )
+            );
           }
         }
 
@@ -218,8 +291,8 @@ sap.ui.define(
           oPath = oItems[index].getBindingContextPath();
           vObject = oModel.getObject(oPath);
 
-          if (vObject.Procesado !== "" ) {          
-            oItems[index].setSelected() === false;            
+          if (vObject.Procesado !== "") {
+            oItems[index].setSelected() === false;
           }
         }
 
@@ -328,6 +401,35 @@ sap.ui.define(
           oItem = oEvent.getSource().getBindingContext().getObject();
         oMockModel.setProperty("/ReciboActivo", oItem);
         this.getOwnerComponent().getTargets().display("TargetDetalle");
+      },
+
+      // Ordenamiento
+
+      openConfigDialog: function () {
+        if (!this._tableConfigDialog) {
+          this._tableConfigDialog = sap.ui.xmlfragment(
+            "morixe.zfirecibosaprob.view.fragments.TableConfigDialog",
+            this
+          );
+          this.getView().addDependent(this._tableConfigDialog);
+        }
+        this._tableConfigDialog.open();
+      },
+
+      handleSortDialogConfirm: function (oEvent) {
+        var oTable = this.byId("idTable"),
+          mParams = oEvent.getParameters(),
+          oBinding = oTable.getBinding("items"),
+          sPath,
+          bDescending,
+          aSorters = new Array();
+
+        sPath = mParams.sortItem.getKey();
+        bDescending = mParams.sortDescending;
+        aSorters.push(new Sorter(sPath, bDescending));
+
+        // apply the selected sort and group settings
+        oBinding.sort(aSorters);
       },
 
       // ******************************************************
