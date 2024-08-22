@@ -101,9 +101,6 @@ sap.ui.define(
           }
         }
 
-
-
-
         if (oVendedor.getTokens().length !== 0) {
           var orFilterSTF = [];
           for (var l = 0; l < oVendedor.getTokens().length; l++) {
@@ -299,7 +296,11 @@ sap.ui.define(
         this.onTableSelection();
       },
 
-      onPostSelection: async function () {
+      onPostSelection: async function (oEvent) {
+        let oControl = oEvent.getSource();
+        oControl.setBusy(true);
+        oControl.setEnabled(false);
+
         let oTable = this.getView().byId("idTable"),
           oMockModel = this.getView().getModel("mockdata"),
           oModel = this.getOwnerComponent().getModel(),
@@ -314,17 +315,19 @@ sap.ui.define(
 
             if (oItems[index].getSelected() === true) {
               vObject.Accion = "P";
+
               await this.onPostPress(vObject);
-              //this._onRefreshTable();
             }
+          }
+
+          let oData = oMockModel.getProperty("/RtaData");
+          if (oData.length > 0) {
+            this._informationDialog();
           }
         }
 
-        oModel.refresh(true);
-        let oData = oMockModel.getProperty("/RtaData");
-        if (oData.length > 0) {
-          this._informationDialog();
-        }
+        oControl.setBusy(false);
+        oControl.setEnabled(false);
       },
 
       onAnultSelection: async function () {

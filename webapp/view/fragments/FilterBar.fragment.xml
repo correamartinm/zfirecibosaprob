@@ -20,13 +20,12 @@
             <fb:FilterGroupItem groupName="search" name="vendedor" label="{i18n>lblvendedor}" visibleInFilterBar="true">
                 <fb:control>
 
-                    <MultiInput id="idVendedorMultiInput" width="200px" valueHelpIconSrc="" showSuggestion="true" suggestionItems="{/VendedoresSet}">
+                    <MultiInput id="idVendedorMultiInput" width="200px"  showSuggestion="true" suggestionItems="{/VendedoresSet}">
                         <core:Item key="{Codigo}" text="{Codigo} {Descripcion}" />
                     </MultiInput>
 
 
-                    <!-- <Input id="idVendedorMultiInput"/> -->
-
+                  
                 </fb:control>
             </fb:FilterGroupItem>
 
